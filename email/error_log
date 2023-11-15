@@ -1,0 +1,12 @@
+[21-Jul-2020 13:58:14 UTC] PHP Warning:  include_once(../functions/functions.php): failed to open stream: No such file or directory in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 1
+[21-Jul-2020 13:58:14 UTC] PHP Warning:  include_once(): Failed opening '../functions/functions.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 1
+[21-Jul-2020 13:58:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function db_select_query() in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php:2
+Stack trace:
+#0 {main}
+  thrown in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 2
+[21-Jul-2020 13:59:45 UTC] PHP Warning:  include_once(../functions/functions.php): failed to open stream: No such file or directory in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 1
+[21-Jul-2020 13:59:45 UTC] PHP Warning:  include_once(): Failed opening '../functions/functions.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 1
+[21-Jul-2020 13:59:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function db_select_query() in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php:2
+Stack trace:
+#0 {main}
+  thrown in /home1/itsergzs/public_html/sahiapp/frontend/email/reset_password.php on line 2
