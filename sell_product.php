@@ -1,22 +1,54 @@
 <?php include('head.php') ;
+$start_date = $end_date = '';
 
-if ($_SESSION['login_type'] === 'subscriber'){
-    $id = $_SESSION['login_id'];
-            $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
-                                     FROM sell_products
-                                     LEFT JOIN products ON products.id = sell_products.product_id
-                                     Where created_by_id = '$id'
-                                     GROUP BY order_id
-                                     ORDER BY sell_products.id DESC");
+if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){ 
+    $start_date = $_REQUEST['start_date'];
+    $end_date = $_REQUEST['end_date'];
+    $start_date_fitler = date('Y-m-d',strtotime($start_date));
+    $end_date_fitler = date('Y-m-d',strtotime($end_date));   
+
+    
+    if ($_SESSION['login_type'] === 'subscriber'){
+        $id = $_SESSION['login_id'];
+                $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
+                                        FROM sell_products
+                                        LEFT JOIN products ON products.id = sell_products.product_id
+                                        Where created_by_id = '$id' 
+                                        AND sell_products.created_at BETWEEN '$start_date_fitler' AND '$end_date_fitler'
+                                        GROUP BY order_id
+                                        ORDER BY sell_products.id DESC");
+
+    }else{
+        $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
+        FROM sell_products
+        LEFT JOIN products ON products.id = sell_products.product_id
+        Where sell_products.created_at BETWEEN '$start_date_fitler' AND '$end_date_fitler'
+        GROUP BY order_id
+        ORDER BY sell_products.created_at DESC, sell_products.id DESC");
+       // ORDER BY sell_products.id DESC");
+    }
 
 }else{
-    $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
-    FROM sell_products
-    LEFT JOIN products ON products.id = sell_products.product_id
-    GROUP BY order_id
-    ORDER BY sell_products.id DESC");
+     if ($_SESSION['login_type'] === 'subscriber'){
+        $id = $_SESSION['login_id'];
+                $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
+                                        FROM sell_products
+                                        LEFT JOIN products ON products.id = sell_products.product_id
+                                        Where created_by_id = '$id'
+                                        GROUP BY order_id
+                                        ORDER BY sell_products.id DESC");
+
+    }else{
+        $sellproducts =  db_select_query("SELECT sell_products.*,products.title as product_name, SUM(quantity) as total_qty
+        FROM sell_products
+        LEFT JOIN products ON products.id = sell_products.product_id
+        GROUP BY order_id
+        ORDER BY sell_products.created_at DESC, sell_products.id DESC");
+    }
 
 }
+
+
                                      
 ?>
 <body>
@@ -49,6 +81,40 @@ if ($_SESSION['login_type'] === 'subscriber'){
                                     <i class="glyphicon glyphicon-remove removepanel"></i>
                                 </span> -->
                             </div>
+
+                            <div class="panel-body">
+                                <div class="row">                                   
+                                    <div class="col-md-12"><br>
+                                        <form   class="form-horizontal"  method="get" action=" " >
+                                            <div class="form-body">
+                                                <div  class="form-group">                                                   
+                                                    <div class="col-md-3">
+                                                        Start Date
+                                                        <div class="input-group">
+                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        End Date
+                                                        <div class="input-group">
+                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                    &nbsp;<br>
+                                                        <input type="submit"  class="btn btn-primary btn-sm" value="Search"> &nbsp;                                                 
+                                                        <a href="sell_product.php" class="btn btn-sm btn-success">Clear</a>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                             <div class="panel-body table-responsive">
                                 <table class="table table-bordered" id="fitness-table">
                                     <thead>

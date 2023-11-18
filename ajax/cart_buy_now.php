@@ -11,7 +11,16 @@ if (isset($_SESSION['cart']) && isset($_SESSION['login_type'])) {
 		$_REQUEST['payment_status'] = 'Complete';
 		$data['table']='sell_products';		
 		$json['created_by']='Admin';
+
+		// date of purchase new functinaliy if you remove then uncomment date "$_REQUEST['created_at']"
+			$_REQUEST['created_at'] = $createdat = date('Y-m-d 02:00:40', strtotime($_REQUEST['date_of_purchase']));
+			unset($_REQUEST['date_of_purchase']);
+	}else{
+			$_REQUEST['created_at'] = date('Y-m-d h:i:s');
+			unset($_REQUEST['date_of_purchase']);
+		// date of purchase new functinaliy
 	 }
+
 	 if($_SESSION['login_type'] === "subscriber"){
 		$_REQUEST['crreated_by'] = 'Subscriber';
 		$_REQUEST['payment_status'] = 'Pending';
@@ -24,7 +33,7 @@ if (isset($_SESSION['cart']) && isset($_SESSION['login_type'])) {
 	$FourDigitRandomNumber = mt_rand(1111,9999);
 	$FourDigitRandomNumbermore = mt_rand(1111,9999);
 	$_REQUEST['order_id'] = 'TCOR-'.$FourDigitRandomNumber.strtotime(date('Y-m-d h:i:s')).$FourDigitRandomNumbermore;
-	$_REQUEST['created_at'] = date('Y-m-d h:i:s');	
+	///// $_REQUEST['created_at'] = date('Y-m-d h:i:s');	
 	$json['page_redirect']= 'Yes';
 	$json['order_data']='';	
 	$json['Knet_payment_redirect_url'] = '';

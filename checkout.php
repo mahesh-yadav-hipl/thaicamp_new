@@ -160,6 +160,21 @@
                                    
                                </td> 
                             </tr>
+
+                            <!-- date  -->
+                           
+                            <?php if($_SESSION['login_type'] === "admin"){ ?>
+                                <tr>
+                                    <td><b>Select Date</b></td>
+                                    <td>
+                                    <input type="date" name="date_of_purchase" class="form-control" value="<?php echo date('Y-m-d'); ?>"  max="<?php echo date("Y-m-d"); ?>">
+                                    </td>
+                                </tr>
+                            <?php }else{ ?>
+                                 <input type="hidden" name="date_of_purchase" class="form-control" value="">
+                         <?php } ?>
+                            <!-- date  -->
+
                                  <tr align="center">
                                     <td colspan="2"><button type="button" class="btn btn-sm btn-success buy_now_btn">Buy Now</button></td>
                                     <div class="buy_now_message"></div>
@@ -250,11 +265,13 @@
                     if (confirm("Are You Sure Buy Now?") == true) {
                         $('.buy_now_btn').prop('disabled', true);
                         var buy_now = "buy_now"                              
-                        var payment_method = $('input[name="payment_method"]:checked').val();   
+                        var payment_method = $('input[name="payment_method"]:checked').val();  
+
+                        var date_of_purchase = $('input[name="date_of_purchase"]').val(); 
                         $.ajax({    
                             type: "post",
                             url: "ajax/cart_buy_now.php", 
-                            data:{buy_now:buy_now,discount_amount:discount_amount,payment_method:payment_method,total_amount:total_amount},                  
+                            data:{buy_now:buy_now,discount_amount:discount_amount,payment_method:payment_method,total_amount:total_amount,date_of_purchase:date_of_purchase},                  
                             success: function(data){  
                                 $('.buy_now_btn').prop('disabled', false);
                                 $(".buy_now_message").html(data.message);                                

@@ -1,4 +1,6 @@
-<?php include('head.php') ;
+<?php 
+die;
+include('head.php') ; 
 if($_SESSION['login_type'] != "admin")
 {
   redirect(URL.'dashboard.php');

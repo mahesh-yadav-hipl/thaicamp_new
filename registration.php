@@ -1,4 +1,4 @@
-<?php include_once('./functions/functions.php');  ?>
+<?php include_once('./functions/functions.php'); die;  ?>
 <!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />

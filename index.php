@@ -63,13 +63,13 @@
                         
                     </div>
                     <button type='submit' class="btn btn-block btn-warning btn-loader">Login </button>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="row">                            
                             <div class="col-xs-12 account_info_btns">
                                 <p class="forgetlink">Don’t Have Account <a href="registration.php" class="">Sign Up</a></p>
                             </div>
                         </div>
-                     </div>
+                     </div> -->
                 </form>
                
             </div>
@@ -116,7 +116,11 @@
                     var json= await response.json();
                     if (json.result){
                         toastr.success(json.message);
-                        setTimeout(function(){ location.href='dashboard.php'; }, 1500);
+                        if(json.admin_type == "super_admin"){
+                            setTimeout(function(){ location.href='menu_list.php'; }, 1500);
+                        }else{
+                            setTimeout(function(){ location.href='dashboard.php'; }, 1500);
+                        }                        
                     }else{
                         toastr.info(json.message);
                     }    

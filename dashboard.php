@@ -19,7 +19,10 @@ $year=date("Y",$time);
 $expeses_query =  db_select_query("select SUM(price) as total_expenses from expenses where YEAR(date(date)) = '$year' AND MONTH(date(date)) = '$month' ") ;
 $total_expeses = $expeses_query[0]['total_expenses'] ;
 
-
+// total hold subscription
+// $users_query_hold_sub = db_select_query("SELECT  *  FROM users WHERE package_class != '0' and hold_status = 'Hold'") ;
+$users_query_hold_sub = db_select_query("SELECT  COUNT(id) as count_id  FROM users WHERE package_class != '0' and hold_status = 'Hold'") ;
+$count_hold_subscription_users = $users_query_hold_sub[0]['count_id'] ;
 
 
 $packages_query  = db_select_query("SELECT DISTINCT(packagesid)  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
@@ -254,7 +257,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         </div>
                                     </div> -->
                                     
-                                    <div class="registered bg-danger">
+                                    <div class="registered bg-success" style="float: left;width:100%">
                                         <div class="row">
                                             <div class="col-lg-8 col-xs-8">
                                                 <h5>TOTAL ACTIVE CLASSES</h5>
@@ -265,10 +268,10 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         </div>
                                     </div>
                                     
-                                    <div class="registered bg-primary">
+                                    <div class="registered bg-danger" style="float: left;width:100%">
                                         <div class="row">
                                             <div class="col-lg-8 col-xs-8">
-                                                <h5>TOTAL ACTIVE SUBSCRIBERS FOR NO ENTRY MORE THAN 7 DAYS</h5>
+                                                <h5>NO ENTRY MORE THAN 7 DAYS</h5>
                                             </div>
                                             <div class="col-lg-4 col-xs-4">
                                                 <h3 id="myTargetElement4.1"><?= $count_no_entry_more_then_7_days ?></h3>
@@ -300,7 +303,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         </div>
                                     </div> -->
                                     
-                                    <div class="registered bg-primary">
+                                    <div class="registered bg-warning" style="float: left;width:100%">
                                         <div class="row">
                                             <div class="col-lg-8 col-xs-8">
                                                 <h5>TOTAL MONTHLY EXPENSES</h5>
@@ -308,6 +311,18 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             <div class="col-lg-4 col-xs-4">
                                                 <h3 id="myTargetElement4.1"><?=$total_expeses?> KD</h3>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="registered bg-info " style="float: left;width:100%">
+                                        <div class="row ">
+                                            <div class="col-lg-8 col-xs-8">
+                                                <h5>TOTAL HOLD SUBSCRIPTION</h5>
+                                            </div>
+                                            <div class="col-lg-4 col-xs-4">
+                                                <h3 id="myTargetElement4.1" class="hold_package_btn"><?= $count_hold_subscription_users;?>
+                                                       
+                                                </h3>
+                                            </div> 
                                         </div>
                                     </div>
                                     
@@ -327,12 +342,14 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     $qr_class = db_select_query("select * from classes where id = '$cls' ")[0] ;
                                     $all_us = db_select_query("select * from users where package_class != '0' and expiry_dates >= '$tdtt'") ;
                                     $cn = 0 ;
+                                    $html_active_class_user = "";
                                     foreach($all_us as $g)
                                     {
                                      $gr = explode(',', $g['class_id']);
                                       if(in_array($cls, $gr))
                                       {
-                                        $cn++ ;  
+                                        $cn++ ; 
+                                        $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td> </tr>";
                                       }
                                     
                                     }
@@ -340,14 +357,46 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     <div class="row" style="margin: 0px; display: block;">
                                         <!--<img src="<?=$user['image']?>" class="recent-user-img" alt="image not found">-->
                                         <h5>
-                                        <a class="text-primary"><?=$qr_class['name']?> </a>
-                                        <small>
-                                            <span class="pull-right">
-                                      <?= $cn ; ?></span>
-                                      </small><br>
+                                            <a class="text-primary" style="cursor: auto;"><?=$qr_class['name']?> </a>
+                                            <small>
+                                                <span class="pull-right view_all_active_class_user_btn"><?= $cn ; ?>
+                                                    <div class="view_all_active_class_user" style="display: none;" >
+                                                        <table>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Mobile No.</th>
+                                                            </tr>
+                                                            <?php echo $html_active_class_user;?>                                                       
+                                                        </table>
+                                                    </div>
+                                                </span>
+                                            </small>
+                                        <br>
                                       <small>
-                                                  <span class="pull-right">Waiting:-
-                                      <?php $count = db_select_query("SELECT count(0) as count FROM waiting_list Where class_id = '".$qr_class['id']."' "); echo ($count)?$count[0]['count']:0; ?></span>
+                                                  <span class="pull-right view_all_active_class_user_btn">Waiting:- 
+                                      <!-- <?php //$count = db_select_query("SELECT *,count(0) as count FROM waiting_list Where class_id = '".$qr_class['id']."' "); ?> -->
+                                      <?php $count = db_select_query("SELECT * FROM waiting_list Where class_id = '".$qr_class['id']."' "); 
+                                                // echo ($count)?$count[0]['count']:0; 
+                                                echo ($count)?count($count):0; 
+                                                 if(count($count) > 0){ ?>
+                                                    <div class="view_all_active_class_user" style="display: none;">
+                                                        <table>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Mobile No.</th>
+                                                            </tr>
+                                                            <?php foreach($count as $active_class_waiting){ ?>
+                                                                <tr>
+                                                                    <td> <?php echo ($active_class_waiting['name'] != "")?$active_class_waiting['name']:'-';?></td>
+                                                                    <td><?php echo ($active_class_waiting['contact'] != "")?$active_class_waiting['contact']:'-';?> </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </div>
+                                                <?php }  ?>
+                                      
+                                        </span>
                                     
                                       </small>
                                     </h5>
@@ -361,7 +410,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     
                                 </div>
                             </div>
-                            <a href="class.php">
+                            <!-- <a href="class.php">
                              <div class="registered bg-success">
                                         <div class="row">
                                             <div class="col-lg-12 col-xs-12">
@@ -370,7 +419,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                            
                                         </div>
                                     </div>
-                                    </a>
+                                    </a> -->
                         </div>
                         <?php } ?>
                        
@@ -471,10 +520,30 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     <div class="row" style="margin: 0px; display: block;">
                                        
                                         <h5>
-                                        <a  class="text-primary"><?=$qr['name']?> </a>
+                                        <a  class="text-primary" style="cursor: auto;"><?=$qr['name']?> </a>
                                         <small>
-                                 <span class="pull-right">
-                                 <?=count($cnp)?></span></small>
+                                            <span class="pull-right package_list_show_btn">
+                                                <?=count($cnp)?>
+                                                <?php if(count($cnp) > 0){ ?>
+                                                <div class="view_package_list" style="display: none;">
+                                                   <table>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Mobile No.</th>
+                                                        </tr>
+                                                        <?php foreach($cnp as $package_user_name){ ?>
+                                                            <tr>
+                                                                <td> <?php echo $package_user_name['name'];?></td>
+                                                                <td><?php echo $package_user_name['email'];?></td>
+                                                                <td><?php echo $package_user_name['mobile'];?></td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                   </table>
+                                                </div>
+                                                <?php } ?>
+                                            </span>
+                                        </small>
                                     </h5>
                                 
                                     </div>
@@ -490,7 +559,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                
                             </div>
                             
-                             <a href="package.php">
+                             <!-- <a href="package.php">
                              <div class="registered bg-primary">
                                         <div class="row">
                                             <div class="col-lg-12 col-xs-12">
@@ -499,7 +568,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                            
                                         </div>
                                     </div>
-                                    </a>
+                                    </a> -->
                             
                         </div>
                             </div>
@@ -566,6 +635,29 @@ function getActiveEmployeePt($emp_id, $emp_name){
             <!-- /.content -->
  </aside>
 <?php } ?>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">View details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body all_model_data">
+        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
 </div>
     <!-- /.right-side -->
     <!-- ./wrapper -->
@@ -591,7 +683,48 @@ function getActiveEmployeePt($emp_id, $emp_name){
 .form-group {
     margin-bottom: 0px;
 }
+.package_list_show_btn:hover, .hold_package_btn:hover, .view_all_active_class_user_btn:hover{
+    cursor: pointer;
+}
+.all_model_data {
+    overflow-x: scroll;
+}
+.all_model_data table{
+    width: 100%;
+}
+.all_model_data th, .all_model_data td{
+    border: 1px solid #e5e5e5;
+    padding: 0 5px;
+}
 
 </style>
-
+<script>
+        $(document).ready(function(){
+            $(document).on('click','.package_list_show_btn',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                var getActivePackageLink = $(this).find('.view_package_list').html();
+                $('.all_model_data').html(getActivePackageLink);
+            });
+            $(document).on('click','.hold_package_btn',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                    $.ajax({    
+                        type: "post",
+                        url: "ajax/dashboard_report.php", 
+                        data:{report_type:"hold_subscribers"},                  
+                        success: function(data){  
+                            $('.all_model_data').html(data.message);   
+                        }
+                    });  
+            });
+            $(document).on('click','.view_all_active_class_user_btn',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                var view_all_active_class_user = $(this).find('.view_all_active_class_user').html();
+                $('.all_model_data').html(view_all_active_class_user);
+            })
+            
+        })
+</script>
 </html>

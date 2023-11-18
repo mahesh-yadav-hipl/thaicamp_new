@@ -10,6 +10,7 @@ $sql = db_select_query($query);
 if($sql)
 {
     $sql = $sql[0];
+	$json['admin_type']="";
 	if($sql['password'] == $password)
 	{
 		
@@ -20,6 +21,9 @@ if($sql)
 			$_SESSION['login_count']=0;
 			$_SESSION['lock']=false;
 
+			if($sql['role'] === "admin" && $sql['id'] == '1'){
+				$json['admin_type']="super_admin";
+			}	
 		$json['result']=true;
 		$json['message']="Login successfull";
 	}

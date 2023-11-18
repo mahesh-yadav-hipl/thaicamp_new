@@ -93,7 +93,16 @@
                             </li>
                             
                     <?php }else{ ?>                 
-                  
+                        
+                        <?php if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { ?>
+                        <li>
+                            <a href="menu_list.php">
+                                <i class="text-info menu-icon fa fa-bars"></i>
+                                <span class="mm-text ">Contain icons</span>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <?php } ?>
                         <li>
                             <a href="dashboard.php">
                                 <i class="text-primary menu-icon fa fa-fw fa-dashboard"></i>
@@ -170,11 +179,11 @@
                                     </a>
                                 </li>
                                
-                                 <li>
+                                 <!-- <li>
                                     <a href="services.php">
                                         <i class="text-info fa fa-fw fa-star"></i> Services
                                     </a>
-                                </li>
+                                </li> -->
                                   <li>
                                     <a href="class.php">
                                         <i class="text-success fa fa-fw fa-list"></i> Classes

@@ -25,7 +25,7 @@ $userAdmin = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image)
             <?php if($_SESSION['login_type'] === "admin" || $_SESSION['login_type'] === "subscriber"){?>   
             <li>
                 <div style="padding: revert;
-                        margin-top: 12px;
+                        margin-top: 17px;
                         margin-right: 15px;
                         font-size: 21px;
                     ">
@@ -43,7 +43,7 @@ $userAdmin = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image)
                                             height: 17px;
                                             text-align: center;
                                             line-height: 19px;
-                                            top: 6px;
+                                            top: 9px;
                                             color: #fff;
                                             right: 2px;"><?php echo $cart_header_qty;?></span>
                                             </a>
@@ -57,11 +57,19 @@ $userAdmin = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image)
                     <?php if($cookie_value == "en_US"){ ?>
                       <input type="hidden" name="lang" value="ar_AR">
                         <input type="hidden" name="googtrans" value="/en/ar">
-                        <button type="submit" class="lan-btn"><li><img src = "img/ar_flag.png" width="50px">&nbsp;&nbsp;&nbsp;AR</li></button>
+                        <button type="submit" class="lan-btn"><li>
+                            <!-- <img src = "img/ar_flag.png" width="50px"> -->
+                            <img src = "img/ar_img.png">
+                            <!-- &nbsp;&nbsp;AR&nbsp;&nbsp; -->
+                        </li></button>
                         <?php } else { ?>
                         <input type="hidden" name="lang" value="en_US">
                         <input type="hidden" name="googtrans" value="/en/en">
-                        <button type="submit" class="lan-btn"><li><img src = "img/en_flag1.png" width="50px"><span style="margin-top: 10px;">&nbsp;&nbsp;&nbsp;EN</span></li></button>
+                        <button type="submit" class="lan-btn"><li>
+                            <!-- <img src = "img/en_flag1.png" width="50px"> -->
+                            <img src = "img/en_img.png" >
+                            <!-- <span style="margin-top: 10px;">&nbsp;&nbsp;EN&nbsp;&nbsp;</span> -->
+                        </li></button>
                         <?php } ?>
                 </form>
             </li>
