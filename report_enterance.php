@@ -100,7 +100,7 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
 
                             <div class="panel-body table-responsive">
