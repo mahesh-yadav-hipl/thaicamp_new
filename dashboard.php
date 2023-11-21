@@ -175,12 +175,10 @@ function getActiveEmployeePt($emp_id, $emp_name){
     if($total_entry > 0){
         $html = '<div class="newstick">
             <div id="pack_mod" class="recent">
-            <div class="row" style="margin: 0px; display: block;">
                 <h5>
                     <a class="text-primary" href="view_employee.php?id='.$emp_id.'">'.ucfirst($emp_name).'</a>
                     <small><span class="pull-right">'.$total_entry.'</span></small>
-                </h5>                                
-                </div>
+                </h5>  
             </div>
         </div>';
         echo $html;
@@ -230,18 +228,14 @@ function getActiveEmployeePt($emp_id, $emp_name){
                  
                     <div class="col-lg-4">
                         <?php if($_SESSION['login_type'] === "admin") { ?>
-                  <div class="box-model">
-                        
-                            <div class="row">
-                                <div class=" col-lg-12 col-xs-12">
-                                     
-                                    <div class="registered bg-primary">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-xs-8">
-                                                <h5>TOTAL ACTIVE SUBSCRIBERS</h5>
-                                            </div>
-                                            <div class="col-lg-4 col-xs-4">
+                  <div class="box-model admin-left-panel">
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area DarkBlue">
                                                 <h3 id="userscount"><?=$count_users?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>TOTAL ACTIVE SUBSCRIBERS</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -257,24 +251,26 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         </div>
                                     </div> -->
                                     
-                                    <div class="registered bg-success" style="float: left;width:100%">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-xs-8">
-                                                <h5>TOTAL ACTIVE CLASSES</h5>
-                                            </div>
-                                            <div class="col-lg-4 col-xs-4">
+                                    
+
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area bg-yellow">
                                                 <h3 id="myTargetElement4.1"><?=sizeof($new_arr);?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>TOTAL ACTIVE CLASSES</h5>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="registered bg-danger" style="float: left;width:100%">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-xs-8">
-                                                <h5>NO ENTRY MORE THAN 7 DAYS</h5>
-                                            </div>
-                                            <div class="col-lg-4 col-xs-4">
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area bg-red">
                                                 <h3 id="myTargetElement4.1"><?= $count_no_entry_more_then_7_days ?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>NO ENTRY MORE THAN 7 DAYS</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -303,31 +299,27 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         </div>
                                     </div> -->
                                     
-                                    <div class="registered bg-warning" style="float: left;width:100%">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-xs-8">
-                                                <h5>TOTAL MONTHLY EXPENSES</h5>
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area bg-sky">
+                                                <h3 id="myTargetElement4.1"><?=$total_expeses?> <span class="value-ext">KD</span></h3>
                                             </div>
-                                            <div class="col-lg-4 col-xs-4">
-                                                <h3 id="myTargetElement4.1"><?=$total_expeses?> KD</h3>
+                                            <div class="re-right-area">
+                                                <h5>TOTAL MONTHLY EXPENSES</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="registered bg-info " style="float: left;width:100%">
-                                        <div class="row ">
-                                            <div class="col-lg-8 col-xs-8">
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area bg-green">
+                                                <h3 id="myTargetElement4.1" class="hold_package_btn"><?= $count_hold_subscription_users;?></h3>
+                                            </div>
+                                            <div class="re-right-area">
                                                 <h5>TOTAL HOLD SUBSCRIPTION</h5>
                                             </div>
-                                            <div class="col-lg-4 col-xs-4">
-                                                <h3 id="myTargetElement4.1" class="hold_package_btn"><?= $count_hold_subscription_users;?>
-                                                       
-                                                </h3>
-                                            </div> 
                                         </div>
                                     </div>
                                     
-                                </div>
-                            </div>
                            
                         </div>
                   <?php } ?>
@@ -349,7 +341,9 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                       if(in_array($cls, $gr))
                                       {
                                         $cn++ ; 
-                                        $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td> </tr>";
+                                        $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
+                                            </tr>";
+                                            // <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
                                       }
                                     
                                     }
@@ -366,6 +360,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                                                 <th>Name</th>
                                                                 <th>Email</th>
                                                                 <th>Mobile No.</th>
+                                                                <!-- <th>View</th> -->
                                                             </tr>
                                                             <?php echo $html_active_class_user;?>                                                       
                                                         </table>
@@ -462,7 +457,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                         <!--    </div>-->
                         <!--</div>-->
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 admin-right-panel">
                       
                         <!-- <div class="col-md-12">
                                 <div id="birth_mod" class="box-model event">
@@ -488,9 +483,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                             </div> -->
                             
                             <?php if($_SESSION['login_type'] === "admin") { ?>
-                              <div class="row">
-                              <div class="col-md-12">
-                                <div class="box-model">
+                                <div class="box-model bg-light radius-15">
                                     <h4>Employee Active PT</h4>                                
                                     <?php 
                                         $get_all_employee  = "SELECT id,name  FROM users Where role ='employee'";
@@ -502,11 +495,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         }                         
                                     ?>
                                  </div> 
-                            </div>
-
-
-                            <div class="col-md-12">
-                            <div class="box-model">
+                            <div class="box-model bg-light radius-15">
                             <h4>Active Packages</h4>
                             <div  class="newstick" style="">
                                 <div id="pack_mod"  class="recent" style="">
@@ -517,7 +506,6 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     $qr = db_select_query("select * from packages where id = '$pc' ")[0] ; 
                                     $cnp = db_select_query("select * from users where packagesid = '$pc' and package_class != '0' and expiry_dates >= '$tdtt' "); 
                                     ?>
-                                    <div class="row" style="margin: 0px; display: block;">
                                        
                                         <h5>
                                         <a  class="text-primary" style="cursor: auto;"><?=$qr['name']?> </a>
@@ -531,12 +519,14 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>Mobile No.</th>
+                                                            <!-- <th>View</th> -->
                                                         </tr>
                                                         <?php foreach($cnp as $package_user_name){ ?>
                                                             <tr>
                                                                 <td> <?php echo $package_user_name['name'];?></td>
                                                                 <td><?php echo $package_user_name['email'];?></td>
                                                                 <td><?php echo $package_user_name['mobile'];?></td>
+                                                                <!-- <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id="<?php echo $package_user_name['id']; ?>"' style='margin: 5px 0px;'>View</a></td> -->
                                                             </tr>
                                                         <?php } ?>
                                                    </table>
@@ -545,8 +535,6 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             </span>
                                         </small>
                                     </h5>
-                                
-                                    </div>
                                     
                                     <?php
                                     $i++ ;
@@ -570,12 +558,6 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     </div>
                                     </a> -->
                             
-                        </div>
-                            </div>
-                           
-                           
-                      
-                      
                         </div>
                         <?php } ?>
                         
@@ -696,6 +678,145 @@ function getActiveEmployeePt($emp_id, $emp_name){
     border: 1px solid #e5e5e5;
     padding: 0 5px;
 }
+
+.register-detail{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #f6f8fc;
+    padding: 12px;
+    border-radius: 15px;
+}
+.register-detail .re-left-area{
+    flex: 0 0 120px;
+    max-width: 120px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 8px;
+}
+.register-detail .re-left-area h3{
+    margin: 0;
+    padding: 0;
+}
+.value-ext{
+    display: block;
+    font-size: 15px;
+}
+.register-detail .re-right-area{
+    flex: 0 0 calc(100% - 120px);
+    max-width: calc(100% - 120px);
+    text-align: left;
+    padding: 0 20px;
+}
+.register-detail .re-right-area h5{
+    padding: 0;
+    margin: 0;
+    color: #33363a;
+    text-transform: lowercase;
+    font-weight: 600;
+    font-size: 15px;
+}
+.register-detail .re-right-area h5::first-letter{
+    text-transform: uppercase;
+}
+
+.DarkBlue{
+    background-color: #e8e9fc;
+}
+.DarkBlue h3{
+    color: #6159e1;
+}
+.bg-yellow{
+    background-color: #f7eee8;
+}
+.bg-yellow h3{
+    color: #c77b41;
+}
+.bg-red{
+    background-color: #f7e4e8;
+}
+.bg-red h3{
+    color: #cf373c;
+}
+.bg-sky{
+    background-color: #ddf4fa;
+}
+.bg-sky h3{
+    color: #29b2c9;
+}
+.bg-green{
+    background-color: #dff7b3;
+}
+.bg-green h3{
+    color: #84ad3a;
+}
+.admin-left-panel{
+    background-color: transparent;
+    margin: 20px 0 0;
+    padding: 0;
+    border: none;
+}
+.admin-left-panel .registered{
+    padding: 0;
+    margin: 0;
+}
+.admin-left-panel .registered:not(:last-child){
+    margin-bottom: 10px;
+}
+.radius-15{
+    border-radius: 15px;
+}
+.bg-light{
+    background-color: #f6f8fc;
+    padding: 12px;
+    border: none;
+}
+.admin-right-panel .box-model{
+    margin-top: 5px;
+}
+.admin-right-panel .box-model + .box-model{
+    margin-top: 10px;
+}
+.admin-right-panel .box-model>h4{
+    margin: 0;
+    padding-bottom: 14px;
+    padding-top: 10px;
+}
+.admin-right-panel .box-model .recent h5{
+    background-color: #ebeff7;
+    margin: 0 0 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.admin-right-panel .box-model .recent h5:last-child{
+    margin-bottom: 0;
+}
+.admin-right-panel .box-model .recent h5>a{
+    color: #446e99;
+}
+.admin-right-panel .box-model .recent small span{
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.admin-right-panel .box-model .recent small span{
+    background-color: #fae2dd;
+    color: #a93c25;
+}
+
+
 
 </style>
 <script>

@@ -7,6 +7,9 @@ if(count($product) == 0){
     echo "Product not exists";
     die;
 }
+
+$get_old_sizes = db_select_query("SELECT * FROM product_sizes WHERE product_id = '$id' AND deleted = 0 ");
+
 ?>
 <style>
 input[type="checkbox"]
@@ -114,6 +117,24 @@ input[type="checkbox"]
                                                                         ?>
                                                                     </td>
                                                                 </tr>
+                                                                    
+                                                                <tr>
+                                                                    <td>Add Size</td>
+                                                                    <td>
+                                                                        <div class="input_fields_wrap">
+                                                                            <button class="add_field_button float-right pull-right btn-success" style="border: 0;margin-bottom:5px;padding: 5px 9px;border-radius: 7px;">Add Size</button>
+                                                                            <!-- old sizes -->
+                                                                                <?php if(count($get_old_sizes) > 0){
+                                                                                    foreach($get_old_sizes as $row_old_size){?>
+                                                                                        <div class="add_more_sizes"><input type="text" name="size_old[<?= $row_old_size['id']; ?>]" value="<?php echo $row_old_size['size_name']; ?>" class="befor_exit_same_size"/><a href="#" class="remove_field">Remove</a></div>
+                                                                                       
+                                                                                  <?php  }
+                                                                                } ?>
+                                                                            <!-- old sizes -->
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                            
                                                                 <tr>
                                                                     <td>Description</td>
                                                                     <td>
@@ -376,5 +397,55 @@ messages:{
 .plan.col-md-3 {
     width: 24%;
 }
+
+
+.add_more_sizes{
+    width: 100%;
+    float: left;
+    margin-top: 7px;
+}
+.add_more_sizes input{
+    width: calc(100% - 100px);
+    float: left;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+.add_more_sizes a{
+    background: red;
+    color: #fff;
+    padding: 2px 9px;
+    border-radius: 7px;
+    vertical-align: text-bottom;
+    float: left;
+    margin-left: 15px;
+}
 </style>
 
+
+<script>
+    $(document).ready(function() {
+    var max_fields      = 50; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="add_more_sizes"><input type="text" name="size[]" class="befor_exit_same_size"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+</script>

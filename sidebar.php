@@ -98,7 +98,7 @@
                         <li>
                             <a href="menu_list.php">
                                 <i class="text-info menu-icon fa fa-bars"></i>
-                                <span class="mm-text ">Contain icons</span>
+                                <span class="mm-text ">Main</span>
                                 <span class="arrow"></span>
                             </a>
                         </li>
@@ -228,6 +228,12 @@
     <li>
                             <a href="reports.php">
                                 <i class="text-default menu-icon fa fa-fw fa-file"></i> Reports
+                            </a>
+                         
+                        </li>
+                        <li>
+                            <a href="report_enterance.php">
+                            <i class="text-primary menu-icon fa fa-fw fa fa-sign-in"></i> Report Enterance
                             </a>
                          
                         </li>

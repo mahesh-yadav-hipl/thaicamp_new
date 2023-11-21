@@ -191,7 +191,9 @@ $tdtt = date('Y-m-d');
                                  <?php              
                                     $total_pt_amount = db_select_query("select sum(price) from private_training  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month'")[0]['sum(price)'];
                                    
-                                    $pt_get_amount = db_select_query("select employee_id, count(id) as total_entry, sum(price - employee_commission) as total_price from private_training  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' GROUP BY employee_id" );
+                                    // new before query
+                                    // $pt_get_amount = db_select_query("select employee_id, count(id) as total_entry, sum(price - employee_commission) as total_price from private_training  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' GROUP BY employee_id" );
+                                    $pt_get_amount = db_select_query("select employee_id, count(id) as total_entry, sum(price) as total_price from private_training  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' GROUP BY employee_id" );
                                    
                                     $total_paid_salary = db_select_query("select sum(salary) from salary  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month'")[0]['sum(salary)'];
                                     $total_paid_employee_percentage = db_select_query("select sum(pt_salary) from salary  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month'")[0]['sum(pt_salary)'];

@@ -7,7 +7,7 @@ $getAll_users =  db_select_query("SELECT * FROM users Where `role` = 'subscriber
 if(!empty($_REQUEST['user_list'])){
     $user_id = $_REQUEST['user_list'];
 }
-
+ 
 
 if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){ 
     $start_date = $_REQUEST['start_date'];

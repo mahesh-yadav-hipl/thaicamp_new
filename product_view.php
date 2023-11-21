@@ -147,6 +147,11 @@
     width: 100%;
     margin-top: 20px;
 }
+.select_size_inner{
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #ddd;
+}
 </style>
 
 <body>
@@ -266,6 +271,25 @@ $products =  db_select_query("SELECT products.*,categories.name as categories_na
                                                       $pro_qty = $_SESSION['cart'][$pro_id]['quantiy'];
                                                   }
                                               }?>
+                                        
+
+
+                                        <?php 
+                                            $getAllSizes = db_select_query("select * from  product_sizes WHERE product_id = ".$v['id']." AND deleted = 0 ");
+                                            if(count($getAllSizes) > 0){
+                                       ?>
+                                         <div class="select_size_main">
+                                                <select name="select_size" class="select_size_inner">
+                                                    <option value="">Select Size</option>
+                                                    <?php foreach($getAllSizes as $rowSize){?>
+                                                            <option value="<?= $rowSize['id']; ?>"><?= $rowSize['size_name'];?></option>
+                                                        <?php } ?>
+                                                </select>
+                                            </div>
+                                        <?php } ?>
+
+
+
                                         <span class="checkout_add_cart">
                                             <div class="quanty-flex-group qty_uniq">
                                                 <div class="qtyminus">-</div>

@@ -21,7 +21,7 @@ if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') {
         <aside class="right-side right-padding">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h2>Contain Icons</h2>
+                <h2>Main </h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="index-2.html">
