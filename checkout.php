@@ -33,6 +33,13 @@
 }
 #discount_btn_apply{margin-top: 5px;}
 
+
+.select_size_inner{
+    width: 169px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    margin-bottom: 9px;
+}
 </style>       
     <aside class="right-side right-padding">
         <!-- Content Header (Page header) -->
@@ -63,6 +70,7 @@
                                         if($row['quantiy'] > 0){
                                                     $product_id = $row['product_id'];
                                                     $quantiy = $row['quantiy'];
+                                                    $pro_size = $row['product_size'];
                                                     $product = db_select_query("SELECT * FROM products WHERE id = '$product_id'")[0];                              
                                                 ?>
                                                 <?php 
@@ -78,6 +86,26 @@
                                                     <td><?= $product['title'];?></td>
                                                     <td>
                                                         <span class="checkout_add_cart">
+
+
+                                                        <?php 
+                                                                $getAllSizes = db_select_query("select * from  product_sizes WHERE product_id = ".$product_id." AND deleted = 0 ");
+                                                                if(count($getAllSizes) > 0){ ?>
+                                                                <div class="select_size_main">
+                                                                        <select name="select_size" class="select_size_inner">
+                                                                            <option value="">Select Size</option>
+                                                                            <?php foreach($getAllSizes as $rowSize){
+                                                                                    $selected_size = "";
+                                                                                    if($rowSize['id'] == $pro_size){
+                                                                                        $selected_size = "selected";
+                                                                                    }
+                                                                                ?>
+                                                                                    <option value="<?= $rowSize['id']; ?>" <?= $selected_size;?>><?= $rowSize['size_name'];?></option>
+                                                                                <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                <?php } ?>
+
                                                             <div class="quanty-flex-group">
                                                                 <div class="qtyminus">-</div>
                                                                 <input type="number" name="quantity" value="<?= $quantiy;?>" class="qty quantity_input" data-product_id="<?= $product_id;?>">
@@ -218,12 +246,18 @@
             $(document).on('click','.cart_add_btn',function(){
                 $(".message_resp").html();
                 var quantiy = $(this).closest( ".checkout_add_cart").find('.quantity_input').val(); 
-                var product_id = $(this).closest( ".checkout_add_cart").find('.quantity_input').data('product_id');; 
+                var product_id = $(this).closest( ".checkout_add_cart").find('.quantity_input').data('product_id');
+
+                var get_size =  $(this).closest( ".checkout_add_cart").find('.select_size_inner').val();
+                    if(typeof get_size === "undefined" || get_size == ""){
+                        get_size = "";
+                    }
+
                 if(quantiy > 0){
                     $.ajax({    
                         type: "post",
                         url: "ajax/cart.php", 
-                        data:{quantiy:quantiy,product_id:product_id},                  
+                        data:{quantiy:quantiy,product_id:product_id,product_size:get_size},                  
                         success: function(data){  
                             $('.message_resp_'+product_id).html(data.message);
                            $(".message_resp").html(data.message);

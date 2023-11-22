@@ -265,32 +265,35 @@ $products =  db_select_query("SELECT products.*,categories.name as categories_na
                                     <div class="col-md-12">
                                         <?php  
                                               $pro_qty = 1;
+                                              $pro_size = "";
                                               if (isset($_SESSION['cart'])) {
                                                   if(array_key_exists($v['id'], $_SESSION['cart'])) {
                                                       $pro_id = $v['id'];
                                                       $pro_qty = $_SESSION['cart'][$pro_id]['quantiy'];
+                                                      $pro_size = $_SESSION['cart'][$pro_id]['product_size'];
                                                   }
                                               }?>
                                         
-
-
+                                        <span class="checkout_add_cart">
+                                            
                                         <?php 
-                                            $getAllSizes = db_select_query("select * from  product_sizes WHERE product_id = ".$v['id']." AND deleted = 0 ");
-                                            if(count($getAllSizes) > 0){
-                                       ?>
+                                        $getAllSizes = db_select_query("select * from  product_sizes WHERE product_id = ".$v['id']." AND deleted = 0 ");
+                                        if(count($getAllSizes) > 0){ ?>
                                          <div class="select_size_main">
                                                 <select name="select_size" class="select_size_inner">
                                                     <option value="">Select Size</option>
-                                                    <?php foreach($getAllSizes as $rowSize){?>
-                                                            <option value="<?= $rowSize['id']; ?>"><?= $rowSize['size_name'];?></option>
+                                                    <?php foreach($getAllSizes as $rowSize){
+                                                            $selected_size = "";
+                                                            if($rowSize['id'] == $pro_size){
+                                                                $selected_size = "selected";
+                                                            }
+                                                        ?>
+                                                            <option value="<?= $rowSize['id']; ?>" <?= $selected_size;?>><?= $rowSize['size_name'];?></option>
                                                         <?php } ?>
                                                 </select>
                                             </div>
                                         <?php } ?>
 
-
-
-                                        <span class="checkout_add_cart">
                                             <div class="quanty-flex-group qty_uniq">
                                                 <div class="qtyminus">-</div>
                                                 <input type="number" name="quantity" value="<?= $pro_qty;?>" class="qty quantity_input" data-product_id="<?=$v['id'];?>">
@@ -457,12 +460,18 @@ $('body').on('click','.remove',function(){
          $(document).on('click','.cart_add_btn',function(){
                 $(".message_resp").html();
                 var quantiy = $(this).closest( ".checkout_add_cart").find('.quantity_input').val(); 
-                var product_id = $(this).closest( ".checkout_add_cart").find('.quantity_input').data('product_id');; 
+                var product_id = $(this).closest( ".checkout_add_cart").find('.quantity_input').data('product_id');
+                
+                var get_size =  $(this).closest( ".checkout_add_cart").find('.select_size_inner').val();
+                    if(typeof get_size === "undefined" || get_size == ""){
+                        get_size = "";
+                    }
+                
                 if(quantiy > 0){
                     $.ajax({    
                         type: "post",
                         url: "ajax/cart.php", 
-                        data:{quantiy:quantiy,product_id:product_id},                  
+                        data:{quantiy:quantiy,product_id:product_id,product_size:get_size},                  
                         success: function(data){  
                             $('.message_resp_'+product_id).html(data.message);
                            $(".message_resp").html(data.message);

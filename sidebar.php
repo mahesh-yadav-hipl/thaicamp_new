@@ -360,7 +360,7 @@
                                     <span class="mm-text ">Products</span>
                                 </a>
                             </li> -->
-
+                        <?php if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { ?>
                             <li class="menu-dropdown">
                                 <a href="#">
                                     <i class="text-primary menu-icon fa fa-users"></i>
@@ -421,6 +421,8 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <?php } ?>
                             <!-- <li>
                                 <a href="private-training.php">
                                     <i class="text-success menu-icon fa fa-fw fa-info-circle"></i>

@@ -311,7 +311,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     </div>
                                     <div class="registered">
                                         <div class="register-detail">
-                                            <div class="re-left-area bg-green">
+                                            <div class="re-left-area bg-green hold_package_btn">
                                                 <h3 id="myTargetElement4.1" class="hold_package_btn"><?= $count_hold_subscription_users;?></h3>
                                             </div>
                                             <div class="re-right-area">
@@ -325,96 +325,95 @@ function getActiveEmployeePt($emp_id, $emp_name){
                   <?php } ?>
                  
                      <?php if($_SESSION['login_type'] === "admin") { ?>
-                        <div class="box-model">
-                            <h4>Active Classes</h4>
-                            <div   class="newstick" style="">
-                                <div  id="class_mod" class="recent" style="">
-                                    <?php if($new_arr) {
-                                    foreach($new_arr as $cls) {
-                                    $qr_class = db_select_query("select * from classes where id = '$cls' ")[0] ;
-                                    $all_us = db_select_query("select * from users where package_class != '0' and expiry_dates >= '$tdtt'") ;
-                                    $cn = 0 ;
-                                    $html_active_class_user = "";
-                                    foreach($all_us as $g)
-                                    {
-                                     $gr = explode(',', $g['class_id']);
-                                      if(in_array($cls, $gr))
-                                      {
-                                        $cn++ ; 
-                                        $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
-                                            </tr>";
-                                            // <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
-                                      }
-                                    
-                                    }
-                                    ?>
-                                    <div class="row" style="margin: 0px; display: block;">
-                                        <!--<img src="<?=$user['image']?>" class="recent-user-img" alt="image not found">-->
-                                        <h5>
-                                            <a class="text-primary" style="cursor: auto;"><?=$qr_class['name']?> </a>
-                                            <small>
-                                                <span class="pull-right view_all_active_class_user_btn"><?= $cn ; ?>
-                                                    <div class="view_all_active_class_user" style="display: none;" >
-                                                        <table>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Mobile No.</th>
-                                                                <!-- <th>View</th> -->
-                                                            </tr>
-                                                            <?php echo $html_active_class_user;?>                                                       
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </small>
-                                        <br>
-                                      <small>
-                                                  <span class="pull-right view_all_active_class_user_btn">Waiting:- 
-                                      <!-- <?php //$count = db_select_query("SELECT *,count(0) as count FROM waiting_list Where class_id = '".$qr_class['id']."' "); ?> -->
-                                      <?php $count = db_select_query("SELECT * FROM waiting_list Where class_id = '".$qr_class['id']."' "); 
-                                                // echo ($count)?$count[0]['count']:0; 
-                                                echo ($count)?count($count):0; 
-                                                 if(count($count) > 0){ ?>
-                                                    <div class="view_all_active_class_user" style="display: none;">
-                                                        <table>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Mobile No.</th>
-                                                            </tr>
-                                                            <?php foreach($count as $active_class_waiting){ ?>
+                        <div class="common-box-layout small-bg-area">
+                            <div class="box-model bg-light radius-15">
+                                <h4>Active Classes</h4>
+                                <div   class="newstick" style="">
+                                    <div  id="class_mod" class="recent" style="">
+                                        <?php if($new_arr) {
+                                        foreach($new_arr as $cls) {
+                                        $qr_class = db_select_query("select * from classes where id = '$cls' ")[0] ;
+                                        $all_us = db_select_query("select * from users where package_class != '0' and expiry_dates >= '$tdtt'") ;
+                                        $cn = 0 ;
+                                        $html_active_class_user = "";
+                                        foreach($all_us as $g)
+                                        {
+                                        $gr = explode(',', $g['class_id']);
+                                        if(in_array($cls, $gr))
+                                        {
+                                            $cn++ ; 
+                                            $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
+                                                </tr>";
+                                                // <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
+                                        }
+                                        
+                                        }
+                                        ?>
+                                            <!--<img src="<?=$user['image']?>" class="recent-user-img" alt="image not found">-->
+                                            <h5>
+                                                <a class="text-primary" style="cursor: auto;"><?=$qr_class['name']?> </a>
+                                                <small>
+                                                    <span>
+                                                    <main class="pull-right view_all_active_class_user_btn"><?= $cn ; ?>
+                                                        <div class="view_all_active_class_user" style="display: none;" >
+                                                            <table>
                                                                 <tr>
-                                                                    <td> <?php echo ($active_class_waiting['name'] != "")?$active_class_waiting['name']:'-';?></td>
-                                                                    <td><?php echo ($active_class_waiting['contact'] != "")?$active_class_waiting['contact']:'-';?> </td>
+                                                                    <th>Name</th>
+                                                                    <th>Email</th>
+                                                                    <th>Mobile No.</th>
+                                                                    <!-- <th>View</th> -->
                                                                 </tr>
-                                                            <?php } ?>
-                                                        </table>
-                                                    </div>
-                                                <?php }  ?>
-                                      
-                                        </span>
-                                    
-                                      </small>
-                                    </h5>
+                                                                <?php echo $html_active_class_user;?>                                                       
+                                                            </table>
+                                                        </div>
+                                                    </main>
+                                                    <main class="pull-right view_all_active_class_user_btn">Waiting:- 
+                                        <!-- <?php //$count = db_select_query("SELECT *,count(0) as count FROM waiting_list Where class_id = '".$qr_class['id']."' "); ?> -->
+                                        <?php $count = db_select_query("SELECT * FROM waiting_list Where class_id = '".$qr_class['id']."' "); 
+                                                    // echo ($count)?$count[0]['count']:0; 
+                                                    echo ($count)?count($count):0; 
+                                                    if(count($count) > 0){ ?>
+                                                        <div class="view_all_active_class_user" style="display: none;">
+                                                            <table>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Mobile No.</th>
+                                                                </tr>
+                                                                <?php foreach($count as $active_class_waiting){ ?>
+                                                                    <tr>
+                                                                        <td> <?php echo ($active_class_waiting['name'] != "")?$active_class_waiting['name']:'-';?></td>
+                                                                        <td><?php echo ($active_class_waiting['contact'] != "")?$active_class_waiting['contact']:'-';?> </td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </table>
+                                                        </div>
+                                                    <?php }  ?>
+                                        
+                                                    </main>
+                                            </span>
+                                        
+                                        </small>
+                                        </h5>
+                                            
+                                        
+                                        <?php }
+                                        } ?>
+                                        
+                                        
                                         
                                     </div>
-                                    
-                                    <?php }
-                                    } ?>
-                                    
-                                    
-                                    
                                 </div>
-                            </div>
-                            <!-- <a href="class.php">
-                             <div class="registered bg-success">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-xs-12">
-                                                <h5>View All Classes</h5>
+                                <!-- <a href="class.php">
+                                <div class="registered bg-success">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-xs-12">
+                                                    <h5>View All Classes</h5>
+                                                </div>
+                                            
                                             </div>
-                                           
                                         </div>
-                                    </div>
-                                    </a> -->
+                                        </a> -->
+                            </div>
                         </div>
                         <?php } ?>
                        
@@ -457,7 +456,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                         <!--    </div>-->
                         <!--</div>-->
                     </div>
-                    <div class="col-lg-8 admin-right-panel">
+                    <div class="col-lg-8 admin-right-panel common-box-layout">
                       
                         <!-- <div class="col-md-12">
                                 <div id="birth_mod" class="box-model event">
@@ -780,12 +779,12 @@ function getActiveEmployeePt($emp_id, $emp_name){
 .admin-right-panel .box-model + .box-model{
     margin-top: 10px;
 }
-.admin-right-panel .box-model>h4{
+.common-box-layout .box-model>h4{
     margin: 0;
     padding-bottom: 14px;
     padding-top: 10px;
 }
-.admin-right-panel .box-model .recent h5{
+.common-box-layout .box-model .recent h5{
     background-color: #ebeff7;
     margin: 0 0 10px;
     padding: 10px;
@@ -794,13 +793,34 @@ function getActiveEmployeePt($emp_id, $emp_name){
     align-items: center;
     justify-content: space-between;
 }
-.admin-right-panel .box-model .recent h5:last-child{
+.common-box-layout .box-model .recent h5:nth-child(5n+1) small span{
+    background-color: #e0e0f7;
+    color: #6159e1;
+}
+.common-box-layout .box-model .recent h5:nth-child(5n+2) small span{
+    background-color: #efe0d6;
+    color: #c77b41;
+}
+.common-box-layout .box-model .recent h5:nth-child(5n+3) small span{
+    background-color: #f7e4e8;
+    color: #cf373c;
+}
+.common-box-layout .box-model .recent h5:nth-child(5n+4) small span{
+    background-color: #cfeff7;
+    color: #29b2c9;
+}
+.common-box-layout .box-model .recent h5:nth-child(5n+5) small span{
+    background-color: #dff7b3;
+    color: #84ad3a;
+}
+.common-box-layout .box-model .recent h5:last-child{
     margin-bottom: 0;
 }
-.admin-right-panel .box-model .recent h5>a{
+.common-box-layout .box-model .recent h5>a{
     color: #446e99;
+    padding-right: 15px;
 }
-.admin-right-panel .box-model .recent small span{
+.common-box-layout .box-model .recent small span{
     width: 80px;
     height: 60px;
     display: flex;
@@ -811,12 +831,25 @@ function getActiveEmployeePt($emp_id, $emp_name){
     font-size: 16px;
     font-weight: 500;
 }
-.admin-right-panel .box-model .recent small span{
+.common-box-layout .box-model .recent small span{
     background-color: #fae2dd;
     color: #a93c25;
 }
+.small-bg-area.common-box-layout .box-model .recent small span{
+    flex-wrap: wrap;
+    align-content: center;
+    width: 110px;
+}
+.small-bg-area.common-box-layout .box-model .recent small span>p{
+    flex: 0 0 100%;
+    margin: 0;
+    text-align: center;
+}
 
-
+main{
+    width: 100%;
+    text-align: center;
+}
 
 </style>
 <script>

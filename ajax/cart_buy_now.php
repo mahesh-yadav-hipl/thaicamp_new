@@ -43,13 +43,27 @@ if (isset($_SESSION['cart']) && isset($_SESSION['login_type'])) {
 			if($row['quantiy'] > 0){
 				$product_id = $row['product_id'];
 				$quantiy = $row['quantiy'];
+				$pro_size = $row['product_size'];
 				$product = db_select_query("SELECT * FROM products WHERE id = '$product_id'")[0];
+
+  
+				if($pro_size !=""){
+					$pro_size_get = db_select_query("SELECT * FROM product_sizes WHERE id = '$pro_size' AND product_id = '$product_id' AND deleted = 0 " )[0];
+					if(count($pro_size_get) < 1){
+						$json['result']=true;
+						$json['page_redirect']= 'No';	
+						$json['message']='<span class="text-danger">Size Not Exist Product: <b>'.$product['title'].'</b></span>';
+						echo json_encode($json);exit;	
+					}
+				}
+				
 				if($product['stock'] < $quantiy) {
 					$json['result']=true;
 					$json['page_redirect']= 'No';	
 					$json['message']='<span class="text-danger">Out of stock Product: <b>'.$product['title'].'</b></span>';
 					echo json_encode($json);exit;	
 				}
+
 			}
 		}
 		// buy befor check
@@ -57,6 +71,7 @@ if (isset($_SESSION['cart']) && isset($_SESSION['login_type'])) {
 			if($row['quantiy'] > 0){
 				$product_id = $row['product_id'];
 				$quantiy = $row['quantiy'];
+				$pro_size = $row['product_size'];
 				$product = db_select_query("SELECT * FROM products WHERE id = '$product_id'")[0];
 				if($product['stock'] < $quantiy) {
 					$json['result']=true;
@@ -78,6 +93,17 @@ if (isset($_SESSION['cart']) && isset($_SESSION['login_type'])) {
 								$_REQUEST['product_id'] = $product_id;
 								$_REQUEST['quantity'] = $quantiy;
 								$_REQUEST['deleted'] =0;
+
+								// add product size 
+								if($pro_size !=""){
+									$pro_size_get = db_select_query("SELECT * FROM product_sizes WHERE id = '$pro_size' AND product_id = '$product_id' AND deleted = 0 " )[0];
+									if(count($pro_size_get) > 0){
+										$_REQUEST['size_id'] = $pro_size;
+										$_REQUEST['size_name'] = $pro_size_get['size_name'];
+									}
+								}
+								// add product size 
+
 								$data['values']=$_REQUEST;
 								if($order = db_insert($data)){
 									$json['order_data']=$_REQUEST['order_id'];

@@ -22,7 +22,7 @@
 					<tr style="border: 1px solid #ddd;">
 						<th align="left" style="border: 1px solid #ddd;">Order id</th>
 						<th align="left" style="border: 1px solid #ddd;">Product</th>
-						<th align="left" style="border: 1px solid #ddd;">Qty</th>
+						<th align="left" style="border: 1px solid #ddd;">Qty / Size</th>
 						<th align="left" style="border: 1px solid #ddd;">Price</th>
 						<th align="left" style="border: 1px solid #ddd;">Amount</th>
 					</tr>';
@@ -34,11 +34,15 @@
 							$pro_details = json_decode($row["product_detail"]);
 							$total = $row['quantity']*$pro_details->price;
 							$sub_total += $row['quantity']*$pro_details->price;
+							$size_value = "";
+							if($row['size_name'] != ""){
+								$size_value = ' / '.$row['size_name'];
+							}
 							$html .='
 								<tr style="border: 1px solid #ddd;">
 								<td style="border: 1px solid #ddd;">'.$row["order_id"].'</td>
 								<td style="border: 1px solid #ddd;">'.$pro_details->title.'</td>
-								<td style="border: 1px solid #ddd;">'.$row['quantity'].'</td>
+								<td style="border: 1px solid #ddd;">'.$row['quantity'].$size_value.'</td>
 								<td style="border: 1px solid #ddd;">'.(int)$pro_details->price.' &nbsp;KD</td>
 								<td style="border: 1px solid #ddd;">'.$total.' &nbsp;KD</td>
 							</tr>';

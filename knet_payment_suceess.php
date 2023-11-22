@@ -42,6 +42,7 @@ if (! function_exists( 'curl_version' )) { exit
                             </div>
                             <div class="row">
                             <?php 
+                                    
                                      $order_id = $_GET['OrderID'];
                                      $product = db_select_query("SELECT * FROM sell_product_generate WHERE order_id = '$order_id' AND deleted = 0 ");
                                     if(count($product) > 0){
@@ -58,6 +59,10 @@ if (! function_exists( 'curl_version' )) { exit
                                              $order_data['created_by_id'] = $row['created_by_id'];
                                              $order_data['discount_amount'] = $row['discount_amount'];
                                              $order_data['total_amount'] = $row['total_amount'];
+                                            
+                                             $order_data['size_id'] = $row['size_id'];
+                                             $order_data['size_name'] = $row['size_name'];
+                                            
                                              $order_data['payment_method'] = '1';
 
                                              $order_data['deleted'] =0;
