@@ -783,6 +783,14 @@ function getActiveEmployeePt($emp_id, $emp_name){
     margin: 0;
     padding-bottom: 14px;
     padding-top: 10px;
+    color: #33363a;
+    text-transform: lowercase;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.common-box-layout .box-model>h4::first-letter{
+    text-transform: uppercase;
 }
 .common-box-layout .box-model .recent h5{
     background-color: #ebeff7;
@@ -794,23 +802,23 @@ function getActiveEmployeePt($emp_id, $emp_name){
     justify-content: space-between;
 }
 .common-box-layout .box-model .recent h5:nth-child(5n+1) small span{
-    background-color: #e0e0f7;
+    background-color: #ebeff7;
     color: #6159e1;
 }
 .common-box-layout .box-model .recent h5:nth-child(5n+2) small span{
-    background-color: #efe0d6;
+    background-color: #ebeff7;
     color: #c77b41;
 }
 .common-box-layout .box-model .recent h5:nth-child(5n+3) small span{
-    background-color: #f7e4e8;
+    background-color: #ebeff7;
     color: #cf373c;
 }
 .common-box-layout .box-model .recent h5:nth-child(5n+4) small span{
-    background-color: #cfeff7;
+    background-color: #ebeff7;
     color: #29b2c9;
 }
 .common-box-layout .box-model .recent h5:nth-child(5n+5) small span{
-    background-color: #dff7b3;
+    background-color: #ebeff7;
     color: #84ad3a;
 }
 .common-box-layout .box-model .recent h5:last-child{

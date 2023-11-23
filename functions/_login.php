@@ -24,7 +24,7 @@ function checkPageAccess(){
 		$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 		$uri_segments = explode('/', $uri_path);
 
-		if($uri_segments[2] == 'dashboard.php' || $uri_segments[2] == 'logout.php' || $uri_segments[2] == 'leave_employee.php' || $uri_segments[2] == 'add_leave.php' || $uri_segments[2] == 'edit_leave.php' || $uri_segments[2] == 'private-training.php' || $uri_segments[2] == 'user-profile.php' || $uri_segments[2] == 'salary_sheet.php'){
+		if($uri_segments[2] == 'menu_list.php' || $uri_segments[2] == 'dashboard.php' || $uri_segments[2] == 'logout.php' || $uri_segments[2] == 'leave_employee.php' || $uri_segments[2] == 'add_leave.php' || $uri_segments[2] == 'edit_leave.php' || $uri_segments[2] == 'private-training.php' || $uri_segments[2] == 'user-profile.php' || $uri_segments[2] == 'salary_sheet.php'){
 			return true;
 		}else{
 			return false;
@@ -33,7 +33,7 @@ function checkPageAccess(){
 		$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 		$uri_segments = explode('/', $uri_path);
 
-		if($uri_segments[2] == 'dashboard.php' || $uri_segments[2] == 'logout.php' || $uri_segments[2] == 'product_view.php' || $uri_segments[2] == 'product-detail.php' || $uri_segments[2] == 'user-profile.php' || $uri_segments[2] == 'ajax' || $uri_segments[2] == 'private-training.php' || $uri_segments[2] == 'checkout.php' || $uri_segments[2] == 'knet_order.php' || $uri_segments[2] == 'knet_payment_suceess.php' ||  $uri_segments[2] ==  'knet_payment_package_suceess.php' || $uri_segments[2] == 'knet_payment_error.php' || $uri_segments[2] == 'sell_product.php' || $uri_segments[2] == 'view_sell_product.php' || $uri_segments[2] == 'buy_new_package.php' || $uri_segments[2] == 'knet_package.php' || $uri_segments[2] == 'buy_private_trainee.php' || $uri_segments[2] == 'knet_payment_private_trainer_suceess.php'){
+		if($uri_segments[2] == 'menu_list.php' || $uri_segments[2] == 'dashboard.php' || $uri_segments[2] == 'logout.php' || $uri_segments[2] == 'product_view.php' || $uri_segments[2] == 'product-detail.php' || $uri_segments[2] == 'user-profile.php' || $uri_segments[2] == 'ajax' || $uri_segments[2] == 'private-training.php' || $uri_segments[2] == 'checkout.php' || $uri_segments[2] == 'knet_order.php' || $uri_segments[2] == 'knet_payment_suceess.php' ||  $uri_segments[2] ==  'knet_payment_package_suceess.php' || $uri_segments[2] == 'knet_payment_error.php' || $uri_segments[2] == 'sell_product.php' || $uri_segments[2] == 'view_sell_product.php' || $uri_segments[2] == 'buy_new_package.php' || $uri_segments[2] == 'knet_package.php' || $uri_segments[2] == 'buy_private_trainee.php' || $uri_segments[2] == 'knet_payment_private_trainer_suceess.php'){
 			return true;
 		}else{
 			return false;

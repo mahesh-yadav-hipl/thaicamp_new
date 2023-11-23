@@ -119,7 +119,8 @@
                         if(json.admin_type == "super_admin"){
                             setTimeout(function(){ location.href='menu_list.php'; }, 1500);
                         }else{
-                            setTimeout(function(){ location.href='dashboard.php'; }, 1500);
+                            setTimeout(function(){ location.href='menu_list.php'; }, 1500);
+                            // setTimeout(function(){ location.href='dashboard.php'; }, 1500);
                         }                        
                     }else{
                         toastr.info(json.message);

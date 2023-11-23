@@ -3,10 +3,10 @@ $id = $_SESSION['login_id'] ;
 $admin_data = db_select_query("select * from admin where id = '$id' ")[0] ;
 // print_r($admin_data);
 // exit() ;
-if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { 
-}else{
-    redirect(URL.'user-profile.php');
-}
+// if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { 
+// }else{
+//     redirect(URL.'user-profile.php');
+// }
 ?>
 
 <body>
@@ -37,30 +37,73 @@ if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') {
             <div class="container-fluid">
                 <!--main content-->
                         <div class="row main_menu_div">
+                        <?php if($_SESSION['login_type'] === "employee"){?>
+                            <div class="col-lg-3">
+                                <a href="user-profile.php" class="menu_store"><i class=" fa fa-user"></i> Profile </a>  
+                            </div>
+                            <div class="col-lg-3">
+                               <a href="leave_employee.php" class="manu_dashboard"><i class="fa fa-fw fa-dashboard"></i> Leaves </a>
+                            </div>
+                            <div class="col-lg-3">
+                               <a href="private-training.php" class="menu_entrance"> <i class="fa fa-fw fa-info-circle"></i> Private Training</a>   
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="salary_sheet.php?employee_id=<?= $_SESSION['login_id'] ;?>" class="menu_admin"><i class=" fa fa-building"></i> Salary Statement</a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="logout.php" class="menu_logout"><i class=" fa fa-fw fa fa-sign-out"></i> Logout </a>  
+                            </div>
+                        <?php  }else if ($_SESSION['login_type'] === 'subscriber'){?>
+                            <div class="col-lg-3">
+                                <a href="user-profile.php" class="menu_profile"><i class=" fa fa-user"></i> Profile </a>  
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="product_view.php" class="menu_store"><i class=" fa fa-th fa-store-alt"></i> Store</a>  
+                            </div>
+                            <div class="col-lg-3">
+                               <a href="private-training.php" class="menu_entrance"> <i class="fa fa-fw fa-info-circle"></i> Private Training</a>   
+                            </div>
+
+                            <div class="col-lg-3">
+                                <a href="buy_new_package.php?id=<?= $_SESSION['login_id'];?>" class="menu_admin"><i class=" fa fa-fw fa-money"></i> Packages</a>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <a href="logout.php" class="menu_logout"><i class=" fa fa-fw fa fa-sign-out"></i> Logout </a>  
+                            </div>
+
+                        <?php } else{ ?>                 
+                        
                             <div class="col-lg-3">
                                <a href="dashboard.php" class="manu_dashboard"><i class="fa fa-fw fa-dashboard"></i> DashBoard </a>
                             </div>
                             <div class="col-lg-3">
                                <a href="subscription.php" class="menu_entrance"> <i class=" fa fa-fw fa fa-sign-in"></i> Entrance</a>   
                             </div>
+                            <?php if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { ?>
                             <div class="col-lg-3">
                                 <a href="subadmin.php" class="menu_admin"><i class=" fa fa-fw fa-user"></i> Admin </a>
                             </div>
+                            <?php } ?>
                             <div class="col-lg-3">
                                 <a href="product_view.php" class="menu_store"><i class=" fa fa-th fa-store-alt"></i> Store</a>  
                             </div>
                             <div class="col-lg-3">
                                 <a href="users.php" class="menu_subscriber"><i class=" fa fa-fw fa-users"></i> Subscriber </a>  
                             </div>
+                            <?php if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { ?>
                             <div class="col-lg-3">
                                 <a href="employee.php" class="menu_employee"><i class=" fa fa-fw fa-users"></i> Employee </a>  
                             </div>
+                            <?php } ?>
                             <div class="col-lg-3">
                                 <a href="profile.php" class="menu_profile"><i class=" fa fa-fw fa-info-circle"></i> Profile </a>  
                             </div>
                             <div class="col-lg-3">
                                 <a href="logout.php" class="menu_logout"><i class=" fa fa-fw fa fa-sign-out"></i> Logout </a>  
                             </div>
+
+                            <?php } ?>
                         </div>
                 <!-- col-md-6 -->
                 <!--row -->
@@ -109,12 +152,13 @@ if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') {
     text-align: center;
 }
 .main_menu_div .col-lg-3 a{
-    color:#fff;
+    /* color:#fff; */
     padding: 20px 15px;
     width: 100%;
     float: left;
     margin-bottom: 25px;
     font-size: 21px;
+    border-radius: 15px;
 }
 .main_menu_div .col-lg-3 a .fa{
     font-size: 17px;
@@ -124,28 +168,36 @@ if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') {
     padding-top: 25px;
 }
 a.manu_dashboard {
-    background: #00c4ff;
+     color: #00c4ff;
+    background: #f6f8fc;
 }
 a.menu_entrance {
-    background: #4b8d53;
+    color: #4b8d53;
+    background: #f6f8fc;
 }
 a.menu_admin {
-    background: #1255cf;
+    color: #1255cf;
+    background: #f6f8fc;
 }
 a.menu_store {
-    background: #d78e1d;
+    color: #d78e1d;
+    background: #f6f8fc;
 }
 a.menu_subscriber {
-    background: #33a4d8;
+    color: #33a4d8;
+    background: #f6f8fc;
 }
 a.menu_employee {
-    background: #999927;
+    color: #999927;
+    background: #f6f8fc;
 }
 a.menu_profile {
-    background: #23818b;
+    color: #23818b;
+    background: #f6f8fc;
 }
 a.menu_logout {
-    background: #d34b4b;
+    color: #d34b4b;
+    background: #f6f8fc;
 }
 @media only screen and (max-width: 1200px) {
     .main_menu_div .col-lg-3 {

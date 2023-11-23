@@ -3,6 +3,13 @@
             <section class="sidebar">
                 <div id="menu" role="navigation">
                 <ul class="navigation">
+                <li>
+                    <a href="menu_list.php">
+                        <i class="text-info menu-icon fa fa-bars"></i>
+                        <span class="mm-text ">Main</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
                     <?php if($_SESSION['login_type'] === "employee"){?>
                         <!-- <li class="menu-dropdown">
                             <a href="#">
@@ -95,13 +102,13 @@
                     <?php }else{ ?>                 
                         
                         <?php if($_SESSION['login_type'] === "admin" && $_SESSION['login_id'] == '1') { ?>
-                        <li>
+                        <!-- <li>
                             <a href="menu_list.php">
                                 <i class="text-info menu-icon fa fa-bars"></i>
                                 <span class="mm-text ">Main</span>
                                 <span class="arrow"></span>
                             </a>
-                        </li>
+                        </li> -->
                         <?php } ?>
                         <li>
                             <a href="dashboard.php">
