@@ -1,6 +1,6 @@
 <?php 
 include('head.php') ;
-
+$get_all_classes = db_select_query("SELECT * from classes");
 ?>
 <style>
     .sub-count
@@ -189,7 +189,7 @@ include('head.php') ;
                                     <thead>
                                         <tr>
                                              <th>Sr No.</th>
-                                             <th>Image</th>
+                                             <!-- <th>Image</th> -->
                                             <th>User Name</th>
                                             <th>Package Name</th>
                                              <th>Payment Method</th>
@@ -197,9 +197,9 @@ include('head.php') ;
                                              <th>Package Start Date</th>
                                             <th>Expiry Date</th>
                                             <th>Package Duration</th>
-                                              <th>Discount Code</th>
+                                              <!-- <th>Discount Code</th> -->
                                             <th>Package Amount</th>
-                                            <th>Classes Count</th>
+                                            <th>Class Name</th>
                                            <th>User Gender</th>
                                             <th>User Mobile</th>
                                             <th>Joined Date</th>
@@ -213,6 +213,17 @@ include('head.php') ;
                                      $t = 0;
                  foreach($users_finished_7_subscription_query as $u)
           {      
+            // get class Name 
+                $class_name_html = "";
+                if($get_all_classes) {
+                    foreach($get_all_classes as $k =>$v){
+                        $sr = explode(",",$u['class_id']);
+                        if(in_array($v['id'], $sr)){ 
+                            $class_name_html .= $v['name'].', '; 
+                        }
+                    } 
+                }
+            // get class Name 
                $pay_method = !empty($u['payment_method'])?$u['payment_method']:0 ; 
                 $packages_id = explode(",",$u['packagesid']);
                 $expiry_dates = explode(",",$u['expiry_dates']);
@@ -244,7 +255,7 @@ include('head.php') ;
          
                                         <tr>
                                             <td><?=$i?></td>
-                                             <td><img src="<?=$u['image']?>" width="50px" height="50px"></td>
+                                             <!-- <td><img src="<?=$u['image']?>" width="50px" height="50px"></td> -->
                                              <td><?=$u['name']?></td>
                                              <td><?=$pck_name?></td>
                                               <td><?=$get_payment_method['name']?></td>
@@ -252,9 +263,12 @@ include('head.php') ;
                                              <td><?php echo date("d-m-Y" , strtotime($u['pck_start_date']))  ; ?></td>
                                               <td><?=date("d-m-Y" , strtotime($exp))?></td>
                                               <td><?=$dr?> Days</td>
-                                               <td><?php echo $discnt_code ;  ?></td>
+                                               <!-- <td><?php //echo $discnt_code ;  ?></td> -->
                                               <td><?=$amnt?> KD</td>
-                                              <td><?=$u['package_class']?></td>
+                                              <td>
+                                              <?php echo rtrim($class_name_html,', ');?>
+                                              <!-- <?//=$u['package_class']?> -->
+                                            </td>
                                              <td><?=$u['gender']?></td>
                                                <td><?=$u['mobile']?></td>
                                                <td><?=date("d-m-Y" , strtotime(substr($u['created_at'], 0 ,10)))?></td>
@@ -279,7 +293,7 @@ include('head.php') ;
                                 </table>
                                 <tr>
                                     <td></td>
-                                    <td></td>
+                                    <!-- <td></td> -->
                                     <td></td>
                                     <td></td>
                                     <td></td>

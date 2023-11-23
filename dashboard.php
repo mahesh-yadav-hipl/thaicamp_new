@@ -24,6 +24,10 @@ $total_expeses = $expeses_query[0]['total_expenses'] ;
 $users_query_hold_sub = db_select_query("SELECT  COUNT(id) as count_id  FROM users WHERE package_class != '0' and hold_status = 'Hold'") ;
 $count_hold_subscription_users = $users_query_hold_sub[0]['count_id'] ;
 
+// today Visitor
+
+$getAll_attendence =  db_select_query("SELECT * FROM attendance Where attendance.date BETWEEN '$tdtt' AND '$tdtt'");
+
 
 $packages_query  = db_select_query("SELECT DISTINCT(packagesid)  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
 $qrcls = db_select_query("SELECT class_id  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
@@ -316,6 +320,17 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             </div>
                                             <div class="re-right-area">
                                                 <h5>TOTAL HOLD SUBSCRIPTION</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="registered">
+                                        <div class="register-detail">
+                                            <div class="re-left-area bg-visitor today_visitor_btn">
+                                                <h3 id="myTargetElement4.1" class="today_visitor_btn"><?= count($getAll_attendence);?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>TODAY VISITOR</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -675,7 +690,12 @@ function getActiveEmployeePt($emp_id, $emp_name){
 }
 .all_model_data th, .all_model_data td{
     border: 1px solid #e5e5e5;
-    padding: 0 5px;
+    padding: 3px 5px;
+}
+.all_model_data th{
+    padding: 7px 7px;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .register-detail{
@@ -752,6 +772,13 @@ function getActiveEmployeePt($emp_id, $emp_name){
 .bg-green h3{
     color: #84ad3a;
 }
+.bg-visitor{
+    background-color: #f7d0f5;
+}
+.bg-visitor h3{
+    color: #cf36c9;
+}
+.today_visitor_btn:hover{cursor: pointer;}
 .admin-left-panel{
     background-color: transparent;
     margin: 20px 0 0;
@@ -795,7 +822,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
 .common-box-layout .box-model .recent h5{
     background-color: #ebeff7;
     margin: 0 0 10px;
-    padding: 10px;
+    padding: 0px 10px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -886,6 +913,21 @@ main{
                 var view_all_active_class_user = $(this).find('.view_all_active_class_user').html();
                 $('.all_model_data').html(view_all_active_class_user);
             })
+
+
+            $(document).on('click','.today_visitor_btn',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                    $.ajax({    
+                        type: "post",
+                        url: "ajax/dashboard_report.php", 
+                        data:{report_type:"today_visitor"},                  
+                        success: function(data){  
+                            $('.all_model_data').html(data.message);   
+                        }
+                    });  
+            });
+
             
         })
 </script>
