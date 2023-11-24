@@ -103,7 +103,10 @@ if($_POST['mobile'])
                                
                             </div>
                             <div class="panel-body table-responsive">
-                                <?php if($user) { ?>
+                                <?php if($user) { 
+                                    if($user['is_deactivate'] == 0){?>
+
+                                  
                                 
                                <div class="col-md-8" style="margin:0 auto;">
                 <div class="card">
@@ -172,6 +175,10 @@ if($_POST['mobile'])
                 </div>
             </div>
                                 <div class="col-sm-6 col-md-4 col-lg-4"></div>
+
+                <?php } else{ ?>
+                    <h3>You are deactivated By admin.</h3>
+               <?php } ?>
                                 
             <?php } else { ?>
              <h3>No User Found</h3>

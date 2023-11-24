@@ -11,6 +11,11 @@ if($sql)
 {
     $sql = $sql[0];
 	$json['admin_type']="";
+	if($sql['is_deactivate'] == 1){
+		$json['result']=false;
+		$json['message']="You are deactivated by admin.";
+		echo json_encode($json); exit;
+	}
 	if($sql['password'] == $password)
 	{
 		

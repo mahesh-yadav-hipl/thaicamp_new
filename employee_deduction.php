@@ -1,32 +1,18 @@
 <?php include('head.php') ;
-$users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users Where role = 'subscriber' ORDER BY id DESC");
-
-?>
+$employee_deduction = db_select_query("SELECT employee_deduction.*, employee.name as employee_name FROM employee_deduction
+    LEFT JOIN users AS employee
+    ON employee_deduction.employee_id = employee.id 
+ Where employee_deduction.deleted = 0 ORDER BY employee_deduction.id DESC");?>
 <body>
     <div class="se-pre-con"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
-<?php include('sidebar.php');
-
-?>        
+<?php include('sidebar.php');?>        
 <aside class="right-side right-padding">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
-                <h2>Subscribers</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index-2.html">
-                            <i class="fa fa-fw fa-home"></i> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Users</a>
-                    </li>
-                    <li>
-                        <a href="admin_userlist.html">Users </a>
-                    </li>
-                </ol>
+                <h2>Employees Deduction</h2>                
             </section>
             <!--section ends-->
             <div class="container-fluid">
@@ -36,75 +22,43 @@ $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS 
                         <div class="panel panel-danger">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <i class="fa fa-fw fa-users"></i> Subscribers List
+                                    <i class="fa fa-fw fa-users"></i> Employees Deduction List
                                 </h4>
                                <span class="pull-right">
-                                    <a  href="add_user.php" class="btn btn-primary">Add Subscriber</a>
+                                    <a  href="add_employee_deduction.php" class="btn btn-primary">Add Employee Deduction</a>
                                     <i class="glyphicon glyphicon-chevron-up showhide clickable" title="Hide Panel content"></i>
                                     <i class="glyphicon glyphicon-remove removepanel"></i>
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table1">
+                                <table class="table table-bordered" id="fitness-table">
                                     <thead>
                                          <tr>
                                              <th style="width: 100px;">Sr No.</th>
-                                             <th>Image</th>
                                              <th>Name</th>
-                                             <th>Email</th>
-                                             <th>Mobile</th>
-                                             <th>Status</th>
-                                             <th>View</th>
-                                             <th>Delete</th>
-                                             <th>Entry List</th>
-                                             <th>Generate Invoice</th>
+                                             <th>Deduction Amount</th>
+                                             <th>Reason</th>
+                                             <th>Created at</th>
+                                             <th>Action</th>
                                          </tr>
                                     </thead>
                                   <tbody>
                                     <?php 
-                                    if($users) {
+                                    if($employee_deduction) {
                                      $i = 1 ;
-                                    foreach($users as $k =>$v){  ?>    
+                                    foreach($employee_deduction as $k =>$v){  ?>    
                                     <tr class="odd">
                                         <td><?=$i?></td>
-                                            <td><?php 
-                                                    //if($v['image']!='' && @getimagesize($v['image'])){ 
-                                                    if($v['image']!=''){ 
-                                                        $image = $v['image'];
-                                                     }else{
-                                                         $image = URL.'uploaded/users/default-user.jpg';
-                                                     }
-                                                ?><img src="<?=$image?>" width="50px" height="50px" alt=""></td>
-                                            <td><?=$v['name']?></td>
-                                            <td><?=$v['email']?></td>
-                                            <td><?=$v['mobile']?></td>
+                                            <td><?= ucfirst($v['employee_name']); ?></td>
+                                            <td><?=(int)$v['deduction_amount']?></td>
+                                            <td><?=$v['reason']?></td>
+                                            <td><?=$v['created_at']?></td>
                                             <td>
-                                            <?php if($v['is_deactivate'] == 1){?>
-                                                <span class="btn btn-sm btn-danger" style="cursor:auto;padding: 1px 5px;border-radius: 5px !important;">Deactivate</span>
-                                                <?php }else{?>
-                                                    <span class="btn btn-sm btn-success" style="cursor:auto;padding: 1px 5px;border-radius: 5px !important;">Activate</span>
-                                            <?php } ?>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary" href="view_user.php?id=<?=$v['id']?>">
-                                                     Press View
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-danger remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
+                                                <a class="btn btn-primary btn-sm" href="edit_employee_deduction.php?id=<?=$v['id']?>">Edit</a>
+                                                <a class="btn btn-danger btn-sm remove" href="#" data-table='employee_deduction' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>
-                                            </td>
-                                            <td>
-                                               <a class="btn btn-primary" href="entry_list.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-eye"></i>
-                                                </a> 
-                                            </td>
-                                            <td>
-                                               <a class="btn btn-primary" href="invoice.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-file-text-o"></i>
-                                                </a> 
-                                            </td>
+                                            </td>                                                                                     
                                         </tr>
                                     <?php
                                       $i++ ;
@@ -193,7 +147,7 @@ $('body').on('click','.remove',function(){
                     success: function(response){
                           
                         toastr.success(response.message);                  
-                       setTimeout(function(){ location.href='users.php'; },1500); 
+                       setTimeout(function(){ location.href='employee_deduction.php'; },1500); 
                     },              
                     error:function(response){
                         toastr.success(response.message);                  
@@ -205,16 +159,7 @@ $('body').on('click','.remove',function(){
          });
          });
          
-           
-         $('#fitness-table1 ').DataTable( {
-            "lengthMenu": [
-                [10, 15, 20, -1],
-                [10, 15, 20, "All"]
-            ],
-            // set the initial value
-            "pageLength": 10
-        } );
-
-       
+         
+         
 
 </script>

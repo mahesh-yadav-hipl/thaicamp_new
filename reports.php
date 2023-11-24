@@ -332,7 +332,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
 <!-- Start New Users -->
                                 <?php
                                 if ($_REQUEST['report_for'] == 'New Users') {
-                                    $new_users_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image from users where 1 = 1 AND role = 'subscriber' ";
+                                    $new_users_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image from users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0 ";
                                     if (!empty($_REQUEST['gender'])) {
                                         $new_users_query .= " AND gender = '{$_REQUEST['gender']}'";
                                     }
@@ -475,7 +475,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
 <!-- Start Finished Subscriptions-->
                                 <?php
                                 if ($_REQUEST['report_for'] == 'Finished Subscriptions') {
-                                    $users_finished_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber'";
+                                    $users_finished_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0 ";
 
                                     if (!empty($_REQUEST['gender'])) {
                                         $users_finished_subscription_query .= " AND gender = '{$_REQUEST['gender']}'";
@@ -638,7 +638,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
 <!-- Start Subscriptions Finished In 7 Days -->
                                 <?php
                                 if ($_REQUEST['report_for'] == 'Subscriptions Finished In 7 Days') {
-                                    $users_finished_7_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber'";
+                                    $users_finished_7_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0  ";
 
                                     if (!empty($_REQUEST['gender'])) {
                                         $users_finished_7_subscription_query .= " AND gender = '{$_REQUEST['gender']}'";
@@ -800,7 +800,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
 
                                 <?php
                                 if ($_REQUEST['report_for'] == 'Subscriptions Finished This Month') {
-                                    $users_finished_month_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber'";
+                                    $users_finished_month_subscription_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0  ";
 
                                     if (!empty($_REQUEST['gender'])) {
                                         $users_finished_month_subscription_query .= " AND gender = '{$_REQUEST['gender']}'";
@@ -969,7 +969,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
                                     $_REQUEST['report_for'] != 'Subscriptions Finished This Month' && $_REQUEST['report_for'] != 'Subscriptions Finished In 7 Days'
                                     && $_REQUEST['report_for'] != 'Finished Subscriptions'  && $_REQUEST['report_for'] != 'New Users' && $_REQUEST['users_status'] != 'Active' && $_REQUEST['users_status'] != 'Non Active'
                                 ) {
-                                    $user_basic_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image from users where 1 = 1 AND role = 'subscriber'";
+                                    $user_basic_query = "SELECT * , CONCAT('" . URL . "uploaded/users/', image) AS image from users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0  ";
                                     if (!empty($_REQUEST['gender'])) {
                                         $user_basic_query .= " AND gender = '{$_REQUEST['gender']}'";
                                     }

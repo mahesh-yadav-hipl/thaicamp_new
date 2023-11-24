@@ -176,7 +176,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
                               <?php
                              
       
-          $users_no_entry_more_then_7_days = "SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users where 1 = 1" ;
+          $users_no_entry_more_then_7_days = "SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users where 1 = 1 AND role = 'subscriber' AND is_deactivate = 0" ;
           
           if(!empty($_REQUEST['gender']))
            {

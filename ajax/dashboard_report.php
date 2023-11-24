@@ -49,5 +49,22 @@ if($_REQUEST['report_type'] == "today_visitor"){
 }
 
 
+if($_REQUEST['report_type'] == "deactivate_user"){
+        $_ACTIVEDEACTIVE['is_deactivate'] = $_REQUEST['active_deactive_type'];
+        $data['table']='users';
+        $data['values']=$_ACTIVEDEACTIVE;
+        $data['where']['id']=$_REQUEST['user_id'];
+
+        if(db_update($data)){
+            $json['result']=true;
+            $json['message']="SuccessFully Deactivate";
+            echo json_encode($json);exit;
+        }
+        $json['result']=true;
+        $json['message']="SuccessFully Deactivate";
+        echo json_encode($json);exit;
+
+}
+
 
 ?>

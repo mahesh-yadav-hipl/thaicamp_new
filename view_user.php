@@ -320,6 +320,12 @@ input[type="checkbox"]
                                                                 <a href = "edit_user.php?id=<?php echo $user['id'] ; ?>"  class="btn btn-warning">Edit Subscriber</a> &nbsp;
                                                                 <a href = "edit_package.php?id=<?php echo $user['id'] ; ?>"  class="btn btn-warning">Edit Package</a> &nbsp;
                                                                 <a href = "users.php"  class="btn btn-warning">Cancel</a> &nbsp;
+                                                                <?php if($user['is_deactivate'] == 1){?>
+                                                                    <a href="javascript:void(0)" class="btn btn-success btn_deactivate" data-user_id="<?= $user['id'];?>" data-active_deactive_type="0">Press to Activate</a> &nbsp;
+                                                               <?php }else{?>
+                                                                    <a href="javascript:void(0)" class="btn btn-danger btn_deactivate" data-user_id="<?= $user['id'];?>" data-active_deactive_type="1">Press to Deactivate</a> &nbsp;
+                                                               <?php } ?>
+                                                                
                             
                                                             </div>
                                                         </div>
@@ -690,7 +696,31 @@ input[type="checkbox"]
         });  
     }
         
-  
+  $(document).ready(function(){
+    $(document).on('click','.btn_deactivate',function(){
+        var user_id = $(this).data('user_id');
+        var active_deactive_type = $(this).data('active_deactive_type');
+        if(user_id){
+            var AD_title = "Activate";
+            if(active_deactive_type == 1){
+                AD_title = "Deactivate";
+            }
+            if(confirm(`Are you sure you want to ${AD_title}?`)) {
+                    $.ajax({    
+                        type: "post",
+                        url: "ajax/dashboard_report.php", 
+                        data:{report_type:"deactivate_user",user_id:user_id,active_deactive_type:active_deactive_type},                  
+                        success: function(data){ 
+                            toastr.success("SuccessFully Updated");
+                            setTimeout(()=>{
+                                location.reload();
+                            },1500);                            
+                        }
+                    });  
+            }
+        }
+    });
+  });
   
 </script>
 
