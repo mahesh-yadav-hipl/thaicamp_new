@@ -90,10 +90,21 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                             <td><?= date('d F Y',strtotime($v['salary_month'])); ?></td>                                                                                                                                
                                             <td><?= $v['gross_salary'];?></td>
                                             <td><?=$v['pt_salary']?></td>
-                                            <td><?=$v['salary_deduction']?></td>
+                                            <td>
+                                                
+                                            <?php
+                                                $start_date = date('Y-m-d 00:00:01',strtotime($v['salary_month'])); 
+                                                $end_date = date('Y-m-t 23:59:00',strtotime($v['salary_month']));   
+                                                $emp_id = $v['employee_id'];
+                                                $employee_direct_deduction_Amount = db_select_query("SELECT SUM(`deduction_amount`) as `emp_deduction_amount` FROM `employee_deduction` WHERE `employee_id` = '$emp_id' AND `created_at` BETWEEN '$start_date' AND '$end_date' GROUP BY employee_id ");
+                                                $emp_deduction_amount =  $employee_direct_deduction_Amount['0']['emp_deduction_amount'];
+                                            ?>
+                                                <?= $v['salary_deduction'] + $emp_deduction_amount ?>                                            
+                                            </td>
                                             <td><?php 
-                                                    echo $v['salary'];
-                                                 $total_salary +=$v['salary'];
+                                                    echo $v['salary']-$emp_deduction_amount;
+                                                    $salaryAmount = ($v['salary'] - $emp_deduction_amount );
+                                                    $total_salary += $salaryAmount;
                                             ?></td>
                                         </tr>
                                     <?php

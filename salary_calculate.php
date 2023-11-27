@@ -1,4 +1,23 @@
 <?php 
+// hold package active if date is exist
+    $Today_Aactive = date('Y-m-d');
+    $Active_hold_package = db_select_query("SELECT * FROM users where hold_days > 0 AND hold_end_date < '$Today_Aactive' ");
+   if(count($Active_hold_package) >0){
+        foreach($Active_hold_package as $u){                  
+            $save['hold_days']=0;
+            $save['hold_end_date']= null;              
+            $expiry_dates = explode(",",$u['expiry_dates']);
+            $expiry_dates = date('Y-m-d', strtotime($expiry_dates['0']. ' + '.$u['hold_days'].' days')) ;
+            $save['expiry_dates']=$expiry_dates ;
+            $save['hold_status']="Active" ;        
+            $datau['table']="users";
+            $datau['values']=$save;
+            $datau['where']['id']=$u['id'];    
+            db_update($datau);
+        }
+    }
+// hold package active if date is exist
+
 
 // dashbor then this file is get
 $salary_year = date('Y', strtotime("first day of previous month"));

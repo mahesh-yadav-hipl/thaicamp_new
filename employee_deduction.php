@@ -51,10 +51,18 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
                                         <td><?=$i?></td>
                                             <td><?= ucfirst($v['employee_name']); ?></td>
                                             <td><?=(int)$v['deduction_amount']?></td>
-                                            <td><?=$v['reason']?></td>
+                                            <td>
+                                                <?php    
+                                                    if(strlen($v['reason']) > 50){
+                                                       echo substr($v['reason'],0,47).'....';
+                                                    }else{
+                                                        echo $v['reason'];
+                                                    }
+                                                ?></td>
                                             <td><?=$v['created_at']?></td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm" href="edit_employee_deduction.php?id=<?=$v['id']?>">Edit</a>
+                                                <a class="btn btn-info btn-sm" href="view_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">View</a>
+                                                <a class="btn btn-primary btn-sm" href="edit_employee_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">Edit</a>
                                                 <a class="btn btn-danger btn-sm remove" href="#" data-table='employee_deduction' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>

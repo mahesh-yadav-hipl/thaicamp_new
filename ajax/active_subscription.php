@@ -55,6 +55,9 @@ try{
 	}
 	$expiry_dates = implode(",", $expiry_dates);
 	$hold_status = implode(",", $hold_status);
+
+	$save['hold_days']=0;
+	$save['hold_end_date']= null;
           
 	$save['expiry_dates']=$expiry_dates ;
 	$save['hold_status']=$hold_status ;

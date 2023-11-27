@@ -37,6 +37,12 @@ try{
 	
 	
 	$save['hold_dates']=$hold_dates ;
+
+	if(isset($hold_package_days)){
+		$save['hold_days']=$hold_package_days;
+		$save['hold_end_date']= Date('Y-m-d', strtotime('+'.$hold_package_days.' days'));
+	}
+
 	$save['hold_status']=$hold_status ;
 	
 	$data['table']="users";

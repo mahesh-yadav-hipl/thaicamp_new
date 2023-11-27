@@ -1,4 +1,5 @@
 <?php include('head.php') ;
+include('salary_calculate.php');
 $id = $_SESSION['login_id'] ;
 $admin_data = db_select_query("select * from admin where id = '$id' ")[0] ;
 // print_r($admin_data);

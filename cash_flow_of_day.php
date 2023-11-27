@@ -179,6 +179,12 @@ $tdtt = date('Y-m-d');
                                    
                                    
                                     $total_paid_salary = db_select_query("select sum(salary) from salary  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' AND DAY(date(created_at)) = '$day'")[0]['sum(salary)'];
+                                    
+                                    // get direct deduction Amount
+                                        $total_direct_deduction_salary = db_select_query("select sum(deduction_amount) from employee_deduction WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month'")[0]['sum(deduction_amount)'];
+                                        $total_paid_salary = $total_paid_salary - $total_direct_deduction_salary;
+                                    // get direct deduction Amount
+                                    
                                     $total_paid_employee_percentage = db_select_query("select sum(pt_salary) from salary  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' AND DAY(date(created_at)) = '$day'")[0]['sum(pt_salary)'];
 
                                     $pt_get_amount_paid = db_select_query("select employee_id, count(id) as total_entry, sum(employee_commission) as total_price from private_training  WHERE  YEAR(date(created_at)) = '$year' AND MONTH(date(created_at)) = '$month' AND DAY(date(created_at)) = '$day' GROUP BY employee_id" );

@@ -418,6 +418,12 @@
                                                     <span class="mm-text">Salary Statement</span>
                                                 </a>                         
                                             </li>
+                                            <li class="menu-dropdown">
+                                                <a href="employee_deduction.php">
+                                                    <i class="text-primary  menu-icon fa fa-money"></i>
+                                                    <span class="mm-text">Deduction Amount</span>
+                                                </a>                         
+                                            </li>
                                             <!-- <li class="menu-dropdown">
                                                 <a href="salary_statement.php">
                                                     <i class="text-warning  menu-icon fa fa-fw fa-info-circle"></i>

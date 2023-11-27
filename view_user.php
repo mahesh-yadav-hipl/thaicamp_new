@@ -286,6 +286,13 @@ input[type="checkbox"]
                                                                   
                                                                     </td>
                                                                 </tr>
+                                                                <?php 
+                                                                if($user['hold_end_date'] != ''){?>
+                                                                <tr>
+                                                                    <td>Package is on hold till</td>
+                                                                    <td><?php echo $user['hold_end_date']; ?></td>
+                                                                </tr>
+                                                                <?php } ?>
                                                               
                                                                
                                                             </table>
@@ -309,7 +316,8 @@ input[type="checkbox"]
                                                                     else
                                                                     {
                                                                 ?>
-                                                                <a class="btn btn-warning btn-plan-select" onclick="hold_package(<?php echo $pck_id ?> , <?php echo $user['id'] ?> )">Hold Package</a> &nbsp;
+                                                                <!-- <a class="btn btn-warning btn-plan-select" onclick="hold_package(<?php //echo $pck_id ?> , <?php //echo $user['id'] ?> )">Hold Package</a> &nbsp; -->
+                                                                <a class="btn btn-warning btn-plan-select package_hold_btn" data-package_id="<?php echo $pck_id ?>" data-user_id="<?php echo $user['id'] ?>">Hold Package</a> &nbsp;
                                                                 <?php }
                                                                     }else { ?>
                                                                         <a class="btn btn-warning btn-plan-select" onclick="active_package(<?php echo $pck_id ?> , <?php echo $user['id'] ?> , '<?php echo $hld_date  ?>' , '<?php echo $hld_status  ?>' )">Active Package</a> &nbsp;
@@ -441,6 +449,38 @@ input[type="checkbox"]
     <!-- /.right-side -->
     <!-- ./wrapper -->
     <!-- global js -->
+
+    <!-- Hold packagte -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hold Package</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Hold Package Days
+                    <input type="hidden" id="user_id_hold">
+                    <input type="hidden" id="package_id_hold">
+                    <div>
+                        <input type="number" placeholder="Hold Package Days" id="hold_packages_days" class="form-control">
+                    </div>
+                    <div class="check_days_till_end"></div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary hold_popup_btn">Hold Package</button>
+                </div>
+                </div>
+            </div>
+        </div>
+<!-- Hold packagte -->
+
+
+
+
     <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-validate.min.js"></script>
         <script src="js/toastr.min.js"></script>
@@ -473,6 +513,31 @@ input[type="checkbox"]
 // });   
 // </script>
 
+<script>
+    $(document).ready(function(){
+        $(document).on('click','.package_hold_btn',function(){
+            $('#user_id_hold').val('');
+            $('#package_id_hold').val('');
+            $('#hold_packages_days').val('');
+            $('.check_days_till_end').html('');
+            $("#exampleModal").modal('show');
+            var user_id = $(this).data('user_id');
+            var package_id = $(this).data('package_id');
+            $('#user_id_hold').val(user_id);
+            $('#package_id_hold').val(package_id);
+        });
+        $(document).on('click','.hold_popup_btn',function(){
+            var hold_package_days = parseInt($('#hold_packages_days').val());
+            if(hold_package_days >= 1){
+                var user_id =  $('#user_id_hold').val();
+               var package_id =  $('#package_id_hold').val();
+                hold_package(package_id,user_id,hold_package_days);
+            }else{
+                alert("Please Enter Days");
+            }                
+        });
+    });
+</script>
 
 
 <script>
@@ -603,15 +668,16 @@ input[type="checkbox"]
     });
  
  
-    function hold_package(packageid , userid)
+    function hold_package(packageid , userid,hold_package_days="")
     {
         var package_id = packageid ;
         var user_id = userid ;
+        var hold_package_days = hold_package_days ;
 
         $.ajax({
             url:'ajax/hold_subscription.php',
             type:'POST',
-            data:{'package_id':package_id,'user_id':user_id},
+            data:{'package_id':package_id,'user_id':user_id,hold_package_days:hold_package_days},
             dataType:'json',
             success: function(response){
                 try {
