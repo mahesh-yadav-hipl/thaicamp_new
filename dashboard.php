@@ -6,11 +6,11 @@ include('salary_calculate.php');
   // Start subscriber and employee we do not need and qeury
  }else{
 
-$tdtt = date('Y-m-d'); 
-$users_query = db_select_query("SELECT  COUNT(id) as count_id  , COUNT(DISTINCT(packagesid)) AS count_packagesid  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
-$count_users = $users_query[0]['count_id'] ;
-// $count_packages = $users_query[0]['count_packagesid'] ;
-// $get_all_users = db_select_query($users_query." limit 5") ;
+$tdtt = date('Y-m-d');
+// comment "Total active subscribers" 
+    // $users_query = db_select_query("SELECT  COUNT(id) as count_id  , COUNT(DISTINCT(packagesid)) AS count_packagesid  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
+    // $count_users = $users_query[0]['count_id'] ;
+// comment "Total active subscribers"
 
 $time=strtotime($tdtt);
 $month=date("m",$time);
@@ -85,91 +85,11 @@ $new_arr = array_unique($un);
 // $get_all_discount_code = db_select_query("select * from discount_code"); 
 
 
-$birthday_notification1 = db_select_query("select * , CONCAT('".URL."uploaded/users/', image) AS image from users") ;
+// $birthday_notification1 = db_select_query("select * , CONCAT('".URL."uploaded/users/', image) AS image from users") ;
 
-
-$users_no_entry_more_then_7_days = "SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users where 1 = 1" ;
- $users_no_entry_more_then_7_days = db_select_query($users_no_entry_more_then_7_days." order by id desc");
-           
-          if($users_no_entry_more_then_7_days){ 
-                               
-            $ikl = 1 ;
-                                     $t = 0;
-                 foreach($users_no_entry_more_then_7_days as $u)
-          {   
-                $count_ent = 0 ;
-               $user_id = $u['id'] ;
-              $uname = $u['name'] ;
-                  $uemail = $u['email'] ;
-                  $uclass = $u['package_class'] ;
-               $pay_method = !empty($u['payment_method'])?$u['payment_method']:0 ; 
-                $packages_id = explode(",",$u['packagesid']);
-                $expiry_dates = explode(",",$u['expiry_dates']);
-                foreach($packages_id as $key => $pck_id) {
-                        $qry = db_select_query("select * from packages where id = '$pck_id'")[0] ;
-                        $pck_name = $qry['name'] ;
-                        $dr = $qry['duration'] ;
-                      if(!empty($u['discount_code']) && !empty($u['after_discount_price']))
-                         {
-                          $dscnt_qry = db_select_query("select * from discount_code where id = '{$u['discount_code']}' ")[0] ;
-                          $discnt_code = $dscnt_qry['code'] ;
-                          $amnt =  $u['after_discount_price'] ;
-                         }
-                         else
-                         {
-                          $amnt = $qry['price'] ;  
-                          $discnt_code = "" ;
-                         }
-                        $countfiles = count($expiry_dates);
-                         $exp=$expiry_dates[$key] ;
-                        $today_date = date('Y-m-d'); 
-                         $get_act_sub  = db_select_query("SELECT * FROM users WHERE packagesid = '$pck_id' and package_class != '0' and expiry_dates >= '$today_date'  ") ;
-                        $get_payment_method = db_select_query("select * from payment_methods where id = '$pay_method'")[0] ;
-                        $eight_days_ago = date('Y-m-d', strtotime('-8 days', strtotime($today_date)));
-                        $dts = $eight_days_ago ;
-                        $currentDateTime = date('Y-m-d H:i:s');
-                        $newDateTime = date('h:i A', strtotime($currentDateTime));
-                        
-           if(($uclass != '0') && ($exp >= $today_date)){ 
-          for($k=1;$k<9;$k++)
-              {
-                  
-                  $rec_date = date('Y-m-d', strtotime('+1 day', strtotime($dts)));
-                  $check_enternace = db_select_query("select * from attendance where user_id = '$user_id' and date = '$rec_date'") ;
-                  if(count($check_enternace))
-                  {
-                    
-                  }
-                  else
-                  {
-                     $count_ent += 1 ;   
-                  }
-                  
-                  $dts = $rec_date ;
-                
-                  
-                  
-              }
-             
-              
-              
-           if($count_ent >= 8){
-               
-                                  $count_no_entry_more_then_7_days = $ikl ;
-                                       $ikl++ ;
-                                      $t+=$amnt;
-                                      
-           }
-                                    } 
-                                    }
-                                    }
-                  } 
-
-// End subscriber and employee we do not need and qeury
-  }
   
   
-
+ }
 function getActiveEmployeePt($emp_id, $emp_name){
 
     $q = "SELECT id FROM  private_training Where employee_id=$emp_id AND pt_end_date >= Now() AND pt_end_date is not null"; 
@@ -234,9 +154,9 @@ function getActiveEmployeePt($emp_id, $emp_name){
                         <?php if($_SESSION['login_type'] === "admin") { ?>
                   <div class="box-model admin-left-panel">
                                     <div class="registered">
-                                        <div class="register-detail Bg-blue2">
+                                        <div class="register-detail Bg-blue2 total_active_subscribler_btn">
                                             <div class="re-left-area">
-                                                <h3 id="userscount"><?=$count_users?></h3>
+                                                <h3 id="userscount">0</h3>
                                             </div>
                                             <div class="re-right-area">
                                                 <h5>TOTAL ACTIVE SUBSCRIBERS</h5>
@@ -250,7 +170,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                                 <h5>TOTAL ACTIVE PACKAGES</h5>
                                             </div>
                                             <div class="col-lg-4 col-xs-4">
-                                                <h3 id="myTargetElement4.2"><?=$count_packages?></h3>
+                                                <h3 id="myTargetElement4.2"><?//=$count_packages?></h3>
                                             </div>
                                         </div>
                                     </div> -->
@@ -258,7 +178,7 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     
 
                                     <div class="registered">
-                                        <div class="register-detail Bg-green2">
+                                        <div class="register-detail Bg-green2 total_active_classes_btn">
                                             <div class="re-left-area">
                                                 <h3 id="myTargetElement4.1"><?=sizeof($new_arr);?></h3>
                                             </div>
@@ -269,9 +189,10 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                     </div>
                                     
                                     <div class="registered">
-                                        <div class="register-detail Bg-lred2">
+                                        <div class="register-detail Bg-lred2 btn_count_no_entry_more_then_7_days">
                                             <div class="re-left-area">
-                                                <h3 id="myTargetElement4.1"><?= $count_no_entry_more_then_7_days ?></h3>
+                                                <!-- <h3 id="myTargetElement4.1"><?//= $count_no_entry_more_then_7_days ?></h3> -->
+                                                <h3 id="myTargetElement4.1" class="count_no_entry_more_then_7_days">0</h3>
                                             </div>
                                             <div class="re-right-area">
                                                 <h5>NO ENTRY MORE THAN 7 DAYS</h5>
@@ -334,6 +255,16 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="registered">
+                                        <div class="register-detail Bg-lslk2 waiting_list_btn">
+                                            <div class="re-left-area">
+                                                <h3 id="myTargetElement4.1" class="Waiting_list_count">0</h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>Waiting List</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                     
                            
                         </div>
@@ -345,7 +276,9 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                 <h4>Active Classes</h4>
                                 <div   class="newstick" style="">
                                     <div  id="class_mod" class="recent" style="">
-                                        <?php if($new_arr) {
+                                        <?php 
+                                        $active_classes_list = "";
+                                        if($new_arr) {
                                         foreach($new_arr as $cls) {
                                         $qr_class = db_select_query("select * from classes where id = '$cls' ")[0] ;
                                         $all_us = db_select_query("select * from users where package_class != '0' and expiry_dates >= '$tdtt'") ;
@@ -353,23 +286,24 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                         $html_active_class_user = "";
                                         foreach($all_us as $g)
                                         {
-                                        $gr = explode(',', $g['class_id']);
-                                        if(in_array($cls, $gr))
-                                        {
-                                            $cn++ ; 
-                                            $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
-                                             <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
-                                                // </tr>";
+                                            $gr = explode(',', $g['class_id']);
+                                            if(in_array($cls, $gr))
+                                            {
+                                                $cn++ ; 
+                                                $html_active_class_user .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
+                                                <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
+                                                    // </tr>";
+                                            }
                                         }
-                                        
-                                        }
-                                        ?>
-                                            <!--<img src="<?=$user['image']?>" class="recent-user-img" alt="image not found">-->
-                                            <h5>
-                                                <a class="text-primary" style="cursor: auto;"><?=$qr_class['name']?> </a>
+                                        $active_classes_list .="<tr><td>".$qr_class['name']."</td><td>".$qr_class['capacity']."</td></tr>";
+
+                                        ?>  
+                                         <!--<img src="<?=$user['image']?>" class="recent-user-img" alt="image not found">-->
+                                            <h5 class="view_all_active_class_user_btn">
+                                                <a class="text-primary"><?=$qr_class['name']?> </a>
                                                 <small>
                                                     <span>
-                                                    <main class="pull-right view_all_active_class_user_btn"><?= $cn ; ?>
+                                                    <main class="pull-right"><?= $cn ; ?>
                                                         <div class="view_all_active_class_user" style="display: none;" >
                                                             <table>
                                                                 <tr>
@@ -382,29 +316,26 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                                             </table>
                                                         </div>
                                                     </main>
-                                                    <main class="pull-right view_all_active_class_user_btn">Waiting:- 
-                                        <!-- <?php //$count = db_select_query("SELECT *,count(0) as count FROM waiting_list Where class_id = '".$qr_class['id']."' "); ?> -->
-                                        <?php $count = db_select_query("SELECT * FROM waiting_list Where class_id = '".$qr_class['id']."' "); 
-                                                    // echo ($count)?$count[0]['count']:0; 
-                                                    echo ($count)?count($count):0; 
-                                                    if(count($count) > 0){ ?>
+                                                    <!-- <main class="pull-right view_all_active_class_user_btn">Waiting:- 
+                                                     <?php //$count = db_select_query("SELECT * FROM waiting_list Where class_id = '".$qr_class['id']."' "); 
+                                                   // echo ($count)?count($count):0; 
+                                                   // if(count($count) > 0){ ?>
                                                         <div class="view_all_active_class_user" style="display: none;">
                                                             <table>
                                                                 <tr>
                                                                     <th>Name</th>
                                                                     <th>Mobile No.</th>
                                                                 </tr>
-                                                                <?php foreach($count as $active_class_waiting){ ?>
+                                                                <?php //foreach($count as $active_class_waiting){ ?>
                                                                     <tr>
-                                                                        <td> <?php echo ($active_class_waiting['name'] != "")?$active_class_waiting['name']:'-';?></td>
-                                                                        <td><?php echo ($active_class_waiting['contact'] != "")?$active_class_waiting['contact']:'-';?> </td>
+                                                                        <td> <?php //echo ($active_class_waiting['name'] != "")?$active_class_waiting['name']:'-';?></td>
+                                                                        <td><?php //echo ($active_class_waiting['contact'] != "")?$active_class_waiting['contact']:'-';?> </td>
                                                                     </tr>
-                                                                <?php } ?>
+                                                                <?php //} ?>
                                                             </table>
                                                         </div>
-                                                    <?php }  ?>
-                                        
-                                                    </main>
+                                                    <?php //}  ?>                                        
+                                                    </main> -->
                                             </span>
                                         
                                         </small>
@@ -412,7 +343,20 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             
                                         
                                         <?php }
-                                        } ?>
+                                        }
+                                        ?>
+                                        <div class="total_active_class" style="display: none;">
+                                            <table>
+                                                <tr>
+                                                    <th>Class Name</th> 
+                                                    <th>Capacity</th>
+                                                </tr>                                                        
+                                                <?php echo $active_classes_list;?>                                                       
+                                            </table>
+                                        </div>
+                                        
+                                        
+                                        
                                         
                                         
                                         
@@ -477,20 +421,20 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                 <div id="birth_mod" class="box-model event">
                                     <h4 class="">Birthdays</h4>
                                     <div class="events_hover">
-                                          <?php foreach($birthday_notification1 as $noti1) { 
-                                                        $bdy1 = substr($noti1['date_of_birth'], 5 , 10) ;
-                                                        $today_date1 = substr(date('Y-m-d') , 5, 10);                                                     
-                                                        if($bdy1 == $today_date1)
-                                                        { ?>
-                                                            <a href="edit_user.php?id=<?php echo $noti1['id'] ?>">
+                                          <?php // foreach($birthday_notification1 as $noti1) { 
+                                                        // $bdy1 = substr($noti1['date_of_birth'], 5 , 10) ;
+                                                        // $today_date1 = substr(date('Y-m-d') , 5, 10);                                                     
+                                                        // if($bdy1 == $today_date1)
+                                                        // { ?>
+                                                            <a href="edit_user.php?id=<?//php echo $noti1['id'] ?>">
                                                                 <div class="row">
-                                                                    <img src="<?=$noti1['image']?>" class="recent-user-img" alt="image not found">
-                                                                    <h5><?=$noti1['name']?></h5>
-                                                                    <small><?=date("d-m-Y", strtotime($noti1['date_of_birth']))?></small>
+                                                                    <img src="<?//=$noti1['image']?>" class="recent-user-img" alt="image not found">
+                                                                    <h5><?//=$noti1['name']?></h5>
+                                                                    <small><?//=date("d-m-Y", strtotime($noti1['date_of_birth']))?></small>
                                                                 
                                                                 </div>
                                                             </a>
-                                                    <?php  } }?>
+                                                    <?php // } }?>
                                         
                                     </div>
                                 </div>
@@ -763,6 +707,9 @@ function getActiveEmployeePt($emp_id, $emp_name){
 .Bg-lgray2{
     background-color: #c56267;
 }
+.Bg-lslk2{
+    background-color: #33af9e;
+}
 .DarkBlue{
     background-color: #e8e9fc;
 }
@@ -939,6 +886,12 @@ main{
                 var getActivePackageLink = $(this).find('.view_package_list').html();
                 $('.all_model_data').html(getActivePackageLink);
             });
+            $(document).on('click','.total_active_classes_btn',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                var getActiveClass = $('.total_active_class').html();
+                $('.all_model_data').html(getActiveClass);
+            });
             $(document).on('click','.hold_package_btn',function(){
                 $('.all_model_data').html('');
                 $("#exampleModal").modal('show');
@@ -972,7 +925,84 @@ main{
                     });  
             });
 
+            $(document).on('click','.waiting_list_btn',function(){
+                getWaitingListUser('waiting_list','list_show'); 
+            })
+            $(document).on('click','.total_active_subscribler_btn',function(){
+                getTotalActiveSubscriber('active_subscriber_list','list_show'); 
+            })
             
         })
+
+        $(window).load(function() {
+            getWaitingListUser('waiting_list','count');
+            getTotalActiveSubscriber('active_subscriber_list','count');     
+            getTotalNoEnteryMoreThenSeven('no_entry_more_than_seven_days','count');     
+        });
+
+        function getWaitingListUser(report_type, count_report){
+                if(count_report == "count"){
+                    $('.Waiting_list_count').html('');
+                }else{
+                    $('.all_model_data').html('');
+                    $("#exampleModal").modal('show');
+                }
+                $.ajax({    
+                    type: "post",
+                    url: "ajax/dashboard_report.php", 
+                    data:{report_type:report_type,count_report:count_report},                  
+                    success: function(data){
+                        if(data.result_type == "result_count"){
+                            $('.Waiting_list_count').html(data.message); 
+                        }
+                        if(data.result_type == "list_show"){
+                            $('.all_model_data').html(data.message); 
+                        }
+                    }
+                });
+        }
+        function getTotalActiveSubscriber(report_type, count_report){
+            if(count_report == "count"){
+                    $('#userscount').html('');
+                }else{
+                    $('.all_model_data').html('');
+                    $("#exampleModal").modal('show');
+                }
+                $.ajax({    
+                    type: "post",
+                    url: "ajax/dashboard_report.php", 
+                    data:{report_type:report_type,count_report:count_report},                  
+                    success: function(data){
+                        if(data.result_type == "result_count"){
+                            $('#userscount').html(data.message); 
+                        }
+                        if(data.result_type == "list_show"){
+                            $('.all_model_data').html(data.message); 
+                        }
+                    }
+                });
+        }
+        function getTotalNoEnteryMoreThenSeven(report_type, count_report){
+            if(count_report == "count"){
+                    $('.count_no_entry_more_then_7_days').html('');
+                }else{
+                    $('.all_model_data').html('');
+                    $("#exampleModal").modal('show');
+                }
+                $.ajax({    
+                    type: "post",
+                    url: "ajax/dashboard_report.php", 
+                    data:{report_type:report_type,count_report:count_report},                  
+                    success: function(data){
+                        if(data.result_type == "result_count"){
+                            $('.count_no_entry_more_then_7_days').html(data.message); 
+                        }
+                        if(data.result_type == "list_show"){
+                            $('.all_model_data').html(data.message); 
+                        }
+                    }
+                });
+        }
+
 </script>
 </html>
