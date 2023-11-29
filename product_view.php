@@ -152,6 +152,16 @@
     padding: 3px;
     border: 1px solid #ddd;
 }
+
+@media only screen and (max-width: 768px) {
+    .product-container  .col-sm-6{
+        width: 100%;
+    }
+
+    .thumbnail img {
+    object-fit: contain;
+}
+}
 </style>
 
 <body>
