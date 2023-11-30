@@ -136,6 +136,10 @@ input[type="checkbox"]
                                                                     } ?>
                                                                   
                                                                     </td>
+                                                                    <tr>
+                                                                        <td>Price</td>
+                                                                        <td><input type="number" value="<?= $user['after_discount_price'] ?>" name="package_price" class="form-control"></td>
+                                                                    </tr>
                                                                 </tr>
                                                               
                                                                

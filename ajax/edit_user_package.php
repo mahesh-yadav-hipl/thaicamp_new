@@ -27,6 +27,7 @@ try{
   $old_data = db_select_query("SELECT * FROM users where id = '$id'")[0] ;
   $old_pckid  = $old_data['packagesid'] ;
   $old_pckclass  = $old_data['package_class'] ;
+  $old_pckPrice  = $old_data['after_discount_price'] ;
   $old_start_date  = date('Y-m-d' , strtotime($old_data['pck_start_date']))   ;
   
   
@@ -98,6 +99,18 @@ if($old_pckid != $_REQUEST['packagesid'] )
       }
       }
 
+      if($old_pckPrice != $_REQUEST['package_price']){
+          $_REQUEST['after_discount_price']= $_REQUEST['package_price'];         
+          $save_cash_flow['created_at'] = date('Y-m-d h:i:s'); 
+          $save_cash_flow['user_id'] = $id; 
+          $save_cash_flow['packagesid'] = $_REQUEST['packagesid']; 
+          $save_cash_flow['price'] = $_REQUEST['package_price']; 
+          $save_cash_flow['created_by'] = 'Admin';
+          $cash_flow_date['table'] = "cash_flow" ;
+          $cash_flow_date['values'] = $save_cash_flow ;		
+          db_insert($cash_flow_date);         
+        }
+        unset($_REQUEST['package_price']);
 
 	
 	$data['table']=$table;
