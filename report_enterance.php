@@ -64,20 +64,20 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                         <form class="form-horizontal"  method="get" action=" " >
                                             <div class="form-body">
                                                 <div  class="form-group"> 
-                                                    <div class="col-md-3">
+                                                    <!-- <div class="col-md-3">
                                                         Select user
                                                         <select name="user_list" id="user_list" class="form-control">
                                                              <option value="">Select user</option>
-                                                            <?php foreach($getAll_users  as $row){
-                                                                    $selected_user ="";
-                                                                    if($user_id == $row['id']){
-                                                                        $selected_user ="selected";
-                                                                    }
+                                                            <?php //foreach($getAll_users  as $row){
+                                                                    // $selected_user ="";
+                                                                    // if($user_id == $row['id']){
+                                                                    //     $selected_user ="selected";
+                                                                    // }
                                                                 ?>
-                                                                <option value="<?php echo $row['id'];?>" <?= $selected_user;?>><?php echo $row['name'];?></option>
-                                                           <?php } ?>                                                            
+                                                                <option value="<?php // echo $row['id'];?>" <?//= $selected_user;?>><?php //echo $row['name'];?></option>
+                                                           <?php //} ?>                                                            
                                                         </select>
-                                                    </div>    
+                                                    </div>     -->
                                                 
                                                     <div class="col-md-3">
                                                         Start Date

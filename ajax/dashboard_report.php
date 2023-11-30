@@ -8,7 +8,7 @@ extract($_REQUEST);
 
 
 if($_REQUEST['report_type'] == "hold_subscribers"){
-    $users_query_hold_sub =  db_select_query("SELECT  *  FROM users WHERE package_class != '0' and hold_status = 'Hold'") ;
+    $users_query_hold_sub =  db_select_query("SELECT  *  FROM users WHERE package_class != '0' and hold_status = 'Hold' and is_deactivate = 0") ;
     $html_report = "";
      if(count($users_query_hold_sub) > 0){ 
         $html_report .= "<table><tr><th>Name</th><th>Email</th><th>Mobile No.</th><th>View</th></tr>";
@@ -74,7 +74,7 @@ if($_REQUEST['report_type'] == "waiting_list"){
 }
 if($_REQUEST['report_type'] == "active_subscriber_list"){
     $tdtt = date('Y-m-d');
-    $users_query = db_select_query("SELECT *  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt'  ") ;
+    $users_query = db_select_query("SELECT *  FROM users WHERE package_class != '0' and expiry_dates >= '$tdtt' and is_deactivate = 0 ") ;
     if($_REQUEST['count_report'] == "count"){
         $json['result_type']="result_count";
         $html_report =  count($users_query);
@@ -124,9 +124,10 @@ if($_REQUEST['report_type'] == "deactivate_user"){
 
 // No entry more than 7 days
 if($_REQUEST['report_type'] == "no_entry_more_than_seven_days"){
-    $users_no_entry_more_then_7_days = "SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users where 1 = 1" ;
+    $users_no_entry_more_then_7_days = "SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users where 1 = 1 and is_deactivate = 0 " ;
     $users_no_entry_more_then_7_days = db_select_query($users_no_entry_more_then_7_days." order by id desc");
     $count_no_entry_more_then_7_days = 0;
+    $html_report = '<table><tr><th>Name</th><th>Email</th><th>Mobile No.</th><th>View</th></tr>';
     if($users_no_entry_more_then_7_days){ 
         $ikl = 1 ;
         $t = 0;
@@ -178,15 +179,23 @@ if($_REQUEST['report_type'] == "no_entry_more_than_seven_days"){
                         $count_no_entry_more_then_7_days = $ikl ;
                         $ikl++ ;
                         $t+=$amnt;
+
+                        $html_report .= "<tr><td>". $u['name']."</td><td>".$u['email']."</td>
+                        <td>".$u['mobile']."</td>
+                        <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$u['id']."' style='margin: 5px 0px;'>View</a></td>
+                        </tr>";
+
                     }
                 } 
             }
         }
     } 
-
+    $html_report .="</table>";
     if($_REQUEST['count_report'] == "count"){
         $json['result_type']="result_count";
-        $html_report =  $count_no_entry_more_then_7_days;
+        $count_html_report =  $count_no_entry_more_then_7_days;
+        
+        
     }
     // if($_REQUEST['count_report'] == "list_show"){
     //     $json['result_type']="list_show";
@@ -203,7 +212,8 @@ if($_REQUEST['report_type'] == "no_entry_more_than_seven_days"){
     //     }
     // }
     $json['result']=true;
-    $json['message']=$html_report;
+    $json['message']=$count_html_report;
+    $json['html_user_list']=$html_report;
     echo json_encode($json);exit;
 
 
