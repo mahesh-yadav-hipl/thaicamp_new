@@ -2,14 +2,15 @@
 $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS image FROM users Where role = 'subscriber' ORDER BY id DESC");
 
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+    <div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');
 
 ?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -45,7 +46,7 @@ $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS 
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table1">
+                                <table class="table" id="fitness-table1">
                                     <thead>
                                          <tr>
                                              <th style="width: 100px;">Sr No.</th>
@@ -55,9 +56,10 @@ $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS 
                                              <th>Mobile</th>
                                              <th>Status</th>
                                              <th>View</th>
-                                             <th>Delete</th>
-                                             <th>Entry List</th>
-                                             <th>Generate Invoice</th>
+                                             <th>Action</th>
+                                             <!--<th>Delete</th>-->
+                                             <!--<th>Entry List</th>-->
+                                             <!--<th>Generate Invoice</th>-->
                                          </tr>
                                     </thead>
                                   <tbody>
@@ -67,7 +69,7 @@ $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS 
                                     foreach($users as $k =>$v){  ?>    
                                     <tr class="odd">
                                         <td><?=$i?></td>
-                                            <td><?php 
+                                            <td class="data-img"><?php 
                                                     //if($v['image']!='' && @getimagesize($v['image'])){ 
                                                     if($v['image']!=''){ 
                                                         $image = $v['image'];
@@ -78,33 +80,46 @@ $users = db_select_query("SELECT * , CONCAT('".URL."uploaded/users/', image) AS 
                                             <td><?=$v['name']?></td>
                                             <td><?=$v['email']?></td>
                                             <td><?=$v['mobile']?></td>
-                                            <td>
+                                            <td class="ac-de-area">
                                             <?php if($v['is_deactivate'] == 1){?>
-                                                <span class="btn btn-sm btn-danger" style="cursor:auto;padding: 1px 5px;border-radius: 5px !important;">Deactivate</span>
+                                                <span class="btn btn-sm btn-danger">Deactivate</span>
                                                 <?php }else{?>
-                                                    <span class="btn btn-sm btn-success" style="cursor:auto;padding: 1px 5px;border-radius: 5px !important;">Activate</span>
+                                                    <span class="btn btn-sm btn-success">Activate</span>
                                             <?php } ?>
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary" href="view_user.php?id=<?=$v['id']?>">
+                                                <a class="btn btn-primary btn-style" href="view_user.php?id=<?=$v['id']?>">
                                                      Press View
                                                 </a>
                                             </td>
-                                            <td>
-                                                <a class="btn btn-danger remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
-                                                    <i class="fa fa-fw fa-trash"></i>
-                                                </a>
+                                            <td class="action-area">
+                                                <div style="min-width: 140px;">
+                                                    <a class="btn btn-danger remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
+                                                        <i class="fa fa-fw fa-trash"></i>
+                                                    </a>
+                                                    <a class="btn btn-primary" href="entry_list.php?id=<?=$v['id']?>">
+                                                        <i class="fa fa-fw fa-eye"></i>
+                                                    </a>
+                                                    <a class="btn btn-primary" href="invoice.php?id=<?=$v['id']?>">
+                                                        <i class="fa fa-fw fa-file-text-o"></i>
+                                                    </a>
+                                                </div>
                                             </td>
-                                            <td>
-                                               <a class="btn btn-primary" href="entry_list.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-eye"></i>
-                                                </a> 
-                                            </td>
-                                            <td>
-                                               <a class="btn btn-primary" href="invoice.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-file-text-o"></i>
-                                                </a> 
-                                            </td>
+                                            <!--<td>-->
+                                            <!--    <a class="btn btn-danger remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">-->
+                                            <!--        <i class="fa fa-fw fa-trash"></i>-->
+                                            <!--    </a>-->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                            <!--   <a class="btn btn-primary" href="entry_list.php?id=<?=$v['id']?>">-->
+                                            <!--        <i class="fa fa-fw fa-eye"></i>-->
+                                            <!--    </a> -->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                            <!--   <a class="btn btn-primary" href="invoice.php?id=<?=$v['id']?>">-->
+                                            <!--        <i class="fa fa-fw fa-file-text-o"></i>-->
+                                            <!--    </a> -->
+                                            <!--</td>-->
                                         </tr>
                                     <?php
                                       $i++ ;
@@ -214,7 +229,10 @@ $('body').on('click','.remove',function(){
             // set the initial value
             "pageLength": 10
         } );
-
+        
+window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}
        
 
 </script>

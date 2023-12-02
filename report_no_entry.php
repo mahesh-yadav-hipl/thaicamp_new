@@ -3,23 +3,75 @@ include('head.php') ;
 $get_all_classes = db_select_query("SELECT * from classes");
 ?>
 <style>
-    .sub-count
-    {
-         float:left;
+    .sub-count {
+        float: left;
     }
-    .tot
-    {
-        float:right;
+
+    .tot {
+        float: right;
+    }
+    .btn-primary{
+        background-color: #289ae7;
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+    }
+    .n_tabledata .panel.panel-danger{
+        background-color: #faf6f6;
+    }
+    .n_tabledata .dataTables_wrapper .dataTables_info{
+        width: 50%;
+        float: left;
+    }
+    .n_tabledata .dataTables_wrapper .dataTables_paginate{
+        width: 50%;
+        float: right;
+        text-align: right;
+    }
+    .n_tabledata .dataTables_wrapper>.dt-buttons{
+        float: left;
+    }
+    .n_tabledata .dataTables_wrapper>.dt-buttons .dt-button{
+        text-align: center;
+        border-radius: 5px !important;
+        margin-right: 5px;
+        border: none;
+        background-color: #424242;
+        color: #fff;
+        padding: 7px 20px;
+    }
+    .n_tabledata .dataTables_wrapper .dataTables_filter{
+        text-align: right;
+    }
+    .n_tabledata .panel.panel-danger > .panel-heading span{
+        margin-top: 0;
+    }
+    @media screen and (max-width: 767px){
+        .n_tabledata .dataTables_wrapper .dataTables_info{
+            float: inherit;
+            width: 100%;
+        }
+        .n_tabledata .dataTables_wrapper .dataTables_paginate{
+            margin-top: 10px;
+            text-align: left;
+            width: 100%;
+            float: inherit;
+        }
     }
 </style>
+
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php')
-?>        <aside class="right-side right-padding">
+?>        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -186,7 +238,7 @@ $get_all_classes = db_select_query("SELECT * from classes");
            $users_no_entry_more_then_7_days = db_select_query($users_no_entry_more_then_7_days." order by id desc");
            
           if($users_no_entry_more_then_7_days){  ?>
-                                <table class="table table-bordered" id="example">
+                                <table class="table " id="example">
                                     <thead>
                                         <tr>
                                           
@@ -636,5 +688,7 @@ messages:{
     
  });
   
-  
+ window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}
 </script>

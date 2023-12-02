@@ -44,6 +44,76 @@ $tdtt = date('Y-m-d');
         background-color: #65a800 !important;
         color:#FFF;
     }
+    .btn-primary{
+        background-color: #289ae7;
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+    }
+    .n_tabledata .table th,
+    .n_tabledata .table td{
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        border-top: 5px solid #fff;
+    }
+    .n_tabledata .table th{
+        border-bottom: none;
+        background-color: #ebeff7;
+        font-weight: 600;
+        padding: 14px 17px;
+    }
+    .n_tabledata .table td{
+        background-color: #ebeff7;
+        color: #446e99;
+    }
+    .n_tabledata .table .total_row th{
+        background-color: #424242;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .table td:first-child,
+    .n_tabledata .table th:first-child{
+        border-radius: 10px 0 0 10px;
+    }
+    .n_tabledata .table td:last-child,
+    .n_tabledata .table th:last-child{
+        border-radius: 0 10px 10px 0;
+    }
+    .n_tabledata .table .total_row th:first-child{
+        border-radius: 10px 0 0 5px;
+    }
+    .n_tabledata .table .total_row th:last-child{
+        border-radius: 0 10px 5px 0;
+    }
+    .n_tabledata .profit{
+        margin-top: 15px;
+        border-radius: 5px;
+    }
+    .n_tabledata .panel-body h2{
+        font-size: 28px;
+        margin-bottom: 18px;
+        margin-top: 10px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .panel-body .table + h2{
+        margin-top: 25px;
+    }
+    .n_tabledata .profit h2{
+        margin-bottom: 6px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .panel.panel-danger > .panel-heading span{
+        margin-top: 0;
+    }
+    .n_tabledata .table thead th:first-child{
+        border-radius: 5px 0 0 10px;
+    }
+    .n_tabledata .table thead th:last-child{
+        border-radius: 0px 5px 10px 0;
+    }
+    
 </style>
  <style>
     .ui-datepicker-calendar {
@@ -51,14 +121,16 @@ $tdtt = date('Y-m-d');
     }
     </style>
      <link rel="stylesheet" type="text/css" media="screen" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
-<body>
-    <div class="se-pre-con"></div>
+
+     <link type="text/css" href="css/new_custom.css" rel="stylesheet">
+     <body>
+     <div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php') ?> 
-        <aside class="right-side right-padding">
+        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -215,7 +287,7 @@ $tdtt = date('Y-m-d');
                                 ?>
                                 <!-- pt -->
                                 
-                                <table class="table table-bordered table-striped">
+                                <table class="table  table-striped">
                                     <thead>
                                         <tr>
                                             <th><b>Packages</b></th>
@@ -279,9 +351,9 @@ $tdtt = date('Y-m-d');
                                          $total_pt_amount_calculate = 0;
                                         if($pt_get_amount) {?>
                                             <tr>
-                                                <td><b>Private Training </b></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                <th><b>Private Training </b></th>
+                                                    <th></th>
+                                                    <th></th>
                                             </tr>
                                         <?php
                                        
@@ -311,7 +383,7 @@ $tdtt = date('Y-m-d');
                                 </table>                               
                                  
                                 <?php }else if($total_pt_amount){ ?>
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table  table-striped">
                                     <thead>
                                         <tr>
                                             <th><b>Private Training</b></th>
@@ -364,7 +436,7 @@ $tdtt = date('Y-m-d');
                                     if($expeses_query || $total_paid_salary || $total_paid_employee_percentage){
 
                                 ?>
-                                <table class="table table-bordered table-striped">
+                                <table class="table  table-striped">
                                     <thead>
                                         <tr>
                                             <th><b>Title</b></th>
@@ -392,15 +464,15 @@ $tdtt = date('Y-m-d');
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th ><b>Salary</b></th>
-                                            <th><b><?php if($total_paid_salary){ echo $total_paid_salary-$total_paid_employee_percentage;}else{ echo "0";};?></b></th>
+                                            <th><b>Salary</b></th>
+                                            <td><?php if($total_paid_salary){ echo $total_paid_salary-$total_paid_employee_percentage;}else{ echo "0";};?></td>
                                         </tr>
                                             <?php
                                             $pt_get_amount_paid_calculate = 0;
                                             if($pt_get_amount_paid) {?>
                                                  <tr>
-                                                    <td><b>Private Training </b></td>
-                                                     <td></td>
+                                                    <th><b>Private Training </b></th>
+                                                     <th></th>
                                                 </tr>
                                             <?php foreach($pt_get_amount_paid as $rows){
                                                     $user_id_pt = $rows['employee_id'];                                                 
@@ -659,5 +731,7 @@ $tdtt = date('Y-m-d');
         });
     });
   
-  
+    window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}
 </script>

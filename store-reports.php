@@ -36,6 +36,85 @@ $tdtt = date('Y-m-d');
     {
         float:right;
     }
+
+    .btn-primary{
+        background-color: #289ae7;
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+    }
+    .n_tabledata .table th,
+    .n_tabledata .table td{
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        border-top: 5px solid #fff;
+    }
+    .n_tabledata .table th{
+        border-bottom: none;
+        background-color: #ebeff7;
+        font-weight: 600;
+        padding: 14px 17px;
+    }
+    .n_tabledata .table td{
+        background-color: #ebeff7;
+        color: #446e99;
+    }
+    .n_tabledata .table .total_row th{
+        background-color: #424242;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .table td:first-child,
+    .n_tabledata .table th:first-child{
+        border-radius: 10px 0 0 10px;
+    }
+    .n_tabledata .table td:last-child,
+    .n_tabledata .table th:last-child{
+        border-radius: 0 10px 10px 0;
+    }
+    .n_tabledata .table .total_row th:first-child{
+        border-radius: 10px 0 0 5px;
+    }
+    .n_tabledata .table .total_row th:last-child{
+        border-radius: 0 10px 5px 0;
+    }
+    .n_tabledata .table thead th:first-child{
+        border-radius: 5px 0 0 10px;
+    }
+    .n_tabledata .table thead th:last-child{
+        border-radius: 0px 5px 10px 0;
+    }
+    .n_tabledata .table tbody th:first-child{
+        border-radius: 10px 0 0 5px;
+    }
+    .n_tabledata .table tbody th:last-child{
+        border-radius: 0px 10px 5px 0;
+    }
+    .n_tabledata .profit{
+        margin-top: 15px;
+        border-radius: 5px;
+    }
+    .n_tabledata .panel-body h2{
+        font-size: 28px;
+        margin-bottom: 18px;
+        margin-top: 10px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .panel-body .table + h2{
+        margin-top: 25px;
+    }
+    .n_tabledata .profit h2{
+        margin-bottom: 6px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .n_tabledata .panel.panel-danger > .panel-heading span{
+        margin-top: 0;
+    }
+    .nodata-title{
+        border-radius: 10px 10px 5px 5px !important;
+    }
 </style>
  <style>
     .ui-datepicker-calendar {
@@ -43,14 +122,15 @@ $tdtt = date('Y-m-d');
     }
     </style>
     <link rel="stylesheet" type="text/css" media="screen" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
-<body>
-    <div class="se-pre-con"></div>
+    <link type="text/css" href="css/new_custom.css" rel="stylesheet">
+    <body>
+    <div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php') ?> 
-        <aside class="right-side right-padding">
+        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -153,7 +233,7 @@ $tdtt = date('Y-m-d');
                                     
                                 
                                 ?>
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th><b>Product Name</b></th>
@@ -216,7 +296,7 @@ $tdtt = date('Y-m-d');
                                         <?php } else{?>
                                         <tbody>
                                             <tr>
-                                                <th colspan="3"><b>No data available</b></th>
+                                                <th colspan="3" class="nodata-title"><b>No data available</b></th>
                                             </tr>
                                         </tbody>   
                                    
@@ -339,12 +419,11 @@ $tdtt = date('Y-m-d');
                             box.removeClass("collapsed-box");
                             bf.slideDown();
                         }
-                    });
-
-
-
-
-           
+                    }); 
         });
+
+window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}
     </script>
    
