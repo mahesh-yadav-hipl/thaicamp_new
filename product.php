@@ -5,14 +5,16 @@ $products =  db_select_query("SELECT products.*,categories.name as categories_na
                                      where categories.id != ''
                                      ORDER BY products.id DESC");
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
+
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');
 
 ?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -36,7 +38,7 @@ $products =  db_select_query("SELECT products.*,categories.name as categories_na
                                 </span> -->
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
                                              <th style="width:100px;">Sr No.</th>
@@ -190,6 +192,8 @@ $('body').on('click','.remove',function(){
          });
          
          
-         
+         window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}  
 
 </script>

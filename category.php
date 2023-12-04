@@ -3,14 +3,15 @@
 $categories = db_select_query("SELECT * FROM categories ORDER BY id DESC");
 
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');
 
 ?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -34,15 +35,15 @@ $categories = db_select_query("SELECT * FROM categories ORDER BY id DESC");
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                              <!-- <th>Image</th> -->
                                              <th>Name</th>
                                              <th>Created  at</th>
-                                             <th>Edit</th>
-                                             <th>Delete</th>
+                                             <th style="width: 100px;">Edit</th>
+                                             <th style="width: 100px;">Delete</th>
                                          </tr>
                                     </thead>
                                   <tbody>
@@ -56,12 +57,12 @@ $categories = db_select_query("SELECT * FROM categories ORDER BY id DESC");
                                             <td><?=$v['name']?></td>
                                             <td><?=$v['created_at']?></td>
                                             <td>
-                                                <a class="btn btn-primary" href="edit_category.php?id=<?=$v['id']?>">
+                                                <a class="btn btn-primary btn-style" href="edit_category.php?id=<?=$v['id']?>">
                                                      Edit
                                                 </a>
                                             </td>
-                                            <td>
-                                                <a class="btn btn-danger remove" href="#" data-table='categories' data-key='id' data-value="<?php echo $v['id'] ?>">
+                                            <td class="action-area">
+                                                <a class="btn btn-danger remove " href="#" data-table='categories' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>
                                             </td>                                            
@@ -166,6 +167,8 @@ $('body').on('click','.remove',function(){
          });
          
          
-         
+window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}   
 
 </script>

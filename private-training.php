@@ -24,11 +24,11 @@ if($_SESSION['login_type'] == "admin"){
 
 ?>
 
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
-?>    <div class="wrapper row-offcanvas row-offcanvas-left">
+?>    <div class="wrapper row-offcanvas row-offcanvas-left n_tabledata">
 <?php include('sidebar.php');?>        
 <aside class="right-side right-padding">
             <!-- Content Header (Page header) -->
@@ -58,7 +58,7 @@ if($_SESSION['login_type'] == "admin"){
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
                                              <th style="width:100px;">Sr No.</th>
@@ -112,7 +112,7 @@ if($_SESSION['login_type'] == "admin"){
                                             <?php } ?>
                                             <td><?=$v['created_at']?></td>
                                             <?php if($_SESSION['login_type'] === "admin"){?>
-                                            <td>
+                                            <td class="action-area">
                                                 <!-- <a class="btn btn-primary btn-sm" href="view_private_training.php?id=<?=$v['id']?>">View</a> -->
                                                 <!-- <a class="btn btn-primary btn-sm" href="edit_employee.php?id=<?=$v['id']?>">Edit</a> -->
                                                 <a class="btn btn-danger btn-sm remove" href="#" data-table='private_training' data-key='id' data-value="<?php echo $v['id'] ?>">
@@ -222,6 +222,8 @@ $('body').on('click','.remove',function(){
          });
          
          
-         
+         window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }     
 
 </script>

@@ -51,14 +51,15 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
 
                                      
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');
 
 ?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -91,19 +92,19 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                                     <div class="col-md-3">
                                                         Start Date
                                                         <div class="input-group">
-                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control">
+                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         End Date
                                                         <div class="input-group">
-                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control">
+                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                     &nbsp;<br>
-                                                        <input type="submit"  class="btn btn-primary btn-sm" value="Search"> &nbsp;                                                 
-                                                        <a href="sell_product.php" class="btn btn-sm btn-success">Clear</a>                                                        
+                                                        <input type="submit"  class="btn btn-primary btn-sm default-btns" value="Search"> &nbsp;                                                 
+                                                        <a href="sell_product.php" class="btn btn-sm btn-success default-btns">Clear</a>                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,10 +117,10 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
 
 
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                         <tr>
-                                            <th>Sr No.</th>
+                                            <th style="width: 100px;">Sr No.</th>
                                             <th>Order Id</th>
                                             <!-- <th>Product Name</th> -->
                                             <th>Sell Quantity</th>
@@ -144,12 +145,12 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                             <td><?=$v['total_qty']?></td>
                                             <td><?= date("d-m-Y" , strtotime($v['created_at'])) ; ?></td>
                                             <td>
-                                                <a class="btn btn-primary" href="order-invoice.php?order_id=<?=$v['order_id']?>">
+                                                <a class="btn btn-primary btn-style" href="order-invoice.php?order_id=<?=$v['order_id']?>">
                                                         Invoice
                                                 </a>
-                                            <td>
-                                                <a class="btn btn-success" href="view_sell_product.php?order_id=<?=$v['order_id']?>">
-                                                        View
+                                            <td class="action-area">
+                                                <a class="btn btn-primary" href="view_sell_product.php?order_id=<?=$v['order_id']?>">
+                                                    <i class="fa fa-fw fa-eye"></i>
                                                 </a>
                                                 <!-- <a class="btn btn-primary" href="edit_sell_product.php?id=<?=$v['id']?>">
                                                         Edit
@@ -260,7 +261,9 @@ $('body').on('click','.remove',function(){
          });
          });
          
-         
+window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}     
          
 
 </script>

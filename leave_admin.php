@@ -2,14 +2,15 @@
 $employee_leave = db_select_query("SELECT * FROM  user_leaves ORDER BY id DESC");
 
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');
  
 ?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -28,10 +29,10 @@ $employee_leave = db_select_query("SELECT * FROM  user_leaves ORDER BY id DESC")
                                 </h4>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                              <th>Employee Name</th>
                                              <th>From</th>
                                              <th>To</th>
@@ -66,11 +67,11 @@ $employee_leave = db_select_query("SELECT * FROM  user_leaves ORDER BY id DESC")
                                             
                                             ?></td>
                                             <td><?=$v['reason']?></td>
-                                            <td><button class="btn btn-sm btn-<?php echo $btn_color;?>"><?= $v['status']?></button></td>
+                                            <td><button class="btn default-btns btn-sm btn-<?php echo $btn_color;?>"><?= $v['status']?></button></td>
                                             <td><?=$v['created_at']?></td>
                                             <td>
                                             <!-- btn-<?php //echo $btn_color;?> -->
-                                                <select class="btn change_leave_satus btn-sm " data-id="<?= $v['id'];?>">
+                                                <select class="btn change_leave_satus btn-sm " data-id="<?= $v['id'];?>" style="padding: 7px; border-radius: 5px !important;">
                                                     <option value="Pending">Pending</option>
                                                     <option value="Approved" <?php if($v['status'] == 'Approved'){echo "selected";}?>>Approved</option>
                                                     <option value="Declined" <?php if($v['status'] == 'Declined'){echo "selected";}?>>Declined</option>
@@ -190,7 +191,9 @@ $(document).ready(function(){
     })
 
 
-         
+    window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }       
          
 
 </script>

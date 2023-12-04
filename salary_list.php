@@ -12,12 +12,13 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
     $employee_salary = db_select_query("SELECT salary.*,users.name, users.salary as gross_salary FROM salary LEFT JOIN users ON users.id = salary.employee_id ORDER BY salary.id DESC ");
 }
 ?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -44,19 +45,19 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                                                     <div class="col-md-3">
                                                         Start Date
                                                         <div class="input-group">
-                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control">
+                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         End Date
                                                         <div class="input-group">
-                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control">
+                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                     &nbsp;<br>
-                                                        <input type="submit"  class="btn btn-primary btn-sm" value="Search"> &nbsp;                                                 
-                                                        <a href="salary_list.php" class="btn btn-sm btn-success">Clear</a>                                                        
+                                                        <input type="submit"  class="btn btn-primary btn-sm default-btns" value="Search"> &nbsp;                                                 
+                                                        <a href="salary_list.php" class="btn btn-sm btn-success default-btns">Clear</a>                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,10 +67,10 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
                             </div>
 
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                              <th>Employee Name</th>
                                              <th>Pay Month</th>
                                              <th>Gross Salary</th>
@@ -153,6 +154,12 @@ if(!empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])){
     <script src="vendors/sweetalert/dist/sweetalert2.js" type="text/javascript"></script>
     <script src="js/custom_js/courses.js" type="text/javascript"></script>
     <!-- end of page level js -->
+
+    <script>
+           window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }   
+    </script>
 </body>
 <style>
     .panel-body.table-responsive {

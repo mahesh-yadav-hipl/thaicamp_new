@@ -3,12 +3,13 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
     LEFT JOIN users AS employee
     ON employee_deduction.employee_id = employee.id 
  Where employee_deduction.deleted = 0 ORDER BY employee_deduction.id DESC");?>
+ <link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -31,7 +32,7 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
                                              <th style="width: 100px;">Sr No.</th>
@@ -60,9 +61,9 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
                                                     }
                                                 ?></td>
                                             <td><?=$v['created_at']?></td>
-                                            <td>
-                                                <a class="btn btn-info btn-sm" href="view_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">View</a>
-                                                <a class="btn btn-primary btn-sm" href="edit_employee_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">Edit</a>
+                                            <td class="action-area">
+                                                <a class="btn btn-info btn-sm default-btns" href="view_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">View</a>
+                                                <a class="btn btn-primary btn-sm default-btns" href="edit_employee_deduction.php?id=<?=$v['id']?>" style="margin-bottom:5px">Edit</a>
                                                 <a class="btn btn-danger btn-sm remove" href="#" data-table='employee_deduction' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>
@@ -105,7 +106,7 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
     <script src="vendors/sweetalert/dist/sweetalert2.js" type="text/javascript"></script>
     <script src="js/custom_js/courses.js" type="text/javascript"></script>
     <!-- end of page level js -->
-</body>
+
 <style>
     .panel-body.table-responsive {
     float: left;
@@ -127,7 +128,7 @@ $employee_deduction = db_select_query("SELECT employee_deduction.*, employee.nam
     font-size: 12px;
 }
 </style>
-</html>
+
 
 <script>
 
@@ -167,7 +168,11 @@ $('body').on('click','.remove',function(){
          });
          });
          
-         
+         window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }       
          
 
 </script>
+</body>
+</html>

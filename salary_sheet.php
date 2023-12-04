@@ -21,12 +21,13 @@ if(!empty($_REQUEST['employee_id'])){
         $employee_salary = db_select_query("SELECT salary.*,users.name, users.salary as gross_salary, users.email, users.mobile, users.date_of_joining,users.address, users.date_of_birth , CONCAT('".URL."uploaded/employee/', image) AS image  FROM salary LEFT JOIN users ON users.id = salary.employee_id  Where salary.employee_id = '$employee_id_get' ORDER BY salary.id DESC ");
     }
 }?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -54,7 +55,7 @@ if(!empty($_REQUEST['employee_id'])){
                                                         <?php }else{?>
                                                     <div class="col-md-3"> Select Name
                                                         <div class="input-group">
-                                                            <select class="form-control employee" name="employee_id" required>
+                                                            <select class="form-control employee input-style" name="employee_id" required>
                                                                 <option value="">Select Employee</option>
                                                             <?php if($get_all_employee) {
                                                             foreach($get_all_employee as $k =>$v){ ?>
@@ -68,26 +69,26 @@ if(!empty($_REQUEST['employee_id'])){
                                                     <div class="col-md-3">
                                                         Start Date
                                                         <div class="input-group">
-                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control">
+                                                            <input type="date" name="start_date" value="<?php echo $start_date;?>" class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         End Date
                                                         <div class="input-group">
-                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control">
+                                                            <input type="date" name="end_date" value="<?php echo $end_date;?>"class="form-control input-style">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                     &nbsp;<br>
-                                                    <input type="submit"  class="btn btn-primary btn-sm" value="Search"> &nbsp;
+                                                    <input type="submit"  class="btn btn-primary btn-sm default-btns" value="Search"> &nbsp;
                                                     <?php  
                                                         if($_SESSION['login_type'] === "employee"){
                                                     ?>
-                                                            <a href="salary_sheet.php?employee_id=<?= $_SESSION['login_id'] ;?>" class="btn btn-sm btn-success">Clear</a>
+                                                            <a href="salary_sheet.php?employee_id=<?= $_SESSION['login_id'] ;?>" class="btn btn-sm btn-success default-btns">Clear</a>
                                                     <?php }else{?>
-                                                    <a href="salary_sheet.php" class="btn btn-sm btn-success">Clear</a>
+                                                    <a href="salary_sheet.php" class="btn btn-sm btn-success default-btns">Clear</a>
                                                     <?php } ?>
-                                                        <button type="button" class="print_btn btn btn-sm btn-warning ">Print</button>
+                                                        <button type="button" class="print_btn btn btn-sm btn-warning default-btns">Print</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +147,7 @@ if(!empty($_REQUEST['employee_id'])){
                                     <br><br>
                                     </div>
                                 </div>
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
                                              <th style="width:120px;">Sr No.</th>
@@ -255,6 +256,9 @@ $(document).ready(function(){
 })
    
 
+window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }
 </script>
 </body>
 <style>

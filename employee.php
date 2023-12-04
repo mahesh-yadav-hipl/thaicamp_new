@@ -1,11 +1,12 @@
 <?php include('head.php') ;
 $categories = db_select_query("SELECT * FROM users Where role = 'employee' ORDER BY id DESC");?>
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
 <?php include('header.php');
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
 <?php include('sidebar.php');?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -28,10 +29,10 @@ $categories = db_select_query("SELECT * FROM users Where role = 'employee' ORDER
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                          <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                              <th>Image</th>
                                              <th>Name</th>
                                              <th>Email</th>
@@ -63,9 +64,9 @@ $categories = db_select_query("SELECT * FROM users Where role = 'employee' ORDER
                                             <td><?=$v['mobile']?></td>
                                             <td><?=$v['salary']?></td>
                                             <td><?=$v['created_at']?></td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm" href="view_employee.php?id=<?=$v['id']?>">View</a>
-                                                <a class="btn btn-primary btn-sm" href="edit_employee.php?id=<?=$v['id']?>">Edit</a>
+                                            <td class="action-area">
+                                                <a class="btn btn-primary btn-sm default-btns" href="view_employee.php?id=<?=$v['id']?>">View</a>
+                                                <a class="btn btn-primary btn-sm default-btns" href="edit_employee.php?id=<?=$v['id']?>">Edit</a>
                                                 <a class="btn btn-danger btn-sm remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>
@@ -171,6 +172,8 @@ $('body').on('click','.remove',function(){
          });
          
          
-         
+         window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}   
 
 </script>

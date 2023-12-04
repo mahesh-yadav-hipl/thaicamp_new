@@ -1,6 +1,17 @@
 <?php
 include_once('functions/functions.php');
 
+
+
+// $cron_jobs['title'] = "upcoming package now activate on users";
+// $cron_jobs['created_at'] = date('Y-m-d H:i:s');      
+// $cron_job_data['table'] = "cron_jobs" ;
+// $cron_job_data['values'] = $cron_jobs ;
+
+// db_insert($cron_job_data) ;
+// print_r('package_schedule'); die;
+
+
 $today = date('Y-m-d');
 
 
