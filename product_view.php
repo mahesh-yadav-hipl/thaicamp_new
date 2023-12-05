@@ -185,6 +185,9 @@
     .thumbnail img {
     object-fit: contain;
 }
+.row.flex-row.product-main-outer .thumbnail {
+    padding: 1px;
+}
 }
 </style>
 

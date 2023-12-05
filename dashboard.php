@@ -136,6 +136,17 @@ function getActiveEmployeePt($emp_id, $emp_name){
         echo $html;
     }
 }
+
+
+$firstDay = date('Y-m-01');
+$lastDay = date('Y-m-t');
+$yearMonthCurrent = date('Y-m');
+$yearMonthDateCurrent = date('Y-m-d');
+// (name it "Safety Renewed ") it is total number of renewed package of this month meaning old subscriber added new package this month
+$ThisMonthActivePackage = db_select_query("SELECT *  FROM users WHERE package_class != '0' and  pck_start_date BETWEEN '$firstDay' AND '$lastDay' AND (DATE_FORMAT(created_at, '%Y-%m') <> '$yearMonthCurrent') and (DATE_FORMAT(pck_start_date, '%Y-%m-%d') <= '$yearMonthDateCurrent') and is_deactivate = 0 ") ;
+//(name it "Safety New ") is the total number of new subscribers this month 
+$ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORMAT(created_at, '%Y-%m') = '$yearMonthCurrent') and is_deactivate = 0 ") ;
+
 ?>
 
 
@@ -310,6 +321,70 @@ function getActiveEmployeePt($emp_id, $emp_name){
                                             </div>
                                             <div class="re-right-area">
                                                 <h5>Waiting List</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="registered">
+                                        <div class="register-detail Bg-lslk4 renew_package_this_month">                                            
+                                        <?php 
+                                            $html_renew_package = "";
+                                            foreach($ThisMonthActivePackage as $g)
+                                            {
+                                               $html_renew_package .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
+                                                    <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
+                                            }
+                                        ?>
+                                        <div class="view_all_renew_package" style="display: none;" >
+                                            <table>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Mobile No.</th>
+                                                    <th>View</th>
+                                                </tr>
+                                                <?php echo $html_renew_package;?>                                                       
+                                            </table>
+                                        </div>
+
+                                            <div class="re-left-area">
+                                                <h3 id="myTargetElement4.1" class="renew_package_this_month"><?= count($ThisMonthActivePackage);?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>Safety Renewed</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="registered">
+                                        <div class="register-detail Bg-lslk3 new_subscriber_this_month">
+                                            
+                                            <?php 
+                                                $html_new_subscriber = "";
+                                                foreach($ThisMonthNewSubscriber as $g)
+                                                {
+                                                $html_new_subscriber .= "<tr><td>".$g['name']."</td><td>".$g['email']."</td><td>".$g['mobile']."</td>
+                                                        <td align='center'><a class='btn btn-success btn-sm' href='view_user.php?id=".$g['id']."' style='margin: 5px 0px;'>View</a></td></tr>";
+                                                }
+                                            ?>
+                                            <div class="view_all_new_subscriber" style="display: none;" >
+                                                <table>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Mobile No.</th>
+                                                        <th>View</th>
+                                                    </tr>
+                                                    <?php echo $html_new_subscriber;?>                                                       
+                                                </table>
+                                            </div>
+
+                                            <div class="re-left-area">
+                                                <h3 id="myTargetElement4.1" class="new_subscriber_this_month"><?= count($ThisMonthNewSubscriber);?></h3>
+                                            </div>
+                                            <div class="re-right-area">
+                                                <h5>Safety New</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -673,8 +748,8 @@ function getActiveEmployeePt($emp_id, $emp_name){
 }
 .package_list_show_btn:hover, .hold_package_btn:hover, .view_all_active_class_user_btn:hover,
 .employee_active_pt_btn:hover, .waiting_list_btn:hover, .btn_count_no_entry_more_then_seven_days:hover,
-.total_active_classes_btn:hover, .total_active_subscribler_btn:hover, .total_expences_views_btn:hover
-{
+.total_active_classes_btn:hover, .total_active_subscribler_btn:hover, .total_expences_views_btn:hover,
+.renew_package_this_month:hover, .new_subscriber_this_month:hover{
     cursor: pointer;
 }
 .employee_active_pt_btn{
@@ -763,6 +838,12 @@ function getActiveEmployeePt($emp_id, $emp_name){
 }
 .Bg-lslk2{
     background-color: #33af9e;
+}
+.Bg-lslk3{
+    background-color: #42b16e;
+}
+.Bg-lslk4{
+    background-color: #d3d35c;
 }
 .DarkBlue{
     background-color: #e8e9fc;
@@ -965,6 +1046,21 @@ main{
                 var getTotalExpences = $('.total_expences_views').html();
                 $('.all_model_data').html(getTotalExpences);
             });
+
+
+            $(document).on('click','.renew_package_this_month',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                var getrenew_package = $('.view_all_renew_package').html();
+                $('.all_model_data').html(getrenew_package);
+            });
+            $(document).on('click','.new_subscriber_this_month',function(){
+                $('.all_model_data').html('');
+                $("#exampleModal").modal('show');
+                var getnew_subscriber = $('.view_all_new_subscriber').html();
+                $('.all_model_data').html(getnew_subscriber);
+            });
+
             $(document).on('click','.hold_package_btn',function(){
                 $('.all_model_data').html('');
                 $("#exampleModal").modal('show');
