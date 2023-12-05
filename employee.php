@@ -65,11 +65,13 @@ $categories = db_select_query("SELECT * FROM users Where role = 'employee' ORDER
                                             <td><?=$v['salary']?></td>
                                             <td><?=$v['created_at']?></td>
                                             <td class="action-area">
+                                                <div style="min-width: 140px;">
                                                 <a class="btn btn-primary btn-sm default-btns" href="view_employee.php?id=<?=$v['id']?>">View</a>
                                                 <a class="btn btn-primary btn-sm default-btns" href="edit_employee.php?id=<?=$v['id']?>">Edit</a>
                                                 <a class="btn btn-danger btn-sm remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </a>
+                                                </div>
                                             </td>                                                                                     
                                         </tr>
                                     <?php

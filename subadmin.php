@@ -6,19 +6,19 @@ $admin_ids=!empty($_GET['id'])?$_GET['id']:"" ;
 $get_all_subadmins =  db_select_query("SELECT * FROM users where role = 'admin' AND id <> 1 ORDER BY id DESC ") ;
 $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ; 
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php')
-?>        <aside class="right-side right-padding">
+?>        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
-                <h2>Sub-Admin</h2>
+                <h2>Users</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="index-2.html">
@@ -44,7 +44,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                          <div class="panel panel-success">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <i class="fa fa-fw fa-user-plus"></i> Edit Sub-Admin
+                                    <i class="fa fa-fw fa-user-plus"></i> Edit User
                                 </h4>
                                 <span class="pull-right">
                                     <i class="glyphicon glyphicon-chevron-up showhide clickable"></i>
@@ -59,7 +59,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                             <div class="form-body">
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Name
+                                                         Name
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -73,7 +73,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Email
+                                                         Email
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -87,7 +87,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Mobile
+                                                         Mobile
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -101,7 +101,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                  <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Password
+                                                         Password
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -117,8 +117,8 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-md-offset-3 col-md-6">
-                                                        <input type="submit" class="btn btn-primary" value="Update"> &nbsp;
-                                                        <a class="btn btn-danger" href="subadmin.php">Cancel</a>
+                                                        <input type="submit" class="btn btn-primary default-btns" value="Update"> &nbsp;
+                                                        <a class="btn btn-danger default-btns" href="subadmin.php">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,7 +138,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                          <div class="panel panel-success">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <i class="fa fa-fw fa-user-plus"></i> Add Sub-Admin
+                                    <i class="fa fa-fw fa-user-plus"></i> Add Users
                                 </h4>
                                 <span class="pull-right">
                                     <i class="glyphicon glyphicon-chevron-up showhide clickable"></i>
@@ -153,7 +153,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                             <div class="form-body">
                                                  <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Name
+                                                         Name
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -167,7 +167,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Email
+                                                         Email
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -181,7 +181,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Mobile
+                                                         Mobile
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -195,7 +195,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="room_name" class="col-md-3 control-label">
-                                                        Sub-Admin Password
+                                                         Password
                                                         <span class='require'>*</span>
                                                     </label>
                                                     <div class="col-md-6">
@@ -212,8 +212,8 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-md-offset-3 col-md-6">
-                                                        <input type="submit" class="btn btn-primary" value="Add"> &nbsp;
-                                                        <a class="btn btn-danger" href="subadmin.php">Cancel</a>
+                                                        <input type="submit" class="btn btn-primary default-btns" value="Add"> &nbsp;
+                                                        <a class="btn btn-danger default-btns" href="subadmin.php">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,7 +231,7 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                         <div class="panel panel-danger">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <i class="fa fa-fw fa-user-plus"></i> Sub-Admin List
+                                    <i class="fa fa-fw fa-user-plus"></i>  List
                                 </h4>
                                 <span class="pull-right">
                                     <i class="glyphicon glyphicon-chevron-up showhide clickable"></i>
@@ -239,10 +239,10 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                         <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Mobile</th>
@@ -261,13 +261,13 @@ $subadmin = db_select_query("SELECT * FROM users where id = '$admin_ids'")[0] ;
                                              <td><?=$v['email']?></td>
                                              <td><?=$v['mobile']?></td>
                                             <td>
-                                                <a class="btn btn-primary" href="subadmin.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-edit"></i> Edit
+                                                <a class="btn btn-primary default-btns" href="subadmin.php?id=<?=$v['id']?>">
+                                                     Edit
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger remove" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
-                                                    <i class="fa fa-trash-o"></i> Delete
+                                                <a class="btn btn-danger remove default-btns" href="#" data-table='users' data-key='id' data-value="<?php echo $v['id'] ?>">
+                                                    Delete
                                                 </a>
                                             </td>
                                         </tr>
@@ -512,5 +512,7 @@ messages:{
     
  });
   
-  
+ window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }
 </script>

@@ -12,7 +12,7 @@ if($_POST['mobile'])
    $joined_date = date("d-m-Y" , strtotime($user['created_at'])) ;
 }
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
     <div class="se-pre-con"></div>
     <!-- header logo: style can be found in header-->
@@ -96,7 +96,7 @@ if($_POST['mobile'])
                         
                 
              <?php if($_POST['mobile']) { ?>
-                <div class="row">
+                <div class="row enterance-table">
                     <div class="col-lg-12">
                         <div class="panel panel-danger">
                             <div class="panel-heading">
@@ -130,13 +130,13 @@ if($_POST['mobile'])
          
                         ?>
                         <div class="card-text">
-                        <i class="fa fa-circle" aria-hidden="true"></i> <?=$pck_name?> (<?php echo $qry['package_id'];?>)
-                        
-                        <?php if(($user['package_class'] != '0') && ($today_date <= $exp )){
-                        ?>
-                       <span class="action-button">
-                        <button style="cursor: text;width: 143px;" type = "button" id="enterance"  data-date="<?php echo $today_date  ?>"  data-packageid="<?php echo $pck_id ?>" data-userid="<?php echo $user['id'] ?>" data-enttime="<?php echo $newDateTime ?>" class="btn btn-success">Valid</button>
-                         </span>
+                                <i class="fa fa-circle" aria-hidden="true"></i> <?=$pck_name?> (<?php echo $qry['package_id'];?>)
+                                
+                                <?php if(($user['package_class'] != '0') && ($today_date <= $exp )){
+                                ?>
+                                <span class="action-button">
+                                    <button style="cursor: text;width: 143px;" type = "button" id="enterance"  data-date="<?php echo $today_date  ?>"  data-packageid="<?php echo $pck_id ?>" data-userid="<?php echo $user['id'] ?>" data-enttime="<?php echo $newDateTime ?>" class="btn btn-success">Valid</button>
+                                </span>
                         <div style="border-top: none!important;" class="card-footer">
                         <span class="float-right">Expiration Date <?php echo date("d-m-Y" , strtotime($exp))  ?></span>
                          </div>
@@ -167,7 +167,7 @@ if($_POST['mobile'])
                    
                         <span style="color: #ff931d;
     font-size: 1em;
-    top: 140px;
+    top: 164px;
     right: 35px;
     position: absolute;"><b id="class-left-count" >Classes Left - <?php echo $pck_cls_user ;  ?></b></span>
                         
@@ -347,7 +347,43 @@ h5 {
 .meta a:hover {
     color: rgba(0, 0, 0, .87);
 }
+
+
+.enterance-table .panel-danger{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+.enterance-table .panel-danger > .panel-heading{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+.enterance-table .panel-danger .panel-body{
+    padding: 0;
+}
+.enterance-table .panel-danger .panel-body .card{
+    box-shadow: none;
+    border: 1px solid #d4d4d5;
+    border-radius: 10px;
+}
+.meta h5{
+    font-size: 18px;
+    color: #000;
+}
+.card-text .action-button{
+    margin-top: -8px;
+}
+.card-footer{
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 14px;
+}
+
+
 </style>
+
 
 <script>
 

@@ -19,15 +19,20 @@
 }
 .n_tabledata .panel.panel-danger > .panel-heading,
 .n_tabledata .panel.panel-danger > .panel-heading .panel-title,
-.n_tabledata .panel.panel-danger > .panel-heading span{
+.n_tabledata .panel.panel-danger > .panel-heading span,
+.n_tabledata .panel.panel-success > .panel-heading,
+.n_tabledata .panel.panel-success > .panel-heading .panel-title,
+.n_tabledata .panel.panel-success > .panel-heading span{
     float: inherit !important;
 }
-.n_tabledata .panel.panel-danger{
+.n_tabledata .panel.panel-danger,
+.n_tabledata .panel.panel-success{
     border: none;
     min-height: 68px;
     border-radius: 5px !important;
 }
-.n_tabledata .panel.panel-danger > .panel-heading{
+.n_tabledata .panel.panel-danger > .panel-heading,
+.n_tabledata .panel.panel-success > .panel-heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,18 +42,22 @@
     border-radius: 5px !important;
     min-height: 68px;
 }
-.n_tabledata .panel.panel-danger > .panel-heading .panel-title{
+.n_tabledata .panel.panel-danger > .panel-heading .panel-title,
+.n_tabledata .panel.panel-success > .panel-heading .panel-title{
     margin: 0;
     padding: 0;
     color: #fff;
     font-weight: 600;
     font-size: 17px;
 }
-.n_tabledata .panel.panel-danger > .panel-heading span{
+.n_tabledata .panel.panel-danger > .panel-heading span,
+.n_tabledata .panel.panel-success > .panel-heading span{
     display: flex;
     align-items: center;
+    margin-top: 0;
 }
-.n_tabledata .panel.panel-danger > .panel-heading span .btn{
+.n_tabledata .panel.panel-danger > .panel-heading span .btn,
+.n_tabledata .panel.panel-success > .panel-heading span .btn{
     background-color: #fbfbfb;
     color: #289ae7;
     font-family: 'Roboto', sans-serif;
@@ -58,7 +67,8 @@
     padding: 8px 12px;
     border-radius: 5px !important;
 }
-.n_tabledata .panel.panel-danger > .panel-heading span .glyphicon{
+.n_tabledata .panel.panel-danger > .panel-heading span .glyphicon,
+.n_tabledata .panel.panel-success > .panel-heading span .glyphicon{
     width: 35px;
     height: 35px;
     line-height: 35px;
@@ -229,6 +239,9 @@
     border-radius: 5px !important;
 }
 
+.n_tabledata .dataTables_wrapper .dataTable td.dataTables_empty {
+    border-radius: 10px 10px 5px 5px !important;
+}
 
 
 

@@ -20,7 +20,7 @@ $id = $_GET['id'] ;
            $currentDateTime = date('Y-m-d H:i:s');
           $newDateTime = date('h:i A', strtotime($currentDateTime));
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <style>
 
 input[type="checkbox"]
@@ -39,6 +39,94 @@ input[type="checkbox"]
         top:0px!important;
         left:0px!important;
     }
+    .n_tabledata .panel{
+        border: none;
+        min-height: 68px;
+        border-radius: 5px !important;
+    }
+    .n_tabledata .panel > .panel-heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        background-color: #289ae7;
+        padding: 15px;
+        border-radius: 5px !important;
+        min-height: 68px; 
+    }
+    .n_tabledata .panel > .panel-heading .panel-title {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-weight: 600;
+        font-size: 17px;
+    }
+    .n_tabledata .panel > .panel-heading span {
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+    }
+    .n_tabledata .panel > .panel-heading span .glyphicon {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        background-color: #fbfbfb;
+        color: #289ae7;
+        margin-left: 10px;
+        top: inherit;
+        border-radius: 5px !important;
+    }
+    .view_user_tabtop .table td{
+        border-top: none;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        background-color: #ebeff7;
+    }
+    .view_user_tabtop .table td:first-child{
+        border-right: 1px solid #ddd;
+        font-weight: 600;
+    }
+    .view_user_tabtop .table td p{
+        margin-bottom: 0;
+    }
+    .view_user_tabtop .table td p + p{
+        margin-top: 8px;
+    }
+    .view_user_tabtop .multi-btns a,
+    .view_user_tabtop .multi-btns button{
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+        margin-bottom: 8px;
+    }
+    .add-package-bottom{
+        margin-top: 20px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1300px){
+        .n_tabledata .table-responsive{
+            border: none;
+            padding-top: 20px;
+        }
+        .add-package-bottom span{
+            display: block;
+            padding-bottom: 15px;
+        }
+    }
+    @media screen and (max-width: 767px){
+        .n_tabledata .table-responsive{
+            border: none;
+            padding-top: 20px;
+        }
+        .add-package-bottom span{
+            display: block;
+            padding-bottom: 15px;
+        }
+    }
 </style>
 <body>
    
@@ -49,7 +137,7 @@ input[type="checkbox"]
         <!-- Left side column. contains the logo and sidebar -->
             <?php include('sidebar.php') ;
 ?>
-        <aside class="right-side right-padding">
+        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h2>Subscribers</h2>
@@ -85,7 +173,7 @@ input[type="checkbox"]
                                     <!-- Nav tabs -->
                                     
                                     <!-- Tab panes -->
-                                    <div class="tab-content">
+                                    <div class="tab-content view_user_tabtop">
                                         <div role="tabpanel" class="tab-pane active" id="Info">
                                             <div class="row">
                                                <form id="edit-user-form"  method="post" action="ajax/renew_package.php"  onsubmit="return false;"  enctype="multipart/form-data" >    
@@ -97,7 +185,7 @@ input[type="checkbox"]
                                                 <div class="col-md-9 col-sm-8">
                                                     <div class="panel-body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-bordered" id="users">
+                                                            <table class="table" id="users">
                                                              
                                                                 <tr>
                                                                     <td>Package</td>
@@ -164,15 +252,14 @@ input[type="checkbox"]
                                                                
                                                             </table>
                                                            
-                                                               <div class="">
-                                                            <p><b>Price : &nbsp;&nbsp;<input id="show_pck_price" type = "text">&nbsp;&nbsp; Discount Code : &nbsp;&nbsp;<select class = "discount_code" name="discount_code"><option value="">Select Discount Code</option><?php if($get_all_discount_codes) { foreach($get_all_discount_codes as $code) { ?> <option value="<?php echo $code['id'] ?>"><?php echo $code['code'] ?></option> <?php } } ?> </select>&nbsp;&nbsp;  Total : &nbsp;<input id="after_discount_price" name="after_discount_price" type = "text" > </b></p>
+                                                               <div class="add-package-bottom">
+                                                                <p><span><b>Price : &nbsp;&nbsp;<input id="show_pck_price" type = "text">&nbsp;&nbsp;</span> <span>Discount Code : &nbsp;&nbsp;<select class = "discount_code" name="discount_code"><option value="">Select Discount Code</option><?php if($get_all_discount_codes) { foreach($get_all_discount_codes as $code) { ?> <option value="<?php echo $code['id'] ?>"><?php echo $code['code'] ?></option> <?php } } ?> </select>&nbsp;&nbsp;</span>  <span>Total : &nbsp;<input id="after_discount_price" name="after_discount_price" type = "text" > </b></span></p>
                                                            
                                                              
                                                             </div>
                                                             
                                                            
-                                                            <div style="text-align: center;margin-top: 30px;" class="">
-                                                                
+                                                            <div style="margin-top: 30px;" class="multi-btns">
                                                                <button type="submit" class="btn btn-warning">Update</button> &nbsp;
                                                                 <a href = "view_user.php?id=<?php echo $user['id'] ?>"  class="btn btn-warning">Cancel</a> &nbsp;
                                                             </div>
@@ -224,13 +311,13 @@ input[type="checkbox"]
 </html>
 
 
-// <script> 
+<script> 
 // $(document).ready(function () {
 // $('input[type=checkbox]:checked').each(function () {
 //  $(this).attr("disabled" , "disabled"); 
 // });
 // });   
-// </script>
+</script>
 
 
 

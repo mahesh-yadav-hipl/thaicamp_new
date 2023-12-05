@@ -85,7 +85,7 @@ $get_all_upcoming_packages = db_select_query("select * from upcoming_packages wh
 
 
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <style>
 
 input[type="checkbox"]
@@ -104,6 +104,115 @@ input[type="checkbox"]
         top:0px!important;
         left:0px!important;
     }
+    .n_tabledata .panel{
+        border: none;
+        min-height: 68px;
+        border-radius: 5px !important;
+    }
+    .n_tabledata .panel > .panel-heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        background-color: #289ae7;
+        padding: 15px;
+        border-radius: 5px !important;
+        min-height: 68px; 
+    }
+    .n_tabledata .panel > .panel-heading .panel-title {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-weight: 600;
+        font-size: 17px;
+    }
+    .n_tabledata .panel > .panel-heading span {
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+    }
+    .n_tabledata .panel > .panel-heading span .glyphicon {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        background-color: #fbfbfb;
+        color: #289ae7;
+        margin-left: 10px;
+        top: inherit;
+        border-radius: 5px !important;
+    }
+    .view_user_tabtop .table td{
+        border-top: none;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        background-color: #ebeff7;
+    }
+    .view_user_tabtop .table td:first-child{
+        border-right: 1px solid #ddd;
+        font-weight: 600;
+    }
+    .view_user_tabtop .table td p{
+        margin-bottom: 0;
+    }
+    .view_user_tabtop .table td p + p{
+        margin-top: 8px;
+    }
+    .view_user_tabtop .multi-btns a,
+    .view_user_tabtop .multi-btns button{
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+        margin-bottom: 8px;
+    }
+    .n_tabledata .panel-body h2{
+        font-size: 22px;
+        line-height: 20px;
+        padding: 20px 0 12px;
+        border-bottom: 1px solid #ebeff7;
+    }
+    .n_tabledata .inner-table-data{
+        
+    }
+    .n_tabledata .inner-table-data thead th, 
+    .n_tabledata .inner-table-data tbody td {
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        border-top: 5px solid #fff;
+    }
+    .n_tabledata .inner-table-data thead th{
+        border-top: none;
+        border-bottom: none;
+        background-color: #ebeff7;
+        font-weight: 600;
+        padding: 24px 17px;
+        padding-right: 24px;
+    }
+    .n_tabledata .inner-table-data tbody td{
+        background-color: #ebeff7;
+        color: #446e99;
+    }
+    .n_tabledata .inner-table-data tbody tr td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+    .n_tabledata .inner-table-data tbody tr:last-child td:first-child {
+        border-radius: 10px 0px 0px 5px;
+    }
+    .n_tabledata .inner-table-data thead tr th:first-child {
+        border-radius: 5px 0 0 10px;
+    }
+    .n_tabledata .inner-table-data thead tr th:last-child {
+        border-radius: 0px 5px 10px 0;
+    }
+    @media screen and (max-width: 767px){
+        .n_tabledata .table-responsive{
+            border: none;
+        }
+    }
 </style>
 <body>
    
@@ -114,7 +223,7 @@ input[type="checkbox"]
         <!-- Left side column. contains the logo and sidebar -->
             <?php include('sidebar.php') ;
 ?>
-        <aside class="right-side right-padding">
+        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h2>Subscribers</h2>
@@ -150,7 +259,7 @@ input[type="checkbox"]
                                     <!-- Nav tabs -->
                                     
                                     <!-- Tab panes -->
-                                    <div class="tab-content">
+                                    <div class="tab-content view_user_tabtop">
                                         <div role="tabpanel" class="tab-pane active" id="Info">
                                             <div class="row">
                                               <form id="edit-user-form"  method="post" action="ajax/update-data.php"  onsubmit="return false;"  enctype="multipart/form-data" >    
@@ -178,7 +287,7 @@ input[type="checkbox"]
                                                 <div class="col-md-9 col-sm-8">
                                                     <div class="panel-body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-bordered" id="users">
+                                                            <table class="table" id="users">
                                                                 <tr>
                                                                     <td>Name</td>
                                                                     <td>
@@ -298,7 +407,7 @@ input[type="checkbox"]
                                                             </table>
                                                             
                                                            
-                                                            <div style="text-align: center;" class="">
+                                                            <div class="multi-btns">
                                                                 <?php $today_date = date('Y-m-d');
                                                                  //if($user['expiry_dates'] < $today_date)
                                                                  //{ 
@@ -344,8 +453,9 @@ input[type="checkbox"]
                                         </div>
                                         
                                     </div>
-                                    <h2>ALL OLD PACKAGES</h2></br>
-                                    <table class="table table-bordered" id="fitness-table">
+                                    <h2>All Old Packages</h2></br>
+                                    <div class="table-responsive">
+                                    <table class="table inner-table-data" id="fitness-table">
                                     <thead>
                                         <tr>
                                              <th>Sr No.</th>
@@ -384,13 +494,15 @@ input[type="checkbox"]
                                        
                                     </tbody>
                                 </table>
+                                </div>
 
 
 
 
                                 <br><br>
-                                    <h2> ALL UPCOMING PACKAGES</h2></br>
-                                    <table class="table table-bordered" id="fitness-table">
+                                    <h2>All Upcoming Packages</h2></br>
+                                    <div class="table-responsive">
+                                    <table class="table inner-table-data" id="fitness-table">
                                     <thead>
                                     <tr>
                                         <th>Sr No.</th>
@@ -428,7 +540,7 @@ input[type="checkbox"]
                                     
                                     </tbody>
                                     </table>
-
+                                    </div>
 
 
 
@@ -505,13 +617,13 @@ input[type="checkbox"]
 </html>
 
 
-// <script> 
+<script> 
 // $(document).ready(function () {
 // $('input[type=checkbox]:checked').each(function () {
 //  $(this).attr("disabled" , "disabled"); 
 // });
 // });   
-// </script>
+</script>
 
 <script>
     $(document).ready(function(){

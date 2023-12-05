@@ -174,15 +174,15 @@
                             
                                 </li>
                                 
-                                 <li>
+                                 <!-- <li>
                                     <a href="admin.php">
                                         <i class="text-default fa fa-fw fa-user-plus"></i> Admin
                                     </a>
-                                </li>
+                                </li> -->
                                 
                                  <li>
                                     <a href="subadmin.php">
-                                        <i class="text-warning fa fa-fw fa-user-plus"></i> Sub-Admin
+                                        <i class="text-warning fa fa-fw fa-user-plus"></i> Users
                                     </a>
                                 </li>
                                

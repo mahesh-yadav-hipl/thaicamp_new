@@ -36,10 +36,31 @@
     display: flex;
     flex-wrap: wrap;
 }
-.thumbnail{
-    padding: 0;
-    overflow: hidden;
-    height: calc(100% - 20px);
+.row.flex-row.product-main-outer {
+    row-gap: 20px;
+}
+
+.row.flex-row.product-main-outer > .col-sm-6.col-md-4.col-lg-3:before {
+    content: "";
+    width: calc(100% - 30px);
+    margin-left: 0;
+    height: 100%;
+    position: absolute;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.row.flex-row.product-main-outer .thumbnail {
+    border: none;
+    box-shadow: none;
+    z-index:1;
+    margin-bottom:0;
+    background: transparent;
+    padding: 0px;
+}
+.product-main-outer .thumbnail .caption{
+    height: calc(100% - 225px);
 }
 .thumbnail img{
     width: 100%;
@@ -152,7 +173,10 @@
     padding: 3px;
     border: 1px solid #ddd;
 }
-
+.row.flex-row.product-main-outer:before,
+.row.flex-row.product-main-outer:after{
+    display:none;
+}
 @media only screen and (max-width: 768px) {
     .product-container  .col-sm-6{
         width: 100%;
@@ -202,7 +226,7 @@ $products =  db_select_query("SELECT products.*,categories.name as categories_na
         <?php } ?>
 
 
-            <div class="row flex-row">
+            <div class="row flex-row product-main-outer">
                 <?php 
                     if($products) {
                     foreach($products as $k =>$v){  ?>

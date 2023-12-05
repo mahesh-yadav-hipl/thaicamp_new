@@ -1,4 +1,6 @@
 <?php include('head.php') ;
+
+die;
 //$admin_ids=!empty($_GET['id'])?$_GET['id']:"";
 // $get_all_admins =  db_select_query("SELECT * FROM users where role = 'admin' ORDER BY id DESC ") ;
 $admin_ids= 1;

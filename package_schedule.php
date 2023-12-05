@@ -1,20 +1,9 @@
 <?php
 include_once('functions/functions.php');
 
-
-
-// $cron_jobs['title'] = "upcoming package now activate on users";
-// $cron_jobs['created_at'] = date('Y-m-d H:i:s');      
-// $cron_job_data['table'] = "cron_jobs" ;
-// $cron_job_data['values'] = $cron_jobs ;
-
-// db_insert($cron_job_data) ;
-// print_r('package_schedule'); die;
-
+//$today = date('Y-m-04'); 
 
 $today = date('Y-m-d');
-
-
 $upcomingPck = db_select_query("select * from upcoming_packages where pck_start_date = '$today' order by id desc");
 
 
@@ -66,4 +55,10 @@ foreach($upcomingPck as $key => $value){
 
     }
 }
+
+$cron_jobs['title'] = "upcoming package now activate on users";
+$cron_jobs['created_at'] = date('Y-m-d H:i:s');      
+$cron_job_data['table'] = "cron_jobs" ;
+$cron_job_data['values'] = $cron_jobs ;
+db_insert($cron_job_data);
 ?>
