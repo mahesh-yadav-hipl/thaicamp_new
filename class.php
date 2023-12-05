@@ -8,15 +8,15 @@ $get_all_classes =  db_select_query("SELECT * FROM classes ORDER BY id DESC") ;
 $class = db_select_query("SELECT * FROM classes where id = '$id'")[0] ; 
 
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php')
-?>        <aside class="right-side right-padding">
+?>        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -106,8 +106,8 @@ $class = db_select_query("SELECT * FROM classes where id = '$id'")[0] ;
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-md-offset-3 col-md-6">
-                                                        <input type="submit" class="btn btn-primary" value="Update"> &nbsp;
-                                                        <a class="btn btn-danger" href="class.php">Cancel</a>
+                                                        <input type="submit" class="btn btn-primary default-btns" value="Update"> &nbsp;
+                                                        <a class="btn btn-danger default-btns" href="class.php">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,8 +187,8 @@ $class = db_select_query("SELECT * FROM classes where id = '$id'")[0] ;
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-md-offset-3 col-md-6">
-                                                        <input type="submit" class="btn btn-primary" value="Add"> &nbsp;
-                                                        <a class="btn btn-danger" href="class.php">Cancel</a>
+                                                        <input type="submit" class="btn btn-primary default-btns" value="Add"> &nbsp;
+                                                        <a class="btn btn-danger default-btns" href="class.php">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,10 +214,10 @@ $class = db_select_query("SELECT * FROM classes where id = '$id'")[0] ;
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                         <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                             
                                             <th>Class Name</th>
                                             <th>Class Duration</th>
@@ -238,13 +238,13 @@ $class = db_select_query("SELECT * FROM classes where id = '$id'")[0] ;
                                              <td><?=$v['duration']?> Hour</td>
                                               <td><?=$v['capacity']?></td>
                                             <td>
-                                                <a class="btn btn-primary" href="class.php?id=<?=$v['id']?>">
-                                                    <i class="fa fa-fw fa-edit"></i> Edit
+                                                <a class="btn btn-primary default-btns" href="class.php?id=<?=$v['id']?>">
+                                                     Edit
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger remove" href="#" data-table='classes' data-key='id' data-value="<?php echo $v['id'] ?>">
-                                                    <i class="fa fa-trash-o"></i> Delete
+                                                <a class="btn btn-danger remove default-btns" href="#" data-table='classes' data-key='id' data-value="<?php echo $v['id'] ?>">
+                                                    Delete
                                                 </a>
                                             </td>
                                         </tr>
@@ -469,6 +469,9 @@ messages:{
          });
     
  });
-  
+ window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }
+
   
 </script>

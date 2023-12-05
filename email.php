@@ -8,15 +8,15 @@ $get_all_payment_methods =  db_select_query("SELECT * FROM payment_methods ORDER
 $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id'")[0] ; 
 
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php')?>        
-<aside class="right-side right-padding">
+<aside class="right-side right-padding n_tabledata">
             <div class="container-fluid">
                 <!--main content-->
                 <div class="row">
@@ -33,10 +33,10 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                         <tr>
-                                            <th>Sr No.</th>
+                                            <th style="width: 100px;">Sr No.</th>
                                             <th>Subject</th>
                                             <th>Action</th>
                                         </tr>
@@ -48,7 +48,7 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                              <td>Account Registration Email</td>
                                              
                                             <td>
-                                                <a class="btn btn-primary" href="edit-registration-email.php">
+                                                <a class="btn btn-primary default-btns" href="edit-registration-email.php">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>
@@ -59,7 +59,7 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                              <td>Subscription Renewal Email</td>
                                              
                                             <td>
-                                                <a class="btn btn-primary" href="edit-renewal-email.php">
+                                                <a class="btn btn-primary default-btns" href="edit-renewal-email.php">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>
@@ -70,7 +70,7 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                              <td>Thankyou Email</td>
                                              
                                             <td>
-                                                <a class="btn btn-primary" href="edit-thankyou-email.php">
+                                                <a class="btn btn-primary default-btns" href="edit-thankyou-email.php">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>
@@ -81,7 +81,7 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                              <td>Subscription Renewal Reminder Email</td>
                                              
                                             <td>
-                                                <a class="btn btn-primary" href="edit-reminder-email.php">
+                                                <a class="btn btn-primary default-btns" href="edit-reminder-email.php">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>
@@ -92,7 +92,7 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
                                              <td>Special Email</td>
                                              
                                             <td>
-                                                <a class="btn btn-primary" href="edit-special-email.php">
+                                                <a class="btn btn-primary default-btns" href="edit-special-email.php">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>
@@ -131,6 +131,11 @@ $payment_method = db_select_query("SELECT * FROM payment_methods where id = '$id
     <script src="vendors/sweetalert/dist/sweetalert2.js" type="text/javascript"></script>
     <script src="js/custom_js/courses.js" type="text/javascript"></script>
     <!-- end of page level js -->
+    <script>
+         window.onload = (event) => {
+        $('.se-pre-con2').css('display','none');
+    }
+    </script>
 </body>
 
 
