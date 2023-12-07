@@ -14,8 +14,35 @@ input[type="checkbox"]
         top:0px!important;
         left:0px!important;
     }
+    .view_user_tabtop .table td{
+        border-top: none;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+        font-family: 'Roboto', sans-serif;
+        background-color: #ebeff7;
+    }
+    .view_user_tabtop .table td:first-child{
+        border-right: 1px solid #ddd;
+        font-weight: 600;
+    }
+    .view_user_tabtop .table td p{
+        margin-bottom: 0;
+    }
+    .view_user_tabtop .table td p + p{
+        margin-top: 8px;
+    }
+    .view_user_tabtop .multi-btns a,
+    .view_user_tabtop .multi-btns button{
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        line-height: 19px;
+        padding: 8px 12px;
+        border-radius: 5px !important;
+        margin-bottom: 8px;
+    }
 </style>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body style="padding:0px;">
    
     <!-- header logo: style can be found in header-->
@@ -25,7 +52,7 @@ input[type="checkbox"]
         <!-- Left side column. contains the logo and sidebar -->
             <?php include('sidebar.php')
 ?>
-        <aside class="right-side right-padding">
+        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h2>Subscribers</h2>
@@ -46,8 +73,8 @@ input[type="checkbox"]
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Basic charts strats here-->
-                        <div class="panel">
-                            <div class="panel-heading bg-primary">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <i class="fa fa-fw fa-user"></i> Add Subscriber
                                 </h4>
@@ -61,7 +88,7 @@ input[type="checkbox"]
                                     <!-- Nav tabs -->
                                     
                                     <!-- Tab panes -->
-                                    <div class="tab-content">
+                                    <div class="tab-content view_user_tabtop">
                                         <div role="tabpanel" class="tab-pane active" id="Info">
                                             <div class="row">
                                               <form id="add-user-form"  method="post" action="ajax/add-data.php"  onsubmit="return false;"  enctype="multipart/form-data" >    
@@ -87,7 +114,7 @@ input[type="checkbox"]
                                                 <div class="col-md-9 col-sm-8">
                                                     <div class="panel-body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-bordered" id="users">
+                                                            <table class="table" id="users">
                                                                 <tr>
                                                                     <td>Name</td>
                                                                     <td>
@@ -140,61 +167,57 @@ input[type="checkbox"]
                                                                       <input type="file" name="image" class="form-control" >
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
+                                                                <!-- <tr>
                                                                     <td>Package</td>
                                                                     <td>
-                                                                  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Add</button> -->
-                                                                   <select class="form-control package" name="packagesid" id="packagesid">
+                                                                         <select class="form-control package" name="packagesid" id="packagesid">
                                                                     <option value="">Select Package</option>
-                                                                    <?php if($get_all_packages) {
-                                                                        foreach($get_all_packages as $k =>$v){ ?>
-                                                                    <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                                                                    <?php } 
-                                                                    } ?>
+                                                                    <?php //if($get_all_packages) {
+                                                                       // foreach($get_all_packages as $k =>$v){ ?>
+                                                                    <option value="<?php //echo $v['id'] ?>"><?php //echo $v['name'] ?></option>
+                                                                    <?php //} 
+                                                                    //} ?>
                                                                    </select>
                                                                     </td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 
-                                                                 <tr id="pck_start">
+                                                                 <!-- <tr id="pck_start">
                                                                     <td>Package Start Date</td>
                                                                     <td>
                                                                       <input type="date" name="pck_start_date" class="form-control" >
                                                                     </td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 
-                                                                  <tr>
+                                                                  <!-- <tr>
                                                                     <td>Classes</td>
                                                                     <td>
-                                                                  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Add</button> -->
-                                                                   
-                                                                    
-                                                                    <?php if($get_all_classes) {
-                                                                        foreach($get_all_classes as $k =>$v){ ?>
-                                                                    <input type="checkbox" value="<?=$v['id']?>"  class = "class_id" name = "class_id[]"> <?=$v['name']?></br>
-                                                                    <?php } 
-                                                                    } ?>
+                                                                    <?php //if($get_all_classes) {
+                                                                        //foreach($get_all_classes as $k =>$v){ ?>
+                                                                    <input type="checkbox" value="<?//=$v['id']?>"  class = "class_id" name = "class_id[]"> <?//=$v['name']?></br>
+                                                                    <?php //} 
+                                                                    //} ?>
                                                                 
                                                                     </td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 
-                                                                 <tr>
+                                                                 <!-- <tr>
                                                                     <td>Payment Method</td>
                                                                     <td>
                                                                 
-                                                                    <?php if($get_all_payment_methods) {
-                                                                    foreach($get_all_payment_methods as $k =>$method){
+                                                                    <?php //if($get_all_payment_methods) {
+                                                                    //foreach($get_all_payment_methods as $k =>$method){
          
                                                                      ?>
-                                                                     <input type="radio"  value="<?=$method['id']?>" name = "payment_method"> <?=$method['name']?></br>
+                                                                     <input type="radio"  value="<?//=$method['id']?>" name = "payment_method"> <?//=$method['name']?></br>
                                                         
-                                                                    <?php } 
-                                                                    } ?>
+                                                                    <?php //} 
+                                                                    //} ?>
                                                                   
                                                                     </td>
-                                                                </tr>
+                                                                </tr> -->
                                                                
                                                             </table>
-                                                             <div class="row" style="margin:0;margin-bottom:15px">
+                                                             <!-- <div class="row" style="margin:0;margin-bottom:15px">
                                                             <p>
                                                                 <div class="col-md-4" style="padding:0 5px">
                                                                     <b>Price :</b><input id="show_pck_price" type = "text" style="width:100%">
@@ -203,9 +226,9 @@ input[type="checkbox"]
                                                                      <b>Discount Code :</b>
                                                                     <select class = "discount_code" name="discount_code" style="width:100%">
                                                                         <option value="">Select Discount Code</option>
-                                                                        <?php if($get_all_discount_codes) 
-                                                                        { foreach($get_all_discount_codes as $code) { ?> 
-                                                                        <option value="<?php echo $code['id'] ?>"><?php echo $code['code'] ?></option> <?php } } ?> 
+                                                                        <?php //if($get_all_discount_codes) 
+                                                                       // { foreach($get_all_discount_codes as $code) { ?> 
+                                                                        <option value="<?php //echo $code['id'] ?>"><?php //echo $code['code'] ?></option> <?php //} } ?> 
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-4" style="padding:0 5px">
@@ -215,8 +238,9 @@ input[type="checkbox"]
                                                             </p>
                                                            
                                                              
-                                                            </div>
-                                                             <div id="myModal" class="modal fade" role="dialog">
+                                                            </div> -->
+                                                             
+<div id="myModal" class="modal fade" role="dialog">
   <div style="width: 100%;float: left;" class="modal-dialog">
 
     <!-- Modal content-->
@@ -267,8 +291,9 @@ input[type="checkbox"]
 
   </div>
   </div>
-                                                    <div style="text-align: center;" class="">
-                                                        <button type="submit" class="btn btn-primary">Add</button> &nbsp;
+                                                    <div style="margin-top:30px;" class="multi-btns">
+                                                        &nbsp;
+                                                        <button type="submit" class="btn btn-primary ">Add</button> &nbsp;
                                                         <a href = "users.php"  class="btn btn-danger">Cancel</a> &nbsp;
                     
                                                     </div>
@@ -464,14 +489,15 @@ input[type="checkbox"]
             },
             date_of_birth:{
                 required:true,
-            } , 
+            } 
+            //, 
        
-            class_id:{
-                required:true,
-            },
-            password:{
-            required:true,
-            }
+            //class_id:{
+            //    required:true,
+           // },
+            //password:{
+           // required:true,
+           // }
         },
         messages:{
             name:{
@@ -496,13 +522,14 @@ input[type="checkbox"]
             } ,
             image:{
                 required:"Choose Image",
-            } ,
-            class_id:{
-                required:"Select Class",
-            },
-            password:{
-            required:"Enter Password",
-            }
+            } 
+            //,
+           // class_id:{
+            //    required:"Select Class",
+           // },
+           // password:{
+           // required:"Enter Password",
+           // }
         },
         submitHandler: async (form, event)=>{
             event.preventDefault();

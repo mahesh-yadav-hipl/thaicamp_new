@@ -199,7 +199,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
                                                 <h3 id="userscount">0</h3>
                                             </div>
                                             <div class="re-right-area">
-                                                <h5>TOTAL ACTIVE SUBSCRIBERS</h5>
+                                                <h5>ACTIVE SUBSCRIBERS</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -223,7 +223,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
                                                 <h3 id="myTargetElement4.1"><?=sizeof($new_arr);?></h3>
                                             </div>
                                             <div class="re-right-area">
-                                                <h5>TOTAL ACTIVE CLASSES</h5>
+                                                <h5>ACTIVE CLASSES</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
                                                 </div>
                                             </div>
                                             <div class="re-right-area">
-                                                <h5>NO ENTRY MORE THAN 7 DAYS</h5>
+                                                <h5>Risk (7d no show)</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +289,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
                                                 <h3 id="myTargetElement4.1"><?=$totalExpancesAmount?> <span class="value-ext">KD</span></h3>
                                             </div>
                                             <div class="re-right-area">
-                                                <h5>TOTAL MONTHLY EXPENSES</h5>
+                                                <h5>EXPENSES</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
                                                 <h3 id="myTargetElement4.1" class=""><?= $count_hold_subscription_users;?></h3>
                                             </div>
                                             <div class="re-right-area">
-                                                <h5>TOTAL HOLD SUBSCRIPTION</h5>
+                                                <h5>HOLD SUBSCRIPTION</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -812,7 +812,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
     color: #fff;
     text-transform: lowercase;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 18px;
 }
 .register-detail .re-right-area h5::first-letter{
     text-transform: uppercase;
@@ -916,7 +916,7 @@ $ThisMonthNewSubscriber = db_select_query("SELECT *  FROM users WHERE (DATE_FORM
     color: #33363a;
     text-transform: lowercase;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .common-box-layout .box-model>h4::first-letter{

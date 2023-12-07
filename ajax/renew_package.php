@@ -168,10 +168,17 @@ try{
 				$prc =  $qry['price'] ;
 				$discnt_code = "No Discount" ;
 			}
+			$email_form_address = db_select_query("SELECT * FROM email_format WHERE type = 'Email_FROM_ADDRESS'") ;
+				if($email_form_address)
+				{
+					$sender_email_is = $email_form_address['0']['detail'];
+				}else{
+					$sender_email_is = SENDER_EMAIL;
+				}
 	    
 	  		$headers  = "MIME-Version: 1.0" . "\r\n";
     		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-    		$headers .= "From:".SENDER_NAME." <".SENDER_EMAIL.">" . "\r\n";
+    		$headers .= "From:".SENDER_NAME." <".$sender_email_is.">" . "\r\n";
         
          
          	$message = '<table class="body-wrap" style=" box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" background-color="#f6f6f6">
@@ -444,10 +451,18 @@ try{
 					
 					$discnt_code = "No Discount" ;
 				}
-	    
+
+				$email_form_address = db_select_query("SELECT * FROM email_format WHERE type = 'Email_FROM_ADDRESS'") ;
+				if($email_form_address)
+				{
+					$sender_email_is = $email_form_address['0']['detail'];
+				}else{
+					$sender_email_is = SENDER_EMAIL;
+				}
+				
 	  			$headers  = "MIME-Version: 1.0" . "\r\n";
     			$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-    			$headers .= "From:".SENDER_NAME." <".SENDER_EMAIL.">" . "\r\n";
+    			$headers .= "From:".SENDER_NAME." <".$sender_email_is.">" . "\r\n";
         
          
          		$message = '<table class="body-wrap" style=" box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" background-color="#f6f6f6">

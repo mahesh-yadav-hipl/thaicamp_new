@@ -12,27 +12,27 @@ try{
 		throw new Exception("Please define table name");
 	}
 	
-	if(empty($packagesid))
-	{
+	// if(empty($packagesid))
+	// {
 	   	
-		throw new Exception("Please select package");
+	// 	throw new Exception("Please select package");
 	   
-	}
+	// }
 	
-	if(empty($pck_start_date))
-	{
-		throw new Exception("Please select package start date");
-	}
+	// if(empty($pck_start_date))
+	// {
+	// 	throw new Exception("Please select package start date");
+	// }
 	
-	if(empty($class_id))
-	{
-		throw new Exception("Please select classes");
-	}
+	// if(empty($class_id))
+	// {
+	// 	throw new Exception("Please select classes");
+	// }
 	
-	if(empty($payment_method))
-	{
-		throw new Exception("Please select payment_method");
-	}
+	// if(empty($payment_method))
+	// {
+	// 	throw new Exception("Please select payment_method");
+	// }
 
   
 
@@ -58,114 +58,102 @@ try{
 		$_REQUEST['image']=upload_file($file);
 	}
 	
-	if($class_id)
-    {
+	// if($class_id)
+    // {
 
-        $countfiles_or = count($_POST['class_id']);
-        $mult = '' ;
+    //     $countfiles_or = count($_POST['class_id']);
+    //     $mult = '' ;
 
-        for($i=0;$i<$countfiles_or;$i++){
-      		$class_id=$_POST['class_id'][$i] ;
-       		$mult.= $class_id.',' ;
-    	}
+    //     for($i=0;$i<$countfiles_or;$i++){
+    //   		$class_id=$_POST['class_id'][$i] ;
+    //    		$mult.= $class_id.',' ;
+    // 	}
 
-      	$_REQUEST['class_id']=trim($mult,',') ;
-    }
+    //   	$_REQUEST['class_id']=trim($mult,',') ;
+    // }
 	
 	
-	if($packagesid)
-    {
-
-        // $countfiles = count($_POST['packagesid']);
-        //   $multiple = '' ;
-        //  $multiple1 = '' ;
-        //   $multiple2 = '' ;
-        //   $multiple3 = '' ;
-        //   $multiple4 = '' ;
-        //   $multiple5 = '' ;
-
-        //   for($i=0;$i<$countfiles;$i++){
+	// if($packagesid)
+    // {
               
-      	$package=$_POST['packagesid'] ;
-      	$qry = db_select_query("SELECT * FROM packages where id = '$package'")[0] ; 
+    //   	$package=$_POST['packagesid'] ;
+    //   	$qry = db_select_query("SELECT * FROM packages where id = '$package'")[0] ; 
       
-       	$drtn = $qry['duration'] ;
-       	$cls = $qry['pck_class'] ;
+    //    	$drtn = $qry['duration'] ;
+    //    	$cls = $qry['pck_class'] ;
       
-       	$today_date = date('Y-m-d' , strtotime($_POST['pck_start_date']))   ;
-      	$exp_date = date('Y-m-d', strtotime($today_date. ' + '.$drtn.' days'));
-      	$hold_date = "00-00-00" ;
-      	$hold_status = "Active" ;
+    //    	$today_date = date('Y-m-d' , strtotime($_POST['pck_start_date']))   ;
+    //   	$exp_date = date('Y-m-d', strtotime($today_date. ' + '.$drtn.' days'));
+    //   	$hold_date = "00-00-00" ;
+    //   	$hold_status = "Active" ;
       
-		//   $multiple.= $package.',' ;
-		//   $multiple1.= $exp_date.',' ;
-		//   $multiple2.= $hold_date.',' ;
-		//   $multiple3.= $hold_status.',' ;
-		//     $multiple4.= $today_date.',' ;
-		//      $multiple5.= $cls.',' ;
 		
-		// }
-
-		$_REQUEST['packagesid']=$package   ;
-		$_REQUEST['expiry_dates']=$exp_date  ;
-		$_REQUEST['hold_dates']=$hold_date  ;
-		$_REQUEST['hold_status']=$hold_status ;
-		$_REQUEST['pck_start_date']=$today_date ;
-		$_REQUEST['package_class']= $cls ;
-    }
+	// 	$_REQUEST['packagesid']=$package   ;
+	// 	$_REQUEST['expiry_dates']=$exp_date  ;
+	// 	$_REQUEST['hold_dates']=$hold_date  ;
+	// 	$_REQUEST['hold_status']=$hold_status ;
+	// 	$_REQUEST['pck_start_date']=$today_date ;
+	// 	$_REQUEST['package_class']= $cls ;
+    // }
       
   
-  	$tdt = date('j M, Y' , strtotime($_POST['pck_start_date']))   ;
+  	//$tdt = date('j M, Y' , strtotime($_POST['pck_start_date']))   ;
 	
 	$get_register_email =  db_select_query("SELECT * FROM email_format where type = 'Register'")[0] ;
 	$rand = rand(99999 , 10000) ;
 	
-	 if(!empty($_REQUEST['discount_code']))
-    {
-        $_REQUEST['discount_code'] = $_REQUEST['discount_code'] ;  
-    }
-    else
-    {
-        $_REQUEST['discount_code'] = "" ;  
-    }
-	if(!empty($_REQUEST['after_discount_price']))
-	{
-		$_REQUEST['after_discount_price'] = $_REQUEST['after_discount_price'] ;  
-	}
-	else
-	{
-		$_REQUEST['after_discount_price'] = "" ;  
-	}
+	//  if(!empty($_REQUEST['discount_code']))
+    // {
+    //     $_REQUEST['discount_code'] = $_REQUEST['discount_code'] ;  
+    // }
+    // else
+    // {
+    //     $_REQUEST['discount_code'] = "" ;  
+    // }
+	// if(!empty($_REQUEST['after_discount_price']))
+	// {
+	// 	$_REQUEST['after_discount_price'] = $_REQUEST['after_discount_price'] ;  
+	// }
+	// else
+	// {
+	// 	$_REQUEST['after_discount_price'] = "" ;  
+	// }
       
 	
 	
 	$data['table']=$table;
 	$data['values']=$_REQUEST;
-	
+		
 	
 	if($usr_id = db_insert($data)){
 	    
 	    $user = db_select_query("select * from users where id = '$usr_id' ")[0] ;
 	    
 	    
-	    if(!empty($_REQUEST['discount_code']) && !empty($_REQUEST['after_discount_price']))
-		{
-			$prc =  $_REQUEST['after_discount_price']  ;  
-			$dscnt_qry = db_select_query("select * from discount_code where id = '{$_REQUEST['discount_code']}' ")[0] ;
-			$discnt_code = $dscnt_qry['code'] ;
-		}
-		else
-		{
-			$prc =  $qry['price'] ;
+	    // if(!empty($_REQUEST['discount_code']) && !empty($_REQUEST['after_discount_price']))
+		// {
+		// 	$prc =  $_REQUEST['after_discount_price']  ;  
+		// 	$dscnt_qry = db_select_query("select * from discount_code where id = '{$_REQUEST['discount_code']}' ")[0] ;
+		// 	$discnt_code = $dscnt_qry['code'] ;
+		// }
+		// else
+		// {
+		// 	$prc =  $qry['price'] ;
 			
-			$discnt_code = "No Discount" ;
-		}
+		// 	$discnt_code = "No Discount" ;
+		// }
 	    
-	   
+		$email_form_address = db_select_query("SELECT * FROM email_format WHERE type = 'Email_FROM_ADDRESS'") ;
+		if($email_form_address)
+		{
+			$sender_email_is = $email_form_address['0']['detail'];
+		}else{
+			$sender_email_is = SENDER_EMAIL;
+		}
         
 		$headers  = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-		$headers .= "From:".SENDER_NAME." <".SENDER_EMAIL.">" . "\r\n";
+		$headers .= "From:".SENDER_NAME." <".$sender_email_is.">" . "\r\n";
         
          
          $message = '<table class="body-wrap" style=" box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" background-color="#f6f6f6">
@@ -214,7 +202,34 @@ try{
 			</tr>
 		</table>
 		
-		 <div class="container" style="padding:15px;width:96.5%; margin: 0 auto; float:left;border:1px solid #fc7070; padding-bottom:50px; border-top:15px solid #fc7070;">
+		';
+         
+       $snt =  @mail($email,$get_register_email['subject'], $message, $headers);
+       
+        
+    if($snt)
+    {
+       	$json['result']=true;	
+		$json['message']="Added Successfully"; 
+    }
+    
+	
+	}else{
+		throw new Exception("Something went wrong");
+	}
+}catch(Exception $e){
+	$json['result']=false;	
+	$json['message']=$e->getMessage();
+}
+
+echo json_encode($json);	exit;
+?>
+
+
+
+<!-- 
+
+ <div class="container" style="padding:15px;width:96.5%; margin: 0 auto; float:left;border:1px solid #fc7070; padding-bottom:50px; border-top:15px solid #fc7070;">
                
                              
     <div class="row" style="width:100%; float:left">
@@ -305,25 +320,10 @@ try{
     </div>
 
         
-            </div>';
-         
-       $snt =  @mail($email,$get_register_email['subject'], $message, $headers);
-       
-        
-    if($snt)
-    {
-       	$json['result']=true;	
-		$json['message']="Added Successfully"; 
-    }
-    
-	
-	}else{
-		throw new Exception("Something went wrong");
-	}
-}catch(Exception $e){
-	$json['result']=false;	
-	$json['message']=$e->getMessage();
-}
+            </div>
+ -->
 
-echo json_encode($json);	
-?>
+ <!-- iske uppar add kr fo if package add kro to 
+ 	';
+    $snt =  @mail($email,$get_register_email['subject'], $message, $headers);
+ iske uppar add kr fo if package add kro to -->
