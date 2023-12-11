@@ -3,15 +3,15 @@ $id=!empty($_GET['id'])?$_GET['id']:"" ;
 $get_all_list =  db_select_query("SELECT attendance.* , packages.name as package_name , packages.package_id as pck_id , users.name as user_name FROM attendance left join packages on attendance.package_id = packages.id left join users on attendance.user_id = users.id where attendance.user_id = '$id' ORDER BY attendance.id DESC") ;
 
 ?>
-
+<link type="text/css" href="css/new_custom.css" rel="stylesheet">
 <body>
-    <div class="se-pre-con"></div>
+<div class="se-pre-con2"></div>
     <!-- header logo: style can be found in header-->
 <?php include('header.php')
 ?>    <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
 <?php include('sidebar.php')
-?>        <aside class="right-side right-padding">
+?>        <aside class="right-side right-padding n_tabledata">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!--section starts-->
@@ -48,10 +48,10 @@ $get_all_list =  db_select_query("SELECT attendance.* , packages.name as package
                                 </span>
                             </div>
                             <div class="panel-body table-responsive">
-                                <table class="table table-bordered" id="fitness-table">
+                                <table class="table" id="fitness-table">
                                     <thead>
                                         <tr>
-                                             <th>Sr No.</th>
+                                             <th style="width: 100px;">Sr No.</th>
                                             <th>User Name</th>
                                             <th>Package ID</th>
                                             <th>Package Name</th>
@@ -263,5 +263,7 @@ messages:{
     
  });
   
-  
+ window.onload = (event) => {
+    $('.se-pre-con2').css('display','none');
+}   
 </script>
