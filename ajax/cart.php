@@ -11,12 +11,14 @@ $product_id = $_REQUEST['product_id'];
 
 $product_size = "";
 if(isset($_REQUEST['product_size'])){
-	$product_size = $_REQUEST['product_size'];
-	$pro_size_get = db_select_query("SELECT * FROM product_sizes WHERE id = '$product_size' AND product_id = '$product_id' AND deleted = 0 " )[0];
-	if(count($pro_size_get) < 1){
-		$json['result']=false;
-		$json['message']='<span class="text-danger">Size Not Exist</span>';
-		echo json_encode($json);exit;
+	if($_REQUEST['product_size'] != ''){
+		$product_size = $_REQUEST['product_size'];
+		$pro_size_get = db_select_query("SELECT * FROM product_sizes WHERE id = '$product_size' AND product_id = '$product_id' AND deleted = 0 " )[0];
+		if(count($pro_size_get) < 1){
+			$json['result']=false;
+			$json['message']='<span class="text-danger">Size Not Exist</span>';
+			echo json_encode($json);exit;
+		}
 	}
 }
 
